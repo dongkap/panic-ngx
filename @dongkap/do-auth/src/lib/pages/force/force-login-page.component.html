@@ -1,0 +1,23 @@
+<h1 id="title" class="title">{{ 'Login Warning' | translate }}</h1>
+<p class="sub-title">{{ 'subtitle.force' | translate }}</p>
+
+<div class="form-control-group">
+  <button fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="buttonForceLogin"
+          [disabled]="buttonForceLogin"
+          (click)="forcelogin()">
+    {{ 'Force Login' | translate }}
+  </button>
+</div>
+
+<section class="sign-in-or-up" aria-label="Sign in or sign up">
+  <p>
+    {{ 'subtitle.force-footer' | translate }} <a class="text-link" routerLink="/auth/login">{{ 'Click here' | translate }}</a>
+  </p>
+  <!--
+  <p><a routerLink="/auth/register" class="text-link">{{ 'Register' | translate}}</a></p>
+  -->
+</section>

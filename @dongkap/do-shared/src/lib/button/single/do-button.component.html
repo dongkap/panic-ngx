@@ -1,0 +1,18 @@
+<button *ngIf="!skeleton; else contentskeleton"
+  type="{{type}}"
+  status="{{status}}"
+  size="{{size}}"
+  (click)="click($event)"
+  [disabled]="(type!='reset' && formGroupButton.invalid) || (type!='reset' && formGroupButton.pristine && !formGroupButton.valid) || disabledButton"
+  nbButton>
+  <ng-content select="[buttonicon]"></ng-content>
+  {{ name | translate}}
+</button>
+<ng-template #contentskeleton>
+  <div
+    [ngClass]="{
+      'button-skeleton': true,
+      'skeleton': skeleton
+    }">
+  </div>
+</ng-template>

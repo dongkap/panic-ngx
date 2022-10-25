@@ -1,0 +1,35 @@
+<do-change-password-page *ngIf="!authProvider"></do-change-password-page>
+<nb-card *ngIf="authProvider">
+    <nb-card-body>
+        <div class="row">
+            <nb-icon [status]="'info'" [icon]="'google'" class="icon-provider"></nb-icon>
+            <p class="text-provider">
+                {{ 'message.provider' | translate:provider}}
+            </p>
+        </div>
+    </nb-card-body>
+</nb-card>
+<do-switch-role-page></do-switch-role-page>
+<nb-card>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-md-3 col-lg-3">
+                <button
+                    type="button"
+                    status="danger"
+                    size="large"
+                    class="deactivated-button"
+                    [disabled]="disabled"
+                    (click)="onSubmit()"
+                    nbButton fullWidth>
+                    {{ 'Deactivate Account' | translate }}
+                </button>
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <h6 class="text-danger deactivated-label">
+                    {{ 'message.deactivated-account' | translate }}
+                </h6>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

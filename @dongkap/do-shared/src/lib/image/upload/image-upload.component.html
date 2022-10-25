@@ -1,0 +1,44 @@
+<div class="body-upload">
+  <div *ngIf="!skeleton; else contentskeleton"
+    class="upload-container"
+    (click)="img.click()"
+    doDragDrop
+    (onFileDropped)="upload($event)"
+    [ngClass]="{
+      'full-file': image,
+      'empty-file': !image
+    }"
+    [ngStyle]="{ 
+      'background-image': 'url(' + (image) + ')',
+      'height':  height ? height+'rem' : 'calc(80vw/5)',
+      'width':  width ? width+'rem' : 'calc(80vw/5)',
+      'border-radius':  radius + '%'
+    }">
+    <label *ngIf="!image"
+      class="label label-upload"
+      [ngStyle]="{
+        'line-height':  height ? height+'rem' : 'calc(80vw/5)'
+      }">
+      {{ 'placeholder.image-upload' | translate }}
+    </label>
+    <input
+      hidden
+      type="file"
+      accept="image/png, image/jpeg, image/jpg"
+      (change)="upload($event.target.files)"
+      #img>
+  </div>
+  <ng-template #contentskeleton>
+    <div
+      [ngClass]="{
+        'skeleton': skeleton
+      }"
+      [ngStyle]="{ 
+        'height':  height ? height+'rem' : 'calc(80vw/5)',
+        'width':  width ? width+'rem' : 'calc(80vw/5)',
+        'border-radius':  radius + '%',
+        'margin': '0.5rem auto'
+      }">
+    </div>
+  </ng-template>
+</div>

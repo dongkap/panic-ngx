@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-lg-{{width}}">
+    <nb-card>
+      <nb-card-header>
+        <nav class="navigation">
+          <nb-icon icon="arrow-back" class="back-link" pack="eva" (click)="back()" *ngIf="url"></nb-icon>
+          {{header | translate:param}}
+        </nav>
+        <div class="row">
+          <nb-select *ngIf="dataSelect" [selected]="selected" (selectedChange)="onChangeSelect($event)">
+            <nb-option *ngFor="let data of dataSelect" [value]="data">{{ data }}</nb-option>
+          </nb-select>
+          <nb-icon icon="{{iconToggle}}" class="toggle-icon" pack="eva" (click)="toggleCollapse()" *ngIf="showToggle"></nb-icon>
+        </div>
+      </nb-card-header>
+      <nb-card-body
+        (collapsed)="collapsed($event)"
+        (expanded)="expanded($event)"
+        [collapse]="isCollapsed">
+        <ng-content select="[pagecontent]"></ng-content>        
+      </nb-card-body>
+      <nb-card-footer *ngIf="!hidefooter">
+        <ng-content select="[pagefooter]"></ng-content>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+  button[nbButton] {
+    margin: 0 0.25rem;
+  }
+
+  .reset-left {
+    margin-right: 0.25rem;
+  }
+
+  .submit-right {
+      margin-left: 0.25rem;
+  }
+
+}

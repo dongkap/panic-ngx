@@ -1,0 +1,24 @@
+<do-page-outlet [header]="'header.business-partner-management'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [delete]="false"
+        [selectionType]="selectionType"
+        (onAdd)="onAdd()"
+        (onEdit)="onViewDetail($event)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'bpName'"
+            [label]="'Business Partner'"
+            formControlName="bpName">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>

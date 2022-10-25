@@ -1,0 +1,63 @@
+<do-page-outlet
+  [header]="'Radio Button'">
+  <div pagecontent>
+    <div class="row">
+      <div class="col-md-6">
+        <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+          <do-radio
+            [name]="'gender'"
+            [label]="'Gender'"
+            [placeholder]="'Gender'"
+            [data]="genderData"
+            formControlName="gender">
+          </do-radio>
+          <do-radio
+            [name]="'religion'"
+            [label]="'Religion'"
+            [placeholder]="'Religion'"
+            [data]="religionData"
+            [required]="true"
+            formControlName="religion">
+          </do-radio>
+          <do-radio
+            [name]="'employee'"
+            [label]="'Status Employee'"
+            [placeholder]="'Status Employee'"
+            [data]="employeeData"
+            formControlName="employee">
+          </do-radio>
+          <do-radio
+            [name]="'skeletonRadio'"
+            [label]="'Skeleton Radio'"
+            [placeholder]="'Skeleton Radio'"
+            [skeleton]="true"
+            formControlName="skeletonRadio">
+          </do-radio>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-secondary">
+          <div class="card-body">
+            <pre>Value: <code>{{ formGroup.value | json }}</code></pre>
+            <p>
+              Status: {{ formGroup.status }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [formGroupButton]="formGroup"
+      [name]="'Submit'">
+    </do-button>
+    <do-button
+      (onSubmit)="onReset()"
+      [name]="'Reset'"
+      [status]="'danger'"
+      [type]="'reset'">
+    </do-button>
+  </div>
+</do-page-outlet>

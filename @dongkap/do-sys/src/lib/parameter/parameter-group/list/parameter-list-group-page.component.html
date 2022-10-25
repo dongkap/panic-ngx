@@ -1,0 +1,47 @@
+<do-page-outlet [header]="'Parameter Group'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [reloadFn]="reload"
+        (onAdd)="onAddGroup()"
+        (onEdit)="onViewDetail($event)"
+        (onDelete)="onDeleteGroup($event, dialogdelete)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'parameterGroupCode'"
+            [label]="'Parameter Group Code'"
+            formControlName="parameterGroupCode">
+          </do-input-text>
+          <do-input-text
+            [name]="'parameterGroupName'"
+            [label]="'Parameter Group Name'"
+            formControlName="parameterGroupName">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>
+
+<ng-template #dialogdelete let-data let-ref="dialogRef">
+  <nb-card accent="danger">
+    <nb-card-header>{{ 'Warning' | translate}}</nb-card-header>
+    <nb-card-body>{{ data | translate}}</nb-card-body>
+    <nb-card-footer>
+      <do-button-submit
+        [colLabel]="0"
+        [colButton]="12"
+        [submitTitle]="'Delete'"
+        [resetTitle]="'Cancel'"
+        [disabledButton]="disabled"
+        (onReset)="ref.close()"
+        (onSubmit)="onDelete(ref)">
+      </do-button-submit>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

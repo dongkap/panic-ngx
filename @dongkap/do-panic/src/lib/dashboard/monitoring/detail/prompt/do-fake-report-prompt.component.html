@@ -1,0 +1,33 @@
+<nb-card>
+  <nb-card-header>
+    <h6 class="text-danger deactivated-label">
+        {{ 'Fake Report' | translate }}
+    </h6>
+  </nb-card-header>
+  <nb-card-body>
+    <p>
+      {{ 'message.fake-form' | translate }}
+    </p>
+    <p>
+      {{ 'message.input-password' | translate }}
+    </p>
+    <input
+      [(ngModel)]="password"
+      type="password"
+      nbInput
+      class="fake-password"
+      placeholder="Password">
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      type="submit"
+      status="danger"
+      size="large"
+      class="fake-button"
+      [disabled]="!password || disabled"
+      (click)="submit(password)"
+      nbButton>
+      {{ 'Fake Report' | translate }}
+    </button>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,39 @@
+<div class="do-wizard-buttons-container">
+  <div *ngIf="currentStepData$ | async as currentStepData" class="do-wizard-buttons">
+    <button *ngIf="!currentStepData.previousStep && !currentStepData.options.buttons?.cancel?.hidden"
+            (click)="goToCancel(wizardOptions.baseUrl)"
+            status="danger"
+            [disabled]="disabled"
+            class="do-wizard-button-previous"
+            nbButton>
+            {{currentStepData.options.buttons?.cancel?.label || wizardOptions.buttons.cancel.label | translate}}
+    </button>
+    <button *ngIf="currentStepData.previousStep && !currentStepData.options.buttons?.previous?.hidden"
+            (click)="goToPreviousStep()"
+            status="danger"
+            [disabled]="disabled"
+            class="do-wizard-button-previous"
+            nbButton>
+            {{currentStepData.options.buttons?.previous?.label || wizardOptions.buttons.previous.label | translate}}
+    </button>
+    <button *ngIf="currentStepData.nextStep && !currentStepData.options.buttons?.next?.hidden"
+            (click)="goToNextStep()"
+            [disabled]="!formIsValid() || disabled"
+            status="primary"
+            class="do-wizard-button-next"
+            nbButton>
+            {{currentStepData.options.buttons?.next?.label || wizardOptions.buttons.next.label | translate}}
+    </button>
+    <button *ngIf="!currentStepData.nextStep && !currentStepData.options.buttons?.finish?.hidden && !extra"
+            (click)="goToSubmit()"
+            [disabled]="!formIsValid() || disabled"
+            status="success"
+            class="do-wizard-button-finish"
+            nbButton>
+            {{currentStepData.options.buttons?.finish?.label || wizardOptions.buttons.finish.label | translate}}
+    </button>
+    <div class="do-wizard-button-right"  *ngIf="!currentStepData.nextStep && extra">
+      <ng-content select="[buttonextra]"></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<do-page-outlet [header]="'header.'+action+'-i18n'" [url]="'/app/sysconf/i18n'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-select
+          [name]="'language'"
+          [label]="'Language'"
+          [required]="true"
+          [api]="apiSelectLanguage"
+          formControlName="language">
+        </do-select>
+        <do-input-icon
+          [name]="'icon'"
+          [label]="'Icon'"
+          [required]="true"
+          [icon]="'search-outline'"
+          [iconcursor]="true"
+          [eva]="true"
+          (clickIcon)="onSearchFlag()"
+          formControlName="icon">
+        </do-input-icon>
+        <do-checkbox
+          [name]="'checkbox'"
+          [label]="'System Default Language'"
+          [data]="dataDefault"
+          formControlName="default">
+        </do-checkbox>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

@@ -1,0 +1,23 @@
+<nb-card [size]="'medium'">
+  <nb-card-header>
+    <h2>
+      <strong>
+        {{ 'header.terms-conditions' | translate }}
+      </strong>
+    </h2>
+  </nb-card-header>
+  <nb-card-body>
+    <div [innerHTML]="content"></div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      type="submit"
+      status="primary"
+      size="large"
+      class="terms-button"
+      (click)="submit()"
+      nbButton>
+      {{ action | translate }}
+    </button>
+  </nb-card-footer>
+</nb-card>

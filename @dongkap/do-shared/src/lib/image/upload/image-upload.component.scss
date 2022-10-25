@@ -1,0 +1,54 @@
+@import '~@dongkap/do-theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install() {
+    .upload-container {
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0.5rem auto;
+    }
+
+    .empty-file{
+        background-color: nb-theme(background-basic-color-3) !important;
+        outline: 0.125rem dashed #8f9bb3;
+        outline-offset: -0.4rem;
+    }
+
+    .full-file{
+        background-color: nb-theme(background-basic-color-1) !important;
+        outline: 0.1rem solid #8f9bb3;
+    }
+
+    .label-upload {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .upload-container:hover {
+        cursor: pointer;
+    }
+
+    .body-upload {
+        margin: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @include media-breakpoint-down(xs) {
+        .upload-container {
+            height: 10rem !important;
+            width: 10rem !important;
+            border-radius: 10rem !important;
+        }
+        .label-upload {
+            line-height: 10rem !important;
+        }
+        .body-upload .skeleton {
+            height: 10rem !important;
+            width: 10rem !important;
+        }
+    }
+}

@@ -1,0 +1,204 @@
+<do-page-outlet [header]="'Profile'">
+  <div class="row" pagecontent>
+    <div class="col-md-4 col-lg-4">
+      <form [formGroup]="formGroupImage">
+        <do-image-upload
+          [radius]="50"
+          [skeleton]="loadingForm"
+          [required]="true"
+          [uploadFn]="uploadFinished"
+          formControlName="image">
+        </do-image-upload>
+        <do-button
+          class="upload-bg"
+          (onSubmit)="uploadImage()"
+          [name]="'Upload'"
+          [formGroupButton]="formGroupImage"
+          [disabledButton]="formGroupImage.pristine"
+          [skeleton]="loadingForm">
+          <nb-icon class="upload-icon" icon="cloud-upload-outline" pack="eva" buttonicon></nb-icon>
+        </do-button>
+      </form>
+    </div>
+    <div class="accordion-container col-md-8 col-lg-8">
+      <form [formGroup]="formGroup">
+        <nb-accordion multi>
+          <nb-accordion-item [expanded]="true">
+            <nb-accordion-item-header>
+              {{'label.account' | translate}}
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <do-input-text
+                [name]="'name'"
+                [label]="'Name'"
+                [required]="true"
+                [skeleton]="loadingForm"
+                formControlName="name">
+              </do-input-text>
+              <do-input-text
+                [name]="'email'"
+                [label]="'Email'"
+                [required]="true"
+                [pattern]="patternEmail"
+                [paramError]="{value:5}"
+                [skeleton]="loadingForm"
+                formControlName="email">
+              </do-input-text>
+              <do-input-text
+                [name]="'username'"
+                [label]="'Username'"
+                [required]="true"
+                [skeleton]="loadingForm"
+                formControlName="username">
+              </do-input-text>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+          <nb-accordion-item [expanded]="true">
+            <nb-accordion-item-header>
+              {{'label.personal-info' | translate}}
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <do-input-text
+                [name]="'idNumber'"
+                [label]="'ID Number'"
+                [required]="true"
+                [skeleton]="loadingForm"
+                formControlName="idNumber">
+              </do-input-text>
+              <do-select
+                [name]="'gender'"
+                [label]="'Gender'"
+                [required]="true"
+                [api]="apiSelectGender"
+                [queryParam]="paramSelectGender"
+                [searchable]="false"
+                [skeleton]="loadingForm"
+                formControlName="gender">
+              </do-select>
+              <do-input-text
+                [name]="'placeOfBirth'"
+                [label]="'Place of Birth'"
+                [required]="true"
+                [skeleton]="loadingForm"
+                formControlName="placeOfBirth">
+              </do-input-text>
+              <do-datepicker
+                [name]="'dateOfBirth'"
+                [label]="'Date of Birth'"
+                [required]="true"
+                [skeleton]="loadingForm"
+                formControlName="dateOfBirth">
+              </do-datepicker>
+              <do-input-text
+                [name]="'height'"
+                [label]="'height.body'"
+                [placeholder]="'Centimeter'"
+                [type]="'number'"
+                [step]="'any'"
+                [skeleton]="loadingForm"
+                formControlName="height">
+              </do-input-text>
+              <do-input-text
+                [name]="'weight'"
+                [label]="'weight.body'"
+                [placeholder]="'Kilogram'"
+                [type]="'number'"
+                [step]="'any'"
+                [skeleton]="loadingForm"
+                formControlName="weight">
+              </do-input-text>
+              <do-select
+                [name]="'bloodType'"
+                [label]="'Blood Type'"
+                [placeholder]="'Blood Type'"
+                [items]="bloodTypeData"
+                [searchable]="false"
+                [skeleton]="loadingForm"
+                formControlName="bloodType">
+              </do-select>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+          <nb-accordion-item [expanded]="true">
+            <nb-accordion-item-header>
+              {{'label.contact-person' | translate}}
+            </nb-accordion-item-header>
+            <nb-accordion-item-body >
+              <do-input-text
+                [name]="'phoneNumber'"
+                [label]="'Telephone'"
+                [required]="true"
+                [pattern]="patternPhoneNumber"
+                [skeleton]="loadingForm"
+                formControlName="phoneNumber">
+              </do-input-text>
+              <do-textarea
+                [name]="'address'"
+                [label]="'Address'"
+                [required]="true"
+                [minLength]="minLength"
+                [skeleton]="loadingForm"
+                formControlName="address">
+              </do-textarea>
+              <do-select
+                [name]="'country'"
+                [label]="'Country'"
+                [api]="apiSelectCountry"
+                [skeleton]="loadingForm"
+                (onSelect)="onSelectCountry($event)"
+                (onClear)="onClearCountry()"
+                formControlName="country">
+              </do-select>
+              <do-select
+                [name]="'province'"
+                [label]="'Province'"
+                [api]="apiSelectProvince"
+                [queryParam]="paramSelectProvince"
+                [skeleton]="loadingForm"
+                (onSelect)="onSelectProvince($event)"
+                (onClear)="onClearProvince()"
+                formControlName="province">
+              </do-select>
+              <do-select
+                [name]="'city'"
+                [label]="'City'"
+                [api]="apiSelectCity"
+                [queryParam]="paramSelectCity"
+                [skeleton]="loadingForm"
+                (onSelect)="onSelectCity($event)"
+                (onClear)="onClearCity()"
+                formControlName="city">
+              </do-select>
+              <do-select
+                [name]="'district'"
+                [label]="'District'"
+                [api]="apiSelectDistrict"
+                [queryParam]="paramSelectDistrict"
+                [skeleton]="loadingForm"
+                (onSelect)="onSelectDistrict($event)"
+                (onClear)="onClearDistrict()"
+                formControlName="district">
+              </do-select>
+              <do-select
+                [name]="'subDistrict'"
+                [label]="'Sub District'"
+                [api]="apiSelectSubDistrict"
+                [queryParam]="paramSelectSubDistrict"
+                [skeleton]="loadingForm"
+                formControlName="subDistrict">
+              </do-select>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+      </form>
+    </div>
+  </div>
+  <div class="offset-sm-6 col-sm-6" pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [name]="'Update Profile'"
+      [disabledButton]="disabled"
+      [formGroupButton]="formGroup"
+      [skeleton]="loadingForm">
+    </do-button>
+  </div>
+</do-page-outlet>

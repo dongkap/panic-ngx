@@ -1,0 +1,26 @@
+<do-page-outlet [header]="'header.job-placement-management'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [sortsDefault]="sortsDefault"
+        [selectionType]="selectionType"
+        [delete]="false"
+        [add]="false"
+        (onEdit)="onViewDetail($event)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'bpName'"
+            [label]="'Business Partner'"
+            formControlName="bpName">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>
+

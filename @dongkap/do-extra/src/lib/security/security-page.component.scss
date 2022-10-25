@@ -1,0 +1,34 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+    button.deactivated-button {
+        width: 100%;
+        margin: 0.5rem 0rem;
+    }
+
+    h6.deactivated-label {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    .icon-provider {
+        margin: 1rem 0rem 1rem 1.5rem;
+    }
+
+    .text-provider {
+        margin: 1rem 1.5rem 1rem 1.5rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+        .icon-provider {
+            margin: 1rem 0rem 1rem 0.5rem;
+        }
+    
+        .text-provider {
+            margin: 1rem 0rem 1rem 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+<do-page-outlet
+  [header]="'Text Editor'">
+  <div pagecontent>
+    <div class="row">
+      <div class="col-md-6">
+        <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+          <do-text-editor
+          [name]="'description'"
+          [label]="'Description'"
+          formControlName="description"></do-text-editor>
+          <do-text-editor
+          [name]="'address'"
+          [label]="'Address'"
+          [placeholder]="'Address'"
+          [required]="true"
+          formControlName="address"></do-text-editor>
+          <do-text-editor
+          [name]="'skeletonEditor'"
+          [label]="'Skeleton Editor'"
+          [skeleton]="true"
+          formControlName="skeletonEditor"></do-text-editor>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-secondary">
+          <div class="card-body">
+            <pre>Value: <code>{{ formGroup.value | json }}</code></pre>
+            <p>
+              Status: {{ formGroup.status }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [formGroupButton]="formGroup"
+      [name]="'Submit'">
+    </do-button>
+    <do-button
+      (onSubmit)="onReset()"
+      [name]="'Reset'"
+      [status]="'danger'"
+      [type]="'reset'">
+    </do-button>
+  </div>
+</do-page-outlet>

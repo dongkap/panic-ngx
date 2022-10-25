@@ -1,0 +1,35 @@
+<do-wizard-page-outlet>
+  <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup" wizardcontent>
+    <div [formGroupName]="formGroupName">
+      <do-select
+        [name]="'occupation'"
+        [label]="'Occupation'"
+        [placeholder]="'Occupation'"
+        [required]="true"
+        [api]="apiSelectOccupation"
+        [searchable]="false"
+        [skeleton]="loadingForm"
+        formControlName="occupation">
+      </do-select>
+      <do-select
+        [name]="'role'"
+        [label]="'Role'"
+        [placeholder]="'Role'"
+        [required]="true"
+        [api]="apiSelectRole"
+        [searchable]="false"
+        [multiple]="true"
+        [skeleton]="loadingForm"
+        formControlName="role">
+      </do-select>
+      <do-select
+        [name]="'employeeParent'"
+        [label]="'Supervisor'"
+        [placeholder]="'Supervisor'"
+        [api]="apiSelectEmployeeParent"
+        [skeleton]="loadingForm"
+        formControlName="employeeParent">
+      </do-select>
+    </div>
+  </form>
+</do-wizard-page-outlet>

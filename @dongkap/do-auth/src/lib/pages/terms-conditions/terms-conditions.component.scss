@@ -1,0 +1,25 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+  .cancel {
+    margin-right: 1rem;
+  }
+
+  button.terms-button {
+    width: 100%;
+  }
+
+  @include media-breakpoint-down(sm) {
+    p {
+      line-height: 1.35rem;
+      word-spacing: 0.15rem;
+    }
+
+    button.terms-button {
+      font-size: 0.6rem;
+    }
+  }
+}

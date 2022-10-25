@@ -1,0 +1,32 @@
+.header-datatable {
+    width: 100%;
+    display: flex;
+    padding-bottom: 0.3rem;
+}
+
+.header-filter {
+    width: 100%;
+}
+
+.filter-funnel {
+    right: 0;
+    padding: 10px 10px 10px 15px;
+    cursor: pointer;
+}
+.filter-icon-funnel:hover {
+    color: #ffc94d;
+}
+
+.header-action {
+    left: 0;
+    padding: 10px 15px 10px 10px;
+    cursor: pointer;
+}
+
+.action-add:hover {
+    color: #598bff;
+}
+
+.action-trash:hover {
+    color: #ff708d;
+}

@@ -1,0 +1,7 @@
+<div *ngIf="hasErrors">
+  <div *ngFor="let message of errorMessages">
+    <span class="caption status-danger">
+      {{message | translate:param}}
+    </span>
+  </div>
+</div>

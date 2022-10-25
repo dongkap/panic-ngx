@@ -1,0 +1,71 @@
+<h1 id="title" class="title">{{ 'Reset Password' | translate }}</h1>
+<p class="sub-title">{{ 'subtitle.reset-password' | translate }}</p>
+
+<nb-alert *ngIf="responseError" outline="danger" role="alert">
+  <p class="alert-title"><b>{{ 'alert.title.reset-password' | translate }}</b></p>
+  <ul class="alert-message-list">
+    <li class="alert-message">{{ responseError }}</li>
+  </ul>
+</nb-alert>
+
+<form [formGroup]="form" (ngSubmit)="forgotPassword()" aria-labelledby="title">
+  <div class="form-control-group">
+    <label class="label" for="input-newpassword">{{ 'New Password' | translate }}* :</label>
+    <input [formControlName]="'newPassword'"
+          [required]="true"
+          minlength="8"
+          maxlength="50"
+          [pattern]="patternPassword"
+          [ngClass]="{
+            'status-danger': hasErrorNewPassword,
+            'status-success': hasSuccessNewPassword
+          }"
+          name="newPassword"
+          type="password"
+          id="inputNewPassword"
+          placeholder="{{ 'New Password' | translate }}"
+          fieldSize="large"
+          tabindex="4"
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorNewPassword">
+      <span class="caption status-danger">{{ errorMsgNewPassword | translate}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-confirmpassword">{{ 'Confirm Password' | translate }}* :</label>
+    <input [formControlName]="'confirmPassword'"
+          [required]="true"
+          minlength="8"
+          maxlength="50"
+          [ngClass]="{
+            'status-danger': hasErrorConfirmPassword,
+            'status-success': hasSuccessConfirmPassword
+          }"
+          name="confirmPassword"
+          type="password"
+          id="inputConfirmPassword"
+          placeholder="{{ 'Confirm Password' | translate }}"
+          fieldSize="large"
+          tabindex="5"
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorConfirmPassword">
+      <span class="caption status-danger">{{ errorMsgConfirmPassword | translate}}</span>
+    </ng-container>
+  </div>
+
+  <button [disabled]="form.invalid || buttonForgotPassword"
+          fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="form.invalid || buttonForgotPassword">
+    {{ 'Reset Password' | translate }}
+  </button>
+</form>
+
+<section class="another-action" aria-label="Sign in">
+  {{ 'message.reset-password-footer' | translate}} <a class="text-link" routerLink="/auth/login" tabindex="-1">{{ 'Login' | translate}}</a>
+</section>

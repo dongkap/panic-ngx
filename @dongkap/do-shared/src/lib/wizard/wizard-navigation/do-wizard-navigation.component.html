@@ -1,0 +1,38 @@
+<div class="do-wizard-navigation-container">
+  <nav class="do-wizard-navigation">
+    <ul class="do-wizard-navigation-list">
+      <li *ngFor="let stepData of stepData$ | async" class="do-wizard-navigation-list-item" (click)="goToStep(stepData);"
+        [ngClass]="{
+          'do-wizard-navigation-list-item-first': stepData?.order === 1
+        }">
+        <div *ngIf="stepData?.order < currentStepData?.order"
+             [ngClass]="{
+               'do-wizard-navigation-link': !currentStepData?.options.disableNavigation,
+               'do-wizard-navigation-disabled': currentStepData?.options.disableNavigation
+             }">
+          <span class="do-wizard-navigation-label">
+            <span [innerHTML]="stepData.options.icon || wizardOptions.navBar.icons.previous" class="do-wizard-navigation-icon"></span>
+            {{ stepData.options.title | translate }}
+          </span>
+        </div>
+
+        <div
+          *ngIf="stepData?.order === currentStepData?.order"
+          class="do-wizard-navigation-active">
+          <span class="do-wizard-navigation-label">
+            <span [innerHTML]="stepData.options.icon || wizardOptions.navBar.icons.current" class="do-wizard-navigation-icon"></span>
+            {{ stepData.options.title | translate }}
+          </span>
+        </div>
+
+        <div *ngIf="stepData?.order > currentStepData?.order"
+             class="do-wizard-navigation-disabled">
+          <span class="do-wizard-navigation-label">
+            <span [innerHTML]="stepData.options.icon || wizardOptions.navBar.icons.next" class="do-wizard-navigation-icon"></span>
+            {{ stepData.options.title | translate }}
+          </span>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>

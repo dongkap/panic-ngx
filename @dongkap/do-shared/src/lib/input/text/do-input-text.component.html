@@ -1,0 +1,48 @@
+<do-container-outlet
+  [name]="name" [label]="label" [nolabel]="nolabel" 
+  [colLabel]="colLabel" [colContent]="colInput"
+  [required]="required" [hasErrors]="hasErrors"
+  [errorMessages]="errorMessages" [paramError]="paramError"
+  [warnMessage]="warnMessage"
+  [skeleton]="skeleton" [show]="show">
+  <div class="col-sm-{{colInput}} input-group" *ngIf="!skeleton; else contentskeleton">
+    <input
+      type="{{type}}"
+      id="{{name}}"
+      [step]="step"
+      [pattern]="pattern"
+      [minLength]="minLength"
+      [maxLength]="maxLength"
+      [min]="min"
+      [max]="max"
+      [placeholder]="placeholder ? (placeholder | translate) : ''"
+      [required]="required"
+      [disabled]="disabled"
+      [ngClass]="{
+        'status-danger': hasErrors,
+        'status-success': (hasSuccess && required),
+        'input-capslock': capslock
+      }"
+      (input)="onChange($event.target.value)"
+      (change)="onChange($event.target.value)"
+      (blur)="onTouched($event.target.value)"
+      (focus)="onTouched($event.target.value)"
+      (keydown)="onKeyDown($event)"
+      (keypress)="onKeyUp($event)"
+      [(ngModel)]="value"
+      #input nbInput fullWidth>
+      <div class="input-icon" *ngIf="togglePassword">
+        <nb-icon [options]="{ animation: { type: 'zoom' } }" class="input-icon-hover" icon="{{icon}}" (click)="onShowPassword()"></nb-icon>
+      </div>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colInput}}">
+      <div
+        [ngClass]="{
+          'input-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

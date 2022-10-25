@@ -1,0 +1,111 @@
+/*
+dongkap wizard arrow theme
+*/
+@import '~bootstrap/scss/mixins/breakpoints';
+@import './common';
+
+$grid-breakpoints: (
+  xs: 0,
+  is: 400px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1600px
+);
+
+@include nb-install() {
+  nav.do-wizard-navigation {
+    margin-bottom: 0;
+    background-color: nb-theme(background-basic-color-1);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
+
+    ul.do-wizard-navigation-list {
+      background: nb-theme(background-basic-color-1);
+      overflow: hidden;
+
+      li.do-wizard-navigation-list-item-first {
+        div {
+          padding-left: 1.25rem !important;
+        }
+      }
+
+      li.do-wizard-navigation-list-item {
+        
+        @include media-breakpoint-down(sm) {
+          div {
+            padding-left: 1.25rem !important;
+          }
+        }
+        div {
+          padding: 0.844rem 0 0.844rem 3rem;
+          position: relative;
+          display: block;
+          border: 0;
+          border-radius: 0;
+          outline-style: none;
+          color: #fff;
+          background: nb-theme(color-success-500);
+
+          &:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid nb-theme(color-success-500);
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            left: 100%;
+            z-index: 2;
+          }
+
+          &:before {
+            content: " ";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid nb-theme(border-basic-color-4);
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            margin-left: 1px;
+            left: 100%;
+            z-index: 1;
+          }
+        }
+
+        &:first-child div {
+          padding-left: 15px;
+        }
+
+        div.do-wizard-navigation-link {
+
+        }
+
+        div.do-wizard-navigation-active {
+          background: nb-theme(color-primary-500) !important;
+
+          &:after {
+            border-left: 30px solid nb-theme(color-primary-500) !important;
+          }
+        }
+
+        div.do-wizard-navigation-disabled {
+          background: nb-theme(background-basic-color-2) !important;
+          cursor: not-allowed;
+          color: nb-theme(text-disabled-color);
+
+          &:after {
+            border-left: 30px solid nb-theme(background-basic-color-2) !important;
+          }
+        }
+      }
+    }
+  }
+}

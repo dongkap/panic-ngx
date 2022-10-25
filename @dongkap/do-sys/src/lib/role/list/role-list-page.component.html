@@ -1,0 +1,31 @@
+<do-page-outlet [header]="'header.role-management'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [delete]="false"
+        [selectionType]="selectionType"
+        (onFilter)="doFilterAdvanced($event)"
+        (onAdd)="onAddGroup()"
+        (onEdit)="onViewDetail($event)"
+        [filterFn]="keyword"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'authority'"
+            [label]="'Authority'"
+            formControlName="authority">
+          </do-input-text>
+          <do-input-text
+            [name]="'description'"
+            [label]="'Description'"
+            formControlName="description">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>

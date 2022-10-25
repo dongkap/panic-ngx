@@ -1,0 +1,9 @@
+<nb-card *ngIf="url && fileType.includes('image')">
+    <nb-card-body>
+        <img [src]="url" height="500">
+    </nb-card-body>
+</nb-card>
+<video *ngIf="url && fileType.includes('video')" [src]="url" height="500" controls></video>
+<audio *ngIf="url && fileType.includes('audio')" controls>
+    <source [src]="url" [type]="fileType">
+</audio>

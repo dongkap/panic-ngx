@@ -1,0 +1,180 @@
+<div class="row">
+  <div class="col-md-4 col-lg-4">
+    <tree-ngx
+      [nodeItems]="nodeItems"
+      [options]="options"
+      #treeMain>
+      <ng-template #nodeNameTemplate let-node="node" let-context="context">
+        <span
+          class="node-action"
+          [ngClass]="{
+            'node-action': !node.item.group,
+            'node-action-group': node.item.group
+          }"
+          [class.active]="context.active"
+          (click)="onSelectNode(node)">
+          {{node.name}}
+        </span>
+        <span class="tree-action">
+          <nb-icon
+              class="action-trash"
+              icon="close-square-outline"
+              (click)="onDeleteTree(node, context, dialogprocess)">
+          </nb-icon>
+        </span>
+      </ng-template>
+    </tree-ngx>
+  </div>
+  <div class="col-md-8 col-lg-8">
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <label
+          for="Title"
+          class="label col-sm-3 col-form-label"
+          *ngIf="!loadingForm; else labelskeleton">
+          {{'Title' | translate}}
+        </label>
+        <ng-template #labelskeleton>
+          <div class="col-sm-3">
+            <div
+              [ngClass]="{
+                'label-skeleton': true,
+                'skeleton': loadingForm
+              }">
+            </div>
+          </div>
+        </ng-template>
+        <div class="col-sm-9" *ngIf="loadLocale; else inputSkeleton">
+          <do-input-icon
+            [name]="localeDefault.localeCode"
+            [nolabel]="true"
+            [required]="true"
+            [colLabel]="0"
+            [colInput]="12"
+            [icon]="'flag-icon flag-icon-' + localeDefault.icon"
+            [skeleton]="loadingForm"
+            formControlName="{{localeDefault.localeCode}}">
+          </do-input-icon>
+        </div>
+        <ng-template #inputSkeleton>
+          <div class="col-sm-9">
+            <div
+              [ngClass]="{
+                'input-skeleton': true,
+                'skeleton': loadingForm
+              }">
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <do-input-icon *ngFor="let i18n of locales"
+        [name]="i18n.localeCode"
+        [nolabel]="true"
+        [icon]="'flag-icon flag-icon-'+ i18n.icon"
+        [skeleton]="loadingForm"
+        formControlName="{{i18n.localeCode}}">
+      </do-input-icon>
+      <do-checkbox
+        [name]="'group'"
+        [label]="'Group'"
+        [data]="groupData"
+        [skeleton]="loadingForm"
+        [warnMessage]="'warn.group-menu'"
+        (onChecked)="onCheckedGroup($event)"
+        formControlName="group">
+      </do-checkbox>
+      <do-checkbox
+        [name]="'root'"
+        [label]="'Root'"
+        [data]="rootData"
+        [skeleton]="loadingForm"
+        (onChecked)="onCheckedRoot($event)"
+        formControlName="root"
+        *ngIf="!isGroup">
+      </do-checkbox>
+      <do-checkbox
+        [name]="'home'"
+        [label]="'Home'"
+        [data]="homeData"
+        [skeleton]="loadingForm"
+        formControlName="home"
+        *ngIf="!isGroup">
+      </do-checkbox>
+      <do-input-text
+        [name]="'code'"
+        [label]="'Code'"
+        [capslock]="true"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="code"
+        *ngIf="!isGroup">
+      </do-input-text>
+      <do-input-text
+        [name]="'link'"
+        [label]="'Link'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="link"
+        *ngIf="!isGroup">
+      </do-input-text>
+      <do-input-icon
+        [name]="'icon'"
+        [label]="'Icon'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        [icon]="'search-outline'"
+        [iconcursor]="true"
+        [eva]="true"
+        (clickIcon)="onSearchIcon()"
+        formControlName="icon"
+        *ngIf="(isRoot && !isGroup)">
+      </do-input-icon>
+      <do-select
+        [name]="'parent'"
+        [label]="'Parent Menu'"
+        [api]="apiSelectParent"
+        [searchable]="false"
+        [skeleton]="loadingForm"
+        [required]="true"
+        formControlName="parent"
+        *ngIf="(!isRoot && !isGroup)">
+      </do-select>
+      <do-input-text
+        [name]="'order'"
+        [label]="'Order'"
+        [required]="true"
+        [type]="'number'"
+        [max]="999"
+        [maxLength]="3"
+        [skeleton]="loadingForm"
+        formControlName="order">
+      </do-input-text>
+      <do-button-submit
+        [submitTitle]="action"
+        [resetTitle]="'Cancel'"
+        [formGroupButton]="formGroup"
+        [disabledButton]="disabled"
+        (onReset)="onReset()"
+        (onSubmit)="onSubmit(dialogprocess)">
+      </do-button-submit>
+    </form>
+  </div>
+</div>
+
+<ng-template #dialogprocess let-data let-ref="dialogRef">
+  <nb-card accent="{{dialogAction === 'Delete' ? 'danger' : 'warning'}}">
+    <nb-card-header>{{ 'Warning' | translate}}</nb-card-header>
+    <nb-card-body>{{ data | translate}}</nb-card-body>
+    <nb-card-footer>
+      <do-button-submit
+        [colLabel]="0"
+        [colButton]="12"
+        [submitTitle]="dialogAction"
+        [resetTitle]="'Cancel'"
+        [disabledButton]="disabled"
+        (onReset)="ref.close()"
+        (onSubmit)="onSubmitDialog(ref)">
+      </do-button-submit>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

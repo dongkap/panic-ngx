@@ -1,0 +1,52 @@
+<nb-card class="modal-form">
+  <nb-card-header>
+    {{ 'header.'+action+'-education-formal' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+          <do-select
+            [name]="'educationalLevel'"
+            [label]="'Educational Level'"
+            [placeholder]="'Educational Level'"
+            [required]="true"
+            [api]="apiSelectEducationalLevel"
+            [queryParam]="paramSelectEducationalLevel"
+            [searchable]="false"
+            formControlName="educationalLevel">
+          </do-select>
+          <do-input-text
+            [name]="'school'"
+            [label]="'School'"
+            [placeholder]="'School'"
+            formControlName="school">
+          </do-input-text>
+          <do-input-text
+            [name]="'startYear'"
+            [label]="'Start Year'"
+            [placeholder]="'Start Year'"
+            [type]="'number'"
+            formControlName="startYear">
+          </do-input-text>
+          <do-input-text
+            [name]="'endYear'"
+            [label]="'End Year'"
+            [placeholder]="'End Year'"
+            [type]="'number'"
+            formControlName="endYear">
+          </do-input-text>
+        </form>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <do-button-submit
+      [submitTitle]="action"
+      [resetTitle]="'Cancel'"
+      [formGroupButton]="formGroup"
+      (onReset)="onReset()"
+      (onSubmit)="onSubmit()">
+    </do-button-submit>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,15 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+    .sub-title {
+      margin: 1rem;
+    }
+
+    .spinner-area {
+      height: 22px;
+    }
+
+    ::ng-deep nb-spinner {
+        background: transparent !important;
+    }
+}

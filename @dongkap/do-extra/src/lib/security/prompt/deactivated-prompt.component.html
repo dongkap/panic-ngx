@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>
+    <h6 class="text-danger deactivated-label">
+        {{ 'Deactivate Account' | translate }}
+    </h6>
+  </nb-card-header>
+  <nb-card-body>
+    <p>
+      {{ 'message.deactivate-form' | translate }}
+    </p>
+    <p>
+      {{ 'message.input-password' | translate }}
+    </p>
+    <div class="input-group">
+      <input
+        [(ngModel)]="password"
+        [type]="!showPassword ? 'password' : 'text'"
+        nbInput
+        class="deactivated-password"
+        placeholder="{{ 'Password' | translate }}">
+      <div class="input-icon">
+        <nb-icon [options]="{ animation: { type: 'zoom' } }" class="input-icon-hover" icon="{{icon}}" (click)="onShowPassword()"></nb-icon>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      type="submit"
+      status="danger"
+      size="large"
+      class="deactivated-button"
+      [disabled]="!password || disabled"
+      (click)="submit(password)"
+      nbButton>
+      {{ 'message.button-deactivate' | translate }}
+    </button>
+  </nb-card-footer>
+</nb-card>

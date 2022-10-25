@@ -1,0 +1,61 @@
+<do-page-outlet [header]="action + ' Parameter'" [url]="'/app/sysconf/parameter/detail'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'parameterCode'"
+          [label]="'Parameter Code'"
+          [required]="!isEdit"
+          [skeleton]="loadingForm"
+          formControlName="parameterCode">
+        </do-input-text>
+        <div class="form-group row">
+          <label
+            for="Parameter Value"
+            class="label col-sm-3 col-form-label"
+            *ngIf="!loadingForm; else labelskeleton">
+            {{'Parameter Value' | translate}}
+          </label>
+          <ng-template #labelskeleton>
+            <div class="col-sm-3">
+              <div
+                [ngClass]="{
+                  'label-skeleton': true,
+                  'skeleton': loadingForm
+                }">
+              </div>
+            </div>
+          </ng-template>
+          <div class="col-sm-9">
+            <do-input-icon *ngIf="localeDefault.localeCode"
+              [name]="localeDefault.localeCode"
+              [nolabel]="true"
+              [required]="true"
+              [colLabel]="0"
+              [colInput]="12"
+              [icon]="'flag-icon flag-icon-' + localeDefault.icon"
+              [skeleton]="loadingForm"
+              formControlName="{{localeDefault.localeCode}}">
+            </do-input-icon>
+          </div>
+        </div>
+        <do-input-icon *ngFor="let i18n of locales"
+          [name]="i18n.localeCode"
+          [nolabel]="true"
+          [icon]="'flag-icon flag-icon-'+ i18n.icon"
+          [skeleton]="loadingForm"
+          formControlName="{{i18n.localeCode}}">
+        </do-input-icon>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

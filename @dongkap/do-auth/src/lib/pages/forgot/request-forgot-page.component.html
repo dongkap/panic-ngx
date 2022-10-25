@@ -1,0 +1,51 @@
+<h1 id="title" class="title">{{ 'Forgot Password' | translate }}</h1>
+<p class="sub-title">{{ 'subtitle.forgot-password' | translate }}</p>
+
+<nb-alert *ngIf="responseError" outline="danger" role="alert">
+  <p class="alert-title"><b>{{ 'alert.title.forgot' | translate }}</b></p>
+  <ul class="alert-message-list">
+    <li class="alert-message">{{ responseError }}</li>
+  </ul>
+</nb-alert>
+
+<form [formGroup]="form" (ngSubmit)="forgotPassword()" aria-labelledby="title">
+  <div class="form-control-group">
+    <label class="label" for="input-name">{{ 'message.email-forgot-password' | translate }} :</label>
+    <input [formControlName]="'email'"
+          [required]="true"
+          minlength="4"
+          maxlength="50"
+          [pattern]="patternEmail"
+          [ngClass]="{
+            'status-danger': hasErrorEmail,
+            'status-success': hasSuccessEmail
+          }"
+          name="email"
+          id="inputEmail"
+          placeholder="{{ 'Email' | translate }}"
+          fieldSize="large"
+          tabindex="1"
+          autofocus
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorEmail">
+      <span class="caption status-danger">{{'error.pattern.email' | translate}}</span>
+    </ng-container>
+  </div>
+
+  <button [disabled]="form.invalid || buttonForgotPassword"
+          fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="form.invalid || buttonForgotPassword">
+    {{ 'Send' | translate }}
+  </button>
+</form>
+
+<section class="sign-in-or-up" aria-label="Sign in or sign up">
+  <p><a class="text-link" routerLink="/auth/login">{{ 'message.forgot-password-link' | translate}}</a></p>
+  <!--
+  <p><a routerLink="/auth/register" class="text-link">{{ 'Register' | translate}}</a></p>
+  -->
+</section>

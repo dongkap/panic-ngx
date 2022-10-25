@@ -1,0 +1,13 @@
+<do-page-outlet [header]="'Profile'" [hidefooter]="true">
+  <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation($event)" pagecontent>
+    <nb-tab tabId="personalInfo" tabTitle="{{'tab.personal-info' | translate}}" [lazyLoad]="true">
+      <do-employee-profile-personal-information #personalInfo></do-employee-profile-personal-information>
+    </nb-tab>
+    <nb-tab tabId="education" tabTitle="{{'tab.education' | translate}}">
+      <do-employee-profile-education #education></do-employee-profile-education>
+    </nb-tab>
+    <nb-tab tabId="employeeStatus" tabTitle="{{'tab.employee-status' | translate}}">
+      <do-employee-profile-employee-status #employeeStatus></do-employee-profile-employee-status>
+    </nb-tab>
+  </nb-tabset>
+</do-page-outlet>

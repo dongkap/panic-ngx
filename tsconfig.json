@@ -1,0 +1,53 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "plugins": [
+    ],
+    "paths": {
+      "@angular/*": [
+        "node_modules/@angular/*"
+      ],
+      "@nebular/*": [
+        "node_modules/@nebular/*"
+      ],
+      "@dongkap/do-core": [
+        "@dongkap/do-core/src"
+      ],
+      "@dongkap/do-theme": [
+        "@dongkap/do-theme/src"
+      ],
+      "@dongkap/do-shared": [
+        "@dongkap/do-shared/src"
+      ],
+      "@dongkap/do-auth": [
+        "@dongkap/do-auth/src"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "annotateClosureCompiler": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
+  "exclude": [
+    "dist/**/*.ts"
+  ]
+}

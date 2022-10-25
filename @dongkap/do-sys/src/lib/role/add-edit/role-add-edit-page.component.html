@@ -1,0 +1,54 @@
+<do-page-outlet [header]="'header.'+action+'-role'" [url]="'/app/mgmt/role'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'authority'"
+          [label]="'Authority'"
+          [required]="true"
+          formControlName="authority">
+        </do-input-text>
+        <do-input-text
+          [name]="'level'"
+          [label]="'Level'"
+          [required]="true"
+          [type]="'number'"
+          formControlName="level">
+        </do-input-text>
+        <do-input-text
+          [name]="'description'"
+          [label]="'Description'"
+          [required]="true"
+          formControlName="description">
+        </do-input-text>
+        <do-select
+          [name]="'group'"
+          [label]="'Group'"
+          [required]="true"
+          [searchable]="false"
+          [api]="apiSelectGroup"
+          formControlName="group">
+        </do-select>
+      </form>
+    </div>
+    <div class="col-md-12 col-lg-12">
+      <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation($event)">
+        <nb-tab tabId="main" tabTitle="{{'tab.main-menu' | translate}}" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+          <do-role-main-page (onSelect)="onSelectMain($event)" #mainRole></do-role-main-page>
+        </nb-tab>
+        <nb-tab tabId="extra" tabTitle="{{'tab.extra-menu' | translate}}" [lazyLoad]="true" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+          <do-role-extra-page (onSelect)="onSelectExtra($event)" #extraRole></do-role-extra-page>
+        </nb-tab>
+      </nb-tabset>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

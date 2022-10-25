@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-6">
+    <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+      <div [formGroupName]="formGroupName">
+        <do-input-text
+          [name]="'name'"
+          [label]="'Name'"
+          [placeholder]="'Name'"
+          [required]="true"
+          formControlName="name">
+        </do-input-text>
+        <do-input-text
+          [name]="'email'"
+          [label]="'Email'"
+          [placeholder]="'Email'"
+          [required]="true"
+          [pattern]="patternEmail"
+          [paramError]="{value:5}"
+          minlength="5"
+          maxlength="50"
+          formControlName="email">
+        </do-input-text>
+        <do-radio
+          [name]="'gender'"
+          [label]="'Gender'"
+          [placeholder]="'Gender'"
+          [data]="genderData"
+          formControlName="gender">
+        </do-radio>
+        <do-datepicker
+          [name]="'dateOfBirth'"
+          [label]="'Date of Birth'"
+          [placeholder]="'Date of Birth'"
+          [required]="true"
+          formControlName="dateOfBirth">
+        </do-datepicker>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="card bg-secondary">
+      <div class="card-body">
+        <pre>Value: <code>{{ formGroup.value | json }}</code></pre>
+        <p>
+          Status: {{ formGroup.status }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<do-page-outlet [header]="'header.job-placement-management'" [url]="'/app/mgmt/job-placement'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-label-text
+        [name]="'bpName'"
+        [label]="'Business Partner'"
+        [skeleton]="loading"
+        [content]="businessPartner?.bpName"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'email'"
+        [label]="'Email'"
+        [skeleton]="loading"
+        [content]="businessPartner?.email"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'address'"
+        [label]="'Address'"
+        [skeleton]="loading"
+        [content]="businessPartner?.address"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'telpNumber'"
+        [label]="'Telp.'"
+        [skeleton]="loading"
+        [content]="businessPartner?.telpNumber"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-datatable
+        [api]="apiPath"
+        [columns]="columns"
+        [filterFn]="keyword"
+        [sort]="sort"
+        [reloadFn]="reload"
+        [edit]="false"
+        (onAdd)="onAddAssignment()"
+        (onDelete)="onDeleteAssignmentDialog($event, dialogdeleteassignment)">
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>
+
+<ng-template #dialogdeleteassignment let-data let-ref="dialogRef">
+  <nb-card accent="danger">
+    <nb-card-header>{{ 'Warning' | translate}}</nb-card-header>
+    <nb-card-body>{{ data | translate}}</nb-card-body>
+    <nb-card-footer>
+      <do-button-submit
+        [colLabel]="0"
+        [colButton]="12"
+        [submitTitle]="'Delete'"
+        [resetTitle]="'Cancel'"
+        [disabledButton]="disabled"
+        (onReset)="ref.close()"
+        (onSubmit)="onDeleteAssignment(ref)">
+      </do-button-submit>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

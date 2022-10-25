@@ -1,0 +1,35 @@
+<nb-card class="modal-form">
+  <nb-card-header>
+    {{ 'header.'+action+'-education-nonformal' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+          <do-input-text
+            [name]="'trainingName'"
+            [label]="'Training Name'"
+            [required]="true"
+            [placeholder]="'Training Name'"
+            formControlName="trainingName">
+          </do-input-text>
+          <do-datepicker-range
+            [name]="'trainingDate'"
+            [label]="'Training Date'"
+            [placeholder]="'Training Date'"
+            formControlName="trainingDate">
+          </do-datepicker-range>
+        </form>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <do-button-submit
+      [submitTitle]="action"
+      [resetTitle]="'Cancel'"
+      [formGroupButton]="formGroup"
+      (onReset)="onReset()"
+      (onSubmit)="onSubmit()">
+    </do-button-submit>
+  </nb-card-footer>
+</nb-card>

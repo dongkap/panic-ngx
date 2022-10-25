@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <do-label-text
+      [label]="'NIK'"
+      [colLabel]="3"
+      [colContent]="9"
+      [dividerlabel]="false"
+      [skeleton]="loadingForm"
+      [content]="dataEmployeeStatus?.idEmployee">
+    </do-label-text>
+    <do-label-text
+      [label]="'Occupation'"
+      [colLabel]="3"
+      [colContent]="9"
+      [dividerlabel]="false"
+      [skeleton]="loadingForm"
+      [content]="dataEmployeeStatus?.occupation?.name">
+    </do-label-text>
+    <do-label-text
+      [label]="'Supervisor'"
+      [colLabel]="3"
+      [colContent]="9"
+      [dividerlabel]="false"
+      [skeleton]="loadingForm"
+      [content]="dataEmployeeStatus?.parentLabel">
+    </do-label-text>
+  </div>
+</div>

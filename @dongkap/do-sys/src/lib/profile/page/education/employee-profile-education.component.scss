@@ -1,0 +1,9 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+  nb-accordion {
+    box-shadow: unset;
+  }
+
+}

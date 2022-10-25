@@ -1,0 +1,21 @@
+<do-page-outlet [header]="'Switch Role'">
+  <form [formGroup]="formGroup" pagecontent>
+      <do-select
+      [name]="'role'"
+      [label]="'Role'"
+      [required]="true"
+      [searchable]="false"
+      [skeleton]="loadingForm"
+      [api]="apiSelectUserRole"
+      formControlName="role">
+      </do-select>
+  </form>
+  <div class="offset-sm-3 col-sm-9" pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [name]="'Switch Role'"
+      [formGroupButton]="formGroup"
+      [disabledButton]="disabled">
+    </do-button>
+  </div>
+</do-page-outlet>

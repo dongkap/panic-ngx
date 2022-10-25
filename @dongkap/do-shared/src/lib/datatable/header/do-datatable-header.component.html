@@ -1,0 +1,48 @@
+<div class="header-datatable" *ngIf="header">
+    <div class="header-action" *ngIf="add">
+        <nb-icon
+            class="action-add"
+            icon="file-add-outline"
+            (click)="doAdd()">
+        </nb-icon>
+    </div>
+    <div class="header-action" *ngIf="delete">
+        <nb-icon
+            class="action-trash"
+            icon="trash-2-outline"
+            (click)="doDelete()">
+        </nb-icon>
+    </div>
+    <div class="header-filter" *ngIf="filter">
+        <do-input-base-icon
+            [name]="'_filter.datatable'"
+            [placeholder]="'datatable.typesearch'"
+            [iconcursor]="true"
+            [(ngModel)]="_search"
+            (clickIcon)="doSearch($event)"
+            (keydown)="onKeyDown($event)"
+            (focus)="onFocusSearch()">
+        </do-input-base-icon>
+    </div>
+    <div class="filter-funnel" *ngIf="filter && formGroupFilter">
+        <nb-icon
+            class="filter-icon-funnel"
+            [icon]="showFilter ? 'arrow-upward-outline' : 'funnel-outline'"
+            (click)="doFilterFunnel()">
+        </nb-icon>
+    </div>
+</div>
+<div *ngIf="filter && formGroupFilter" do-datatable-collapse #collapse>
+    <ng-content></ng-content>
+    <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button
+            type="submit"
+            status="primary"
+            (click)="doFilter()"
+            nbButton>
+            {{ 'Search' | translate}}
+          </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<nb-card>
+  <nb-card-header>
+    <h6 class="text-danger deactivated-label">
+        {{ 'Deactivate Account' | translate }}
+    </h6>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" aria-labelledby="title">
+    <p>
+      {{ 'message.deactivate-form' | translate }}
+    </p>
+    <p>
+      {{ 'message.input-email' | translate }}
+    </p>
+    <input
+      [formControlName]="'email'"
+      type="text"
+      [required]="true"
+      [pattern]="patternEmail"
+      nbInput
+      class="deactivated-email"
+      placeholder="Email">
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      type="submit"
+      status="danger"
+      size="large"
+      class="deactivated-button"
+      [disabled]="!form.valid || disabled"
+      (click)="submit()"
+      nbButton>
+      {{ 'message.button-deactivate' | translate }}
+    </button>
+  </nb-card-footer>
+</nb-card>

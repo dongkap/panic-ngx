@@ -1,0 +1,28 @@
+<div class="input-group">
+  <input
+    type="{{type}}"
+    id="{{name}}"
+    [pattern]="pattern"
+    [minLength]="minLength"
+    [maxLength]="maxLength"
+    [placeholder]="placeholder ? (placeholder | translate) : ''"
+    [required]="required"
+    [disabled]="disabled"
+    [ngClass]="{
+      'status-danger': hasErrors,
+      'status-success': hasSuccess
+    }"
+    (input)="onChange($event.target.value)"
+    (change)="onChange($event.target.value)"
+    (blur)="onTouched($event.target.value)"
+    (focus)="onFocus($event.target.value)"
+    [(ngModel)]="value"
+    #input nbInput fullWidth>
+  <div
+    class="input-icon"
+    [ngStyle]="{
+      'cursor': iconcursor ? 'pointer' : 'unset'
+    }">
+    <nb-icon class="input-icon-hover" icon="{{icon}}" (click)="onClickIcon()"></nb-icon>
+  </div>
+</div>

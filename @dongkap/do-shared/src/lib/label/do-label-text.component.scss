@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+
+label.label-text {
+    width: 100%;
+    border-bottom: 0.05rem solid #e4e5e6;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+div.label-text {
+    overflow: auto;
+    width: 100%;
+    border-bottom: 0.05rem solid #e4e5e6;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+button.btn-link {
+    padding-left: 0;
+}
+
+label.no-content-label {
+    padding: 15px 0;
+}
+
+label.numeric-label {
+    text-align: right;
+}

@@ -1,0 +1,44 @@
+<nb-card class="modal-form">
+  <nb-card-header>
+    {{ 'header.employee-selection' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <do-datatable
+          [api]="apiPath"
+          [columns]="columns"
+          [sort]="sort"
+          [sortsDefault]="sortsDefault"
+          [edit]="false"
+          [add]="false"
+          [delete]="false"
+          (onSelected)="onSelected($event)">
+        </do-datatable>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row" style="margin: auto; width: 50%">
+      <div style="margin: auto">
+        <button
+          type="reset"
+          status="danger"
+          (click)="onReset()"
+          class="reset-left"
+          nbButton>
+          {{ 'Cancel' | translate}}
+        </button>
+        <button
+          type="submit"
+          status="primary"
+          (click)="onSubmit()"
+          class="submit-right"
+          [disabled]="disabled"
+          nbButton>
+          {{ 'Choose' | translate}}
+        </button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

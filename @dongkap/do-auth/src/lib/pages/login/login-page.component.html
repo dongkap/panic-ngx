@@ -1,0 +1,101 @@
+<h1 id="title" class="title">{{ 'Login' | translate }}</h1>
+<p class="sub-title">{{ 'subtitle.login' | translate }}</p>
+<nb-alert *ngIf="responseError" outline="danger" role="alert">
+  <p class="alert-title"><b>{{ 'alert.title.login' | translate }}</b></p>
+  <ul class="alert-message-list">
+    <li class="alert-message">{{ responseError | translate }}</li>
+  </ul>
+</nb-alert>
+
+<form [formGroup]="formGroup" (ngSubmit)="login()" aria-labelledby="title">
+  <div class="form-control-group">
+    <label class="label">{{ 'message.username-login' | translate }} :</label>
+    <input [formControlName]="'username'"
+          [required]="true"
+          [ngClass]="{
+            'status-danger': hasErrorUsername,
+            'status-success': hasSuccessUsername
+          }"
+          name="username"
+          id="inputUsername"
+          placeholder="{{ 'message.username-login-placeholder' | translate }}"
+          fieldSize="large"
+          tabindex="1"
+          autofocus
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorUsername">
+      <span class="caption status-danger">{{'error.username-login' | translate}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label">{{ 'Password' | translate }} :</label>
+      <a class="forgot-password caption-2" routerLink="/auth/forgot-password" tabindex="-1">{{ 'Forgot Password' | translate}}?</a>
+    </span>
+    <div class="input-group">
+      <input [formControlName]="'password'"
+            [required]="true"
+            [ngClass]="{
+              'status-danger': hasErrorPassword,
+              'status-success': hasSuccessPassword
+            }"
+            name="password"
+            [type]="!showPassword ? 'password' : 'text'"
+            id="inputPassword"
+            placeholder="{{ 'Password' | translate }}"
+            fieldSize="large"
+            tabindex="2"
+            nbInput
+            fullWidth>
+      <div class="input-icon">
+        <nb-icon [options]="{ animation: { type: 'zoom' } }" class="input-icon-hover" icon="{{icon}}" (click)="onShowPassword()"></nb-icon>
+      </div>
+    </div>
+    <ng-container *ngIf="hasErrorPassword">
+      <span class="caption status-danger">{{ 'error.password' | translate}}</span>
+    </ng-container>
+  </div>
+
+  <button [disabled]="formGroup.invalid || buttonLogin"
+          fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="formGroup.invalid || buttonLogin">
+    {{ 'Login' | translate }}
+  </button>
+</form>
+<!--
+<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  {{ 'message.login-footer-social' | translate}}:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link"
+         [routerLink]="socialLink.link"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+      <a *ngIf="socialLink.url"
+         [attr.href]="socialLink.url"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+    </ng-container>
+  </div>
+</section>
+
+<section class="another-action" aria-label="Register">
+  {{ 'message.login-footer' | translate}} <a class="text-link" routerLink="/auth/register">{{ 'Register' | translate}}</a>
+</section>
+-->
+<section class="another-action" aria-label="Terms and Conditions">
+  <span class="terms-conditions" (click)="onClickTermsConditions()" tabindex="-1">{{ 'message.terms-conditions' | translate}}</span>
+</section>

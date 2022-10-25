@@ -1,0 +1,10 @@
+<div
+  id="leafletmap"
+  [ngStyle]="{
+    'height': height + 'rem'
+  }"
+  leaflet
+  [leafletOptions]="options"
+  [leafletLayers]="layers"
+  (leafletMapReady)="onMapReady($event)">
+</div>

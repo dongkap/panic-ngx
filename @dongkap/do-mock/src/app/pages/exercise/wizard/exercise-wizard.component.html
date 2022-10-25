@@ -1,0 +1,20 @@
+<do-wizard [extra]="true">
+    <div buttonextra>
+        <button
+            (click)="onSaveDraft()"
+            [disabled]="!formIsValid()"
+            class="reset-left"
+            status="primary"
+            nbButton>
+            {{'Save Draft' | translate}}
+        </button>
+        <button
+            (click)="onSend()"
+            [disabled]="!formIsValid()"
+            class="submit-right"
+            status="success"
+            nbButton>
+            {{'Send' | translate}}
+        </button>
+    </div>
+</do-wizard>

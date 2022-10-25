@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-4 col-lg-4">
+    <tree-ngx
+      (selectedItems)="select($event)"
+      [nodeItems]="nodeItems"
+      [options]="options"
+      #treeMain>
+      <ng-template #nodeNameTemplate let-node="node" let-context="context">
+        <span
+          class="node-action"
+          [ngClass]="{
+            'node-action': !node.item.group,
+            'node-action-group': node.item.group
+          }">
+          {{node.name}}
+        </span>
+      </ng-template>
+    </tree-ngx>
+  </div>
+</div>

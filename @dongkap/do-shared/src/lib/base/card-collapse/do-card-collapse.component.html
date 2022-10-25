@@ -1,0 +1,13 @@
+<div class="header-card-collapse">
+    <label>
+        {{header | translate}}
+    </label>
+    <div class="filter-collapse">
+        <span class="filter-icon-collapse" (click)="doCollapse()">
+            <i class="{{show ? 'icon-arrow-down' : 'icon-arrow-up'}}"></i>
+        </span>
+    </div>
+</div>
+<div do-collapse [expanded]="expanded" #cardcollapse class="card-collapse">
+    <ng-content></ng-content>
+</div>

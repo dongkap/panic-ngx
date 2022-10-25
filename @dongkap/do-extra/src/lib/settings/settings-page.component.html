@@ -1,0 +1,33 @@
+<do-page-outlet [header]="'Settings'">
+  <form [formGroup]="formGroup" pagecontent>
+    <do-select
+      [name]="'locale'"
+      [label]="'label.language'"
+      [required]="true"
+      [searchable]="false"
+      [skeleton]="loadingForm"
+      [api]="apiSelectLocale"
+      formControlName="locale">
+      <div *doContentSelect="let item">
+        <span class="{{item.icon ? item.icon : localeIcon}}"></span>
+        <span class="label-select">{{item.label ? item.label : item}}</span>
+      </div>
+    </do-select>
+    <do-checkbox
+      [name]="'checkbox'"
+      [label]="'label.dark-mode'"
+      [data]="dataTheme"
+      [skeleton]="loadingForm"
+      formControlName="theme">
+    </do-checkbox>
+  </form>
+  <div class="offset-sm-3 col-sm-9" pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [name]="'Update Settings'"
+      [formGroupButton]="formGroup"
+      [disabledButton]="disabled"
+      [skeleton]="loadingForm">
+    </do-button>
+  </div>
+</do-page-outlet>

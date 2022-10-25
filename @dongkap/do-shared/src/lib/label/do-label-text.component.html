@@ -1,0 +1,37 @@
+<do-container-outlet
+  [name]="name" [label]="label" [nolabel]="nolabel" 
+  [colLabel]="colLabel" [colContent]="colContent"
+  [required]="required"
+  [dividerlabel]="dividerlabel"
+  [skeleton]="skeleton">
+  <div class="col-sm-{{colContent}}" *ngIf="!skeleton; else contentskeleton">
+    <label *ngIf="!showMoreMode"
+      class="col-form-label label-text"
+      [ngClass]="{
+        'no-content-label': !value,
+        'numeric-label': numeric
+      }"
+    >{{value | translate}} </label>
+    <div *ngIf="showMoreMode" class="label-text">
+      <label
+      class="col-form-label"
+      [ngClass]="{
+        'no-content-label': !value,
+        'numeric-label': numeric
+      }"
+      >{{value | translate}} </label>
+      <button *ngIf="!showMore" type="button" nbButton outline status="info" (click)="onShowMore()">{{'Show More' | translate}}</button>
+      <button *ngIf="showMore" type="button" nbButton outline status="info" (click)="onShowMore()">{{'Show Less' | translate}}</button>
+    </div>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colContent}}">
+      <div
+        [ngClass]="{
+          'input-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

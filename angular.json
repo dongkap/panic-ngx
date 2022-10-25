@@ -1,0 +1,556 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "46f93268-cb99-4a82-a8cd-9b2cd8a2eaa2"
+  },
+  "version": 1,
+  "newProjectRoot": "@dongkap",
+  "projects": {
+    "@dongkap/do-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "@dongkap/do-app",
+      "sourceRoot": "@dongkap/do-app/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "preserveSymlinks": true,
+            "outputPath": "dist/@dongkap/do-app",
+            "index": "@dongkap/do-app/src/index.html",
+            "main": "@dongkap/do-app/src/main.ts",
+            "polyfills": "@dongkap/do-app/src/polyfills.ts",
+            "tsConfig": "@dongkap/do-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "@dongkap/do-app/src/assets",
+              "@dongkap/do-app/src/favicon.ico",
+              "@dongkap/do-app/src/favicon.png",
+              "@dongkap/do-app/src/ngdo-sw.js",
+              "@dongkap/do-app/src/ngsw.json",
+              "@dongkap/do-app/src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/@dongkap/do-theme/styles/styles.scss",
+              "node_modules/flag-icon-css/css/flag-icons.min.css",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css"
+            ],
+            "scripts": [
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "angular2-chartjs",
+              "echarts",
+              "lodash",
+              "zrender/lib/svg/svg",
+              "zrender/lib/vml/vml",
+              "crypto-js"
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "500kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "@dongkap/do-app/src/environments/environment.ts",
+                  "with": "@dongkap/do-app/src/environments/prod.environment.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "@dongkap/do-app/ngsw-config.json"
+            },
+            "github": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "500kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "@dongkap/do-app/src/environments/environment.ts",
+                  "with": "@dongkap/do-app/src/environments/github.environment.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "@dongkap/do-app/ngsw-config.json"
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "@dongkap/do-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "@dongkap/do-app:build:production"
+            },
+            "github": {
+              "browserTarget": "@dongkap/do-app:build:github"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@dongkap/do-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-app/src/test.ts",
+            "polyfills": "@dongkap/do-app/src/polyfills.ts",
+            "tsConfig": "@dongkap/do-app/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-app/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "@dongkap/do-app/src/assets",
+              "@dongkap/do-app/src/favicon.ico",
+              "@dongkap/do-app/src/favicon.png"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/@dongkap/do-theme/styles/styles.scss",
+              "node_modules/flag-icon-css/css/flag-icons.min.css",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css"
+            ],
+            "scripts": [
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "@dongkap/do-mock": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "@dongkap/do-mock",
+      "sourceRoot": "@dongkap/do-mock/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "preserveSymlinks": true,
+            "outputPath": "dist/@dongkap/do-mock",
+            "index": "@dongkap/do-mock/src/index.html",
+            "main": "@dongkap/do-mock/src/main.ts",
+            "polyfills": "@dongkap/do-mock/src/polyfills.ts",
+            "tsConfig": "@dongkap/do-mock/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "@dongkap/do-mock/src/assets",
+              "@dongkap/do-mock/src/favicon.ico",
+              "@dongkap/do-mock/src/favicon.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "@dongkap/do-mock/src/app/@theme/styles/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "angular2-chartjs",
+              "echarts",
+              "lodash",
+              "zrender/lib/svg/svg",
+              "zrender/lib/vml/vml",
+              "crypto-js"
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "@dongkap/do-mock/src/environments/environment.ts",
+                  "with": "@dongkap/do-mock/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "@dongkap/do-mock:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "@dongkap/do-mock:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@dongkap/do-mock:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-mock/src/test.ts",
+            "polyfills": "@dongkap/do-mock/src/polyfills.ts",
+            "tsConfig": "@dongkap/do-mock/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-mock/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "@dongkap/do-mock/src/assets",
+              "@dongkap/do-mock/src/favicon.ico",
+              "@dongkap/do-mock/src/favicon.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "@dongkap/do-mock/src/app/@theme/styles/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "@dongkap/do-core": {
+      "projectType": "library",
+      "root": "@dongkap/do-core",
+      "sourceRoot": "@dongkap/do-core/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-core/src/test.ts",
+            "tsConfig": "@dongkap/do-core/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-core/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-theme": {
+      "projectType": "library",
+      "root": "@dongkap/do-theme",
+      "sourceRoot": "@dongkap/do-theme/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-theme/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-theme/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-theme/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-theme/src/test.ts",
+            "tsConfig": "@dongkap/do-theme/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-theme/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-shared": {
+      "projectType": "library",
+      "root": "@dongkap/do-shared",
+      "sourceRoot": "@dongkap/do-shared/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-shared/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-shared/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-shared/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-shared/src/test.ts",
+            "tsConfig": "@dongkap/do-shared/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-shared/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-auth": {
+      "projectType": "library",
+      "root": "@dongkap/do-auth",
+      "sourceRoot": "@dongkap/do-auth/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-auth/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-auth/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-auth/src/test.ts",
+            "tsConfig": "@dongkap/do-auth/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-auth/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-extra": {
+      "projectType": "library",
+      "root": "@dongkap/do-extra",
+      "sourceRoot": "@dongkap/do-extra/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-extra/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-extra/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-extra/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-extra/src/test.ts",
+            "tsConfig": "@dongkap/do-extra/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-extra/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-sys": {
+      "projectType": "library",
+      "root": "@dongkap/do-sys",
+      "sourceRoot": "@dongkap/do-sys/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-sys/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-sys/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-sys/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-sys/src/test.ts",
+            "tsConfig": "@dongkap/do-sys/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-sys/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@dongkap/do-panic": {
+      "projectType": "library",
+      "root": "@dongkap/do-panic",
+      "sourceRoot": "@dongkap/do-panic/src",
+      "prefix": "do",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "@dongkap/do-panic/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "@dongkap/do-panic/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "@dongkap/do-panic/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "@dongkap/do-panic/src/test.ts",
+            "tsConfig": "@dongkap/do-panic/tsconfig.spec.json",
+            "karmaConfig": "@dongkap/do-panic/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "@dongkap/do-app"
+}

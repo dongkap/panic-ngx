@@ -1,0 +1,18 @@
+{
+	"totalFiltered": 3,
+	"totalRecord": 3,
+	"data": [
+    {
+      "name": "Ethel Price",
+      "religion": "Moeslem",
+      "company": "Johnson, Johnson and Partners, LLC CMP DDC",
+      "age": 22
+    },
+    {
+      "name": "Claudine Neal",
+      "religion": "Tretan Non Moeslem",
+      "company": "Sealoud",
+      "age": 55
+    }
+  ]
+}

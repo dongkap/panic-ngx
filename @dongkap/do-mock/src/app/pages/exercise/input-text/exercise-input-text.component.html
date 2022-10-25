@@ -1,0 +1,71 @@
+<do-page-outlet
+  [header]="'Input Text'">
+  <div pagecontent>
+    <div class="row">
+      <div class="col-md-6">
+        <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+          <do-input-text
+            [name]="'name'"
+            [label]="'Name'"
+            [placeholder]="'Name'"
+            formControlName="name">
+          </do-input-text>
+          <do-input-text
+            [name]="'username'"
+            [label]="'Username'"
+            [placeholder]="'Username'"
+            [required]="true"
+            [pattern]="patternUsername"
+            [paramError]="{value:5}"
+            minlength="5"
+            maxlength="20"
+            formControlName="username">
+          </do-input-text>
+          <do-input-icon
+            [name]="'email'"
+            [label]="'Email'"
+            [placeholder]="'Email'"
+            [required]="true"
+            [pattern]="patternEmail"
+            [paramError]="{value:5}"
+            [icon]="'cil-envelope-closed'"
+            [buttontype]="'btn-light'"
+            minlength="5"
+            maxlength="50"
+            formControlName="email">
+          </do-input-icon>
+          <do-input-text
+            [name]="'skeletonText'"
+            [label]="'Skeleton Text'"
+            [placeholder]="'Skeleton Text'"
+            [skeleton]="true"
+            formControlName="skeletonText">
+          </do-input-text>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-secondary">
+          <div class="card-body">
+            <pre>Value: <code>{{ formGroup.value | json }}</code></pre>
+            <p>
+              Status: {{ formGroup.status }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div pagefooter>
+    <do-button
+      (onSubmit)="onSubmit()"
+      [formGroupButton]="formGroup"
+      [name]="'Submit'">
+    </do-button>
+    <do-button
+      (onSubmit)="onReset()"
+      [name]="'Reset'"
+      [status]="'danger'"
+      [type]="'reset'">
+    </do-button>
+  </div>
+</do-page-outlet>

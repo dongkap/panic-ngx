@@ -1,0 +1,70 @@
+<do-page-outlet [header]="'header.'+action+'-business-partner'" [url]="'/app/mgmt/business-partner'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'bpName'"
+          [label]="'Business Partner Name'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="bpName">
+        </do-input-text>
+        <do-checkbox
+          [name]="'b2bNonExpired'"
+          [label]="'Non Expired'"
+          [data]="dataDefault"
+          (onChecked)="onCheckB2bNonExpired($event)"
+          formControlName="b2bNonExpired">
+        </do-checkbox>
+        <do-datepicker
+          [show]="!isB2bNonExpired"
+          [name]="'expiredTime'"
+          [label]="'Expired Date'"
+          [required]="!isB2bNonExpired"
+          formControlName="expiredTime">
+        </do-datepicker>
+        <do-input-text
+          [name]="'email'"
+          [label]="'Email'"
+          [required]="true"
+          [pattern]="patternEmail"
+          [paramError]="{value:5}"
+          [skeleton]="loadingForm"
+          formControlName="email">
+        </do-input-text>
+        <do-textarea
+          [name]="'address'"
+          [label]="'Address'"
+          [required]="true"
+          [minLength]="5"
+          [skeleton]="loadingForm"
+          formControlName="address">
+        </do-textarea>
+        <do-input-text
+          [name]="'telpNumber'"
+          [label]="'Telp.'"
+          [required]="true"
+          [pattern]="patternPhoneNumber"
+          [skeleton]="loadingForm"
+          formControlName="telpNumber">
+        </do-input-text>
+        <do-input-text
+          [name]="'faxNumber'"
+          [label]="'Fax.'"
+          [pattern]="patternPhoneNumber"
+          [skeleton]="loadingForm"
+          formControlName="faxNumber">
+        </do-input-text>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

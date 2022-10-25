@@ -1,0 +1,30 @@
+<do-page-outlet [header]="'i18n'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [delete]="false"
+        [selectionType]="selectionType"
+        (onFilter)="doFilterAdvanced($event)"
+        (onAdd)="onAddGroup()"
+        (onEdit)="onViewDetail($event)"
+        [filterFn]="keyword"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'localeCode'"
+            [label]="'Locale Code'"
+            formControlName="localeCode">
+          </do-input-text>
+          <do-input-text
+            [name]="'identifier'"
+            [label]="'Identifier'"
+            formControlName="identifier">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>

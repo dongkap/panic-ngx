@@ -1,0 +1,69 @@
+<do-page-outlet [header]="'header.'+action+'-corporate'" [url]="'/app/mgmt/corporate'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'corporateCode'"
+          [label]="'Corporate Code'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="corporateCode">
+        </do-input-text>
+        <do-input-text
+          [name]="'corporateName'"
+          [label]="'Corporate Name'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="corporateName">
+        </do-input-text>
+        <do-checkbox
+          [name]="'corporateNonExpired'"
+          [label]="'Non Expired'"
+          [data]="dataDefault"
+          formControlName="corporateNonExpired">
+        </do-checkbox>
+        <do-input-text
+          [name]="'email'"
+          [label]="'Email'"
+          [required]="true"
+          [pattern]="patternEmail"
+          [paramError]="{value:5}"
+          [skeleton]="loadingForm"
+          formControlName="email">
+        </do-input-text>
+        <do-textarea
+          [name]="'address'"
+          [label]="'Address'"
+          [required]="true"
+          [minLength]="5"
+          [skeleton]="loadingForm"
+          formControlName="address">
+        </do-textarea>
+        <do-input-text
+          [name]="'telpNumber'"
+          [label]="'Telp.'"
+          [required]="true"
+          [pattern]="patternPhoneNumber"
+          [skeleton]="loadingForm"
+          formControlName="telpNumber">
+        </do-input-text>
+        <do-input-text
+          [name]="'faxNumber'"
+          [label]="'Fax.'"
+          [pattern]="patternPhoneNumber"
+          [skeleton]="loadingForm"
+          formControlName="faxNumber">
+        </do-input-text>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

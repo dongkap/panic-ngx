@@ -1,0 +1,29 @@
+<do-page-outlet [header]="'Add Parameter Group'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'parameterGroupCode'"
+          [label]="'Parameter Group Code'"
+          [required]="true"
+          formControlName="parameterGroupCode">
+        </do-input-text>
+        <do-input-text
+          [name]="'parameterGroupName'"
+          [label]="'Parameter Group Name'"
+          [required]="true"
+          formControlName="parameterGroupName">
+        </do-input-text>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="'Add'"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

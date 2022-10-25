@@ -1,0 +1,38 @@
+<do-page-outlet
+  [header]="'Datatable'"
+  [dataSelect]="dataSelect"
+  [selected]="selected"
+  [hidefooter]="true">
+  <div pagecontent>
+      <do-datatable 
+        [api]="apiDatatable"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [selectionType]="selectionType"
+        (onFilter)="doFilterAdvanced($event)"
+        (onAdd)="onAddGroup()"
+        (onEdit)="onViewDetail($event)"
+        (onDelete)="onDeleteGroup($event)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'name.table'"
+            [label]="'Name'"
+            formControlName="name">
+          </do-input-text>
+          <do-input-text
+            [name]="'gender.table'"
+            [label]="'Gender'"
+            formControlName="gender">
+          </do-input-text>
+          <do-input-text
+            [name]="'company.table'"
+            [label]="'Company'"
+            formControlName="company">
+          </do-input-text>
+        </form>
+      </do-datatable>
+  </div>
+  <div pagefooter>
+  </div>
+</do-page-outlet>

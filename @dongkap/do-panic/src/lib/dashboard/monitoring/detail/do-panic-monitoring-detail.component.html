@@ -1,0 +1,174 @@
+<do-page-outlet [url]="'/app/dashboard'" [header]="'Emergency Report Detail'">
+    <div class="row" pagecontent>
+        <div class="col-md-4 col-lg-4 col-xxxl-6">
+            <div class="photo-profile"
+            [ngStyle]="{ 
+                'background-image': 'url(' + (image? image: imageDefault) + ')'
+            }">
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-8 col-xxxl-6">
+            <div class="split-row">
+                <do-label-text
+                    [label]="'Name'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.name"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'ID Number'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.idNumber"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Gender'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.gender"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Place / Date of Birth'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.placeOfBirth ? (profile.placeOfBirth + ', ' + profile.dateOfBirth) : ''"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+            </div>
+            <div class="split-row">
+                <do-label-text
+                    [label]="'Username'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.username"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Email'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.email"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Phone Number'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.phoneNumber"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Address'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.address"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Country'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.country"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+            </div>
+            <div class="split-row">
+                <do-label-text
+                    [label]="'Related Person'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.referenceName"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Relationship'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.relationship"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Address'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.referenceAddress"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+                <do-label-text
+                    [label]="'Phone Number'"
+                    [colLabel]="4"
+                    [colContent]="8"
+                    [content]="profile.referencePhoneNumber"
+                    [skeleton]="loadingForm">
+                </do-label-text>
+            </div>
+            <form [formGroup]="formGroup">
+                <do-select
+                    [name]="'status'"
+                    [label]="'Status'"
+                    [colLabel]="4"
+                    [colInput]="8"
+                    [required]="true"
+                    [api]="apiSelectParameter"
+                    [queryParam]="paramSelectStatus"
+                    [searchable]="false"
+                    [skeleton]="loadingForm"
+                    formControlName="status">
+                </do-select>
+                <do-select
+                    [name]="'emergency'"
+                    [label]="'Emergency'"
+                    [colLabel]="4"
+                    [colInput]="8"
+                    [required]="true"
+                    [api]="apiSelectParameter"
+                    [queryParam]="paramSelectEmergency"
+                    [searchable]="false"
+                    [skeleton]="loadingForm"
+                    formControlName="emergencyCategory">
+                </do-select>
+                <div class="form-group row">
+                    <div class="offset-sm-4 col-sm-8">
+                        <button
+                            type="reset"
+                            status="danger"
+                            (click)="onFake()"
+                            class="reset-left"
+                            nbButton>
+                            {{ 'Fake Report' | translate}}
+                        </button>
+                        <button
+                            type="submit"
+                            status="primary"
+                            (click)="onProcess()"
+                            [disabled]="formGroup.invalid || formGroup.pristine || disabled"
+                            class="submit-right"
+                            nbButton>
+                            {{ 'Process' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xxxl-6">
+            <do-datatable
+                [api]="apiPath"
+                [filters]="filters"
+                (onButtonCell)="onPreview($event)"
+                [filterFn]="keyword"
+                [selectionType]="null"
+                [add]="false"
+                [edit]="false"
+                [delete]="false"
+                [sort]="sort"
+                [columns]="columns">
+            </do-datatable>
+        </div>
+    </div>
+</do-page-outlet>  

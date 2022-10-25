@@ -1,0 +1,26 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+  ::ng-deep .leaflet-top, ::ng-deep .leaflet-bottom {
+    z-index: 997;
+  }
+
+  ::ng-deep .leaflet-container {
+    width: 100%;
+    height: nb-theme(card-height-large);
+  }
+
+  ::ng-deep .pulse {
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0.0;
+  }
+  
+  @keyframes pulsate {
+    0% { opacity: 0.0;}
+    50% { opacity: 1.0;}
+    100% { opacity: 0.0;}
+  }
+
+}

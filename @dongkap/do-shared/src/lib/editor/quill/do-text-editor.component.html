@@ -1,0 +1,36 @@
+<do-container-outlet
+  [name]="name" [label]="label" [nolabel]="nolabel" 
+  [colLabel]="colLabel" [colContent]="colInput"
+  [required]="required" [hasErrors]="hasErrors"
+  [errorMessages]="errorMessages" [paramError]="paramError"
+  [warnMessage]="warnMessage"
+  [skeleton]="skeleton" [show]="show">
+  <div class="col-sm-{{colInput}}" *ngIf="!skeleton; else contentskeleton">
+    <quill-editor
+      [minLength]="minLength"
+      [maxLength]="maxLength"
+      [placeholder]="placeholder ? (placeholder | translate) : ''"
+      [required]="required"
+      [disabled]="disabled"
+      [readOnly]="disabled"
+      [ngClass]="{
+        'hasErrors': hasErrors
+      }"
+      [styles]="{height: height+'px'}"
+      (onContentChanged)="onChange(value)"
+      (onBlur)="onTouched(value)"
+      (onFocus)="onTouched(value)"
+      [(ngModel)]="value">
+    </quill-editor>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colInput}}">
+      <div
+        [ngClass]="{
+          'texteditor-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

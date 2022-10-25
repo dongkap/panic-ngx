@@ -1,0 +1,10 @@
+<do-page-outlet [header]="'header.menu-management'" [hidefooter]="true">
+  <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation($event)" pagecontent>
+    <nb-tab tabId="main" tabTitle="{{'tab.main-menu' | translate}}">
+      <do-main-menu-page #mainMenu></do-main-menu-page>
+    </nb-tab>
+    <nb-tab tabId="extra" tabTitle="{{'tab.extra-menu' | translate}}" [lazyLoad]="true">
+      <do-extra-menu-page #extraMenu></do-extra-menu-page>
+    </nb-tab>
+  </nb-tabset>
+</do-page-outlet>

@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup">
+      <do-input-text
+        [name]="'name'"
+        [label]="'Employee Name'"
+        [placeholder]="'Employee Name'"
+        [pattern]="patternFullname"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="employeeName">
+      </do-input-text>
+      <do-input-text
+        [name]="'nik'"
+        [label]="'Employee Identification Number'"
+        [placeholder]="'Employee Identification Number'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="nik">
+      </do-input-text>
+      <do-input-text
+        [name]="'idNumber'"
+        [label]="'ID Card Number'"
+        [placeholder]="'ID Card Number'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="idNumber">
+      </do-input-text>
+      <do-input-text
+        [name]="'email'"
+        [label]="'Email'"
+        [placeholder]="'Email'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        [pattern]="patternEmail"
+        [paramError]="{value:5}"
+        minlength="5"
+        maxlength="50"
+        formControlName="email">
+      </do-input-text>
+      <do-input-text
+        [name]="'phoneNumber'"
+        [label]="'Phone Number'"
+        [placeholder]="'Phone Number'"
+        [pattern]="patternPhoneNumber"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="phoneNumber">
+      </do-input-text>
+      <do-textarea
+        [name]="'address'"
+        [label]="'Address'"
+        [placeholder]="'Address'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="address">
+      </do-textarea>
+      <do-label-text
+        [name]="'pobdob'"
+        [label]="'label.pobdob'"
+        [skeleton]="loadingForm"
+        [content]="personalInfo?.placeOfBirth + ', ' +personalInfo?.dateOfBirth"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'gender'"
+        [label]="'Gender'"
+        [skeleton]="loadingForm"
+        [content]="personalInfo?.genderValue"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'height'"
+        [label]="'Height'"
+        [skeleton]="loadingForm"
+        [content]="personalInfo?.height"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'weight'"
+        [label]="'Weight'"
+        [skeleton]="loadingForm"
+        [content]="personalInfo?.weight"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-label-text
+        [name]="'bloodType'"
+        [label]="'Blood Type'"
+        [skeleton]="loadingForm"
+        [content]="personalInfo?.bloodType"
+        [colLabel]="3"
+        [colContent]="9"
+        [dividerlabel]="false">
+      </do-label-text>
+      <do-button-submit
+        [submitTitle]="'Edit'"
+        [resetTitle]="'Cancel'"
+        [formGroupButton]="formGroup"
+        [disabledButton]="disabled"
+        (onReset)="onReset()"
+        (onSubmit)="onSubmit()">
+      </do-button-submit>
+    </form>
+  </div>
+</div>

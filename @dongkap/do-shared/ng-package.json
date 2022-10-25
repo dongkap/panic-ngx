@@ -1,0 +1,20 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@dongkap/do-shared",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@dongkap/do-core": "@dongkap/do-core",
+      "@ngx-translate/core": "@ngx-translate/core",
+      "@nebular/theme": "@nebular/theme",
+      "@nebular/date-fns": "@nebular/date-fns",
+      "@nebular/moment": "@nebular/moment",
+      "@ng-select/ng-select": "@ng-select/ng-select",
+      "@swimlane/ngx-datatable": "@swimlane/ngx-datatable",
+      "ngx-bootstrap/collapse": "ngx-bootstrap/collapse",
+      "text-mask-core/dist/textMaskCore": "text-mask-core/dist/textMaskCore",
+      "ngx-quill": "ngx-quill",
+      "date-fns/esm/locale": "date-fns/esm/locale"
+    }
+  }
+}

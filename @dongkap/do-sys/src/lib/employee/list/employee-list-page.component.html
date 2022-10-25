@@ -1,0 +1,37 @@
+<do-page-outlet [header]="'header.employee-management'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [sortsDefault]="sortsDefault"
+        [reloadFn]="reload"
+        [selectionType]="selectionType"
+        [delete]="false"
+        (onAdd)="onAdd()"
+        (onEdit)="onViewDetail($event)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'fullname'"
+            [label]="'Name'"
+            formControlName="fullname">
+          </do-input-text>
+          <do-input-text
+            [name]="'idEmployee'"
+            [label]="'NIK'"
+            formControlName="idEmployee">
+          </do-input-text>
+          <do-input-text
+            [name]="'occupationName'"
+            [label]="'Occupation Name'"
+            formControlName="occupationName">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>
+

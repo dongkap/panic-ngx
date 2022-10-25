@@ -1,0 +1,38 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+  input.deactivated-password {
+    max-width: unset;
+    width: 100%;
+  }
+
+  .cancel {
+    margin-right: 1rem;
+  }
+
+  button.deactivated-button {
+    width: 100%;
+  }
+
+  @include media-breakpoint-down(sm) {
+    p {
+      line-height: 1.35rem;
+      word-spacing: 0.15rem;
+    }
+
+    button.deactivated-button {
+      font-size: 0.6rem;
+    }
+  }
+
+  .flag-icon {
+    margin: 0.75rem;
+  }
+
+  .choose-flag {
+    cursor: pointer;
+  }
+
+}

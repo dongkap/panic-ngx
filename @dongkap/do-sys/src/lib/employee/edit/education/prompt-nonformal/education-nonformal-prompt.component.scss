@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+  .modal-form {
+    max-width: 40rem;
+    width: 40rem !important;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .modal-form {
+      width: 100% !important;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<do-page-outlet [header]="'header.'+action+'-occupation'" [url]="'/app/mgmt/occupation'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'code'"
+          [label]="'Occupation Code'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="code">
+        </do-input-text>
+        <do-input-text
+          [name]="'name'"
+          [label]="'Occupation Name'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="name">
+        </do-input-text>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

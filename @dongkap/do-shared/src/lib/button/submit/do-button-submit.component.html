@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="offset-sm-{{colLabel}} col-sm-{{colButton}}" *ngIf="!skeleton; else contentskeleton">
+    <button
+      type="reset"
+      status="danger"
+      (click)="reset($event)"
+      [disabled]="disabledReset"
+      class="reset-left"
+      nbButton>
+      {{ resetTitle | translate}}
+    </button>
+    <button
+      type="submit"
+      status="primary"
+      (click)="submit($event)"
+      [disabled]="disabledButton || disabledForm"
+      class="submit-right"
+      nbButton>
+      {{ submitTitle | translate}}
+    </button>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="row offset-sm-{{colLabel}} col-sm-{{colButton}}">
+      <div
+        [ngClass]="{
+          'reset-left': true,
+          'button-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+      <div
+        [ngClass]="{
+          'reset-right': true,
+          'button-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</div>

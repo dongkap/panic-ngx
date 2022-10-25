@@ -1,0 +1,38 @@
+<do-page-outlet [header]="'header.'+action+'-apps'" [url]="'/app/mgmt/apps'">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'appCode'"
+          [label]="'App Code'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="appCode">
+        </do-input-text>
+        <do-input-text
+          [name]="'appName'"
+          [label]="'App Name'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="appName">
+        </do-input-text>
+        <do-textarea
+          [name]="'description'"
+          [label]="'Description'"
+          [minLength]="5"
+          [skeleton]="loadingForm"
+          formControlName="description">
+        </do-textarea>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

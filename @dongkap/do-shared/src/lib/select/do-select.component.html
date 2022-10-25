@@ -1,0 +1,57 @@
+<do-container-outlet
+  [name]="name" [label]="label" [nolabel]="nolabel"
+  [colLabel]="colLabel" [colContent]="colInput"
+  [required]="required" [hasErrors]="hasErrors"
+  [errorMessages]="errorMessages" [paramError]="paramError"
+  [warnMessage]="warnMessage"
+  [skeleton]="skeleton" [show]="show">
+  <div class="col-sm-{{colInput}}" *ngIf="!skeleton; else contentskeleton">
+    <ng-select
+      [placeholder]="placeholder ? (placeholder | translate) : ''"
+      [items]="items"
+      [typeahead]="typeahead$"
+      [multiple]="multiple"
+      [loading]="loading"
+      [notFoundText]="notFoundText | translate"
+      [addTag]="addTag"
+      [closeOnSelect]="closeOnSelect"
+      [clearable]="required? false: clearable"
+      [searchable]="searchable"
+      [hideSelected]="hideSelected"
+      [minTermLength]="minTermLength"
+      [virtualScroll]="virtualScroll"
+      [required]="required"
+      [disabled]="disabled"
+      (keydown)="onKeyDown($event, select.searchTerm)"
+      (scroll)="onScroll($event, select.searchTerm)"
+      (scrollToEnd)="onScrollToEnd(select.searchTerm)"
+      (open)="onOpen()"
+      (close)="onClose()"
+      (clear)="doClear()"
+      (change)="onChange($event)"
+      (focus)="onTouched($event)"
+      (blur)="onTouched($event)"
+      [(ngModel)]="value"
+      [ngClass]="{'required': required}"
+      appendTo="body"
+      typeToSearchText="{{typeToSearchText | translate:paramSearch}}"
+      #select>
+        <ng-template *ngIf="contentTemplate" ng-label-tmp let-item="item">
+          <ng-container *ngTemplateOutlet="contentTemplate; context: {$implicit: item}"></ng-container>
+        </ng-template>
+        <ng-template *ngIf="contentTemplate" ng-option-tmp let-item="item">
+          <ng-container *ngTemplateOutlet="contentTemplate; context: {$implicit: item}"></ng-container>
+        </ng-template>
+    </ng-select>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colInput}}">
+      <div
+        [ngClass]="{
+          'input-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

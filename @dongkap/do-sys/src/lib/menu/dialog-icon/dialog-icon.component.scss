@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+  .choose-icon {
+    margin: 0.75rem;
+    cursor: pointer;
+  }
+
+}

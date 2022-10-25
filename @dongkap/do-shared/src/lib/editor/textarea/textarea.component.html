@@ -1,0 +1,45 @@
+<do-container-outlet
+  [name]="name" [label]="label"
+  [colLabel]="colLabel" [colContent]="colInput"
+  [required]="required" [hasErrors]="hasErrors"
+  [errorMessages]="errorMessages" [paramError]="paramError"
+  [warnMessage]="warnMessage"
+  [skeleton]="skeleton" [show]="show">
+  <div class="col-sm-{{colInput}}" *ngIf="!skeleton; else contentskeleton">
+    <textarea 
+      id="{{name}}"
+      [minLength]="minLength"
+      [maxLength]="maxLength"
+      [required]="required"
+      [placeholder]="placeholder ? (placeholder | translate) : ''"
+      [disabled]="disabled"
+      [ngStyle]="{ 
+        'width':  '100%',
+        'height':  height + 'px'
+      }"
+      [ngClass]="{
+        'status-danger': hasErrors,
+        'status-success': (hasSuccess && required)
+      }"
+      (input)="onChange($event.target.value)"
+      (change)="onChange($event.target.value)"
+      (blur)="onTouched($event.target.value)"
+      (focus)="onTouched($event.target.value)"
+      [(ngModel)]="value"
+      nbInput fullWidth>
+    </textarea>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colInput}}">
+      <div
+        [ngClass]="{
+          'skeleton': skeleton
+        }"
+        [ngStyle]="{ 
+          'width':  '100%',
+          'height':  height + 'px'
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

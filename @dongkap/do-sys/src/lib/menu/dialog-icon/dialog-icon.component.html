@@ -1,0 +1,8 @@
+<nb-card>
+  <nb-card-header>
+    {{ 'Choose Icon' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <nb-icon *ngFor="let icon of evaIcons" class="choose-icon" (click)="choose(icon)" [icon]="icon" pack="eva"></nb-icon>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,21 @@
+<div class="animated fadeIn">
+  <div class="do-wizard-container">
+    <do-wizard-error [error]="error"></do-wizard-error>
+    <do-wizard-navigation></do-wizard-navigation>
+    <div class="do-wizard-content-container">
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+    <div class="do-wizard-footer">
+      <do-wizard-buttons
+        [extra]="extra"
+        [disabled]="loading"
+        (onNext)="goToNextStep()"
+        (onPrevious)="goToPreviousStep()"
+        (onSubmit)="goToSubmit($event)">
+        <div buttonextra *ngIf="extra">
+          <ng-content select="[buttonextra]"></ng-content>
+        </div>
+      </do-wizard-buttons>
+    </div>
+  </div>
+</div>

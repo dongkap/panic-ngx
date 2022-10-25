@@ -1,0 +1,44 @@
+/*
+dongkap tree theme
+*/
+@import '~tree-ngx/style/ngx-tree.scss';
+@import '../../themes';
+
+@include nb-install() {
+    .node-checkbox {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        top: 3px;
+        left: 5px;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: 0rem 0.25rem;
+        cursor: pointer;
+    }
+
+    .node-action {
+        font-family: Open Sans, sans-serif;
+        font-weight: 600;
+        line-height: 1.5rem;
+        color: nb-theme(text-basic-color);
+        border-radius: 0;
+        cursor: pointer;
+    }
+
+    .node-action:hover {
+        background-color: transparent;
+        color: #598bff;
+        cursor: pointer;
+    }
+
+    .tree-action {
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+
+    .action-trash:hover {
+        color: #ff708d;
+    }
+
+}

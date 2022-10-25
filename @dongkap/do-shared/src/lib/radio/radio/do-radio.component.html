@@ -1,0 +1,30 @@
+<do-container-outlet
+  [name]="name" [label]="label" [nolabel]="nolabel" 
+  [colLabel]="colLabel" [colContent]="colInput"
+  [required]="required" [hasErrors]="hasErrors"
+  [errorMessages]="errorMessages" [paramError]="paramError"
+  [warnMessage]="warnMessage"
+  [skeleton]="skeleton" [show]="show">
+  <div class="col-sm-{{colInput}}" *ngIf="!skeleton; else contentskeleton">
+    <nb-radio-group
+      [(value)]="value"
+      [name]="name"
+      [disabled]="disabled"
+      #radiogroup>
+      <nb-radio *ngFor="let item of data"
+        [value]="item.value">
+        {{item.name | translate}}
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+  <ng-template #contentskeleton>
+    <div class="col-sm-{{colInput}}">
+      <div
+        [ngClass]="{
+          'input-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </div>
+    </div>
+  </ng-template>
+</do-container-outlet>

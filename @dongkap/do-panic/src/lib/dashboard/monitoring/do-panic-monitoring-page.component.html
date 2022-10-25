@@ -1,0 +1,10 @@
+<do-page-outlet [header]="'Dashboard'" [hidefooter]="true">
+    <do-maps-leaflet pagecontent
+        [markersFn]="markers"
+        (onMarkerClick)="onMarker($event)">
+    </do-maps-leaflet>
+</do-page-outlet>
+<do-panic-slide-out [showInfo]="showInfo" (onToggle)="onToggleInfo($event)">
+    <do-panic-monitoring-info [markerFn]="markerSelected">
+    </do-panic-monitoring-info>
+</do-panic-slide-out>

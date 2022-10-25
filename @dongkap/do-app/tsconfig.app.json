@@ -1,0 +1,68 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/@dongkap/do-app",
+    "baseUrl": "./",
+    "paths": {
+      "@dongkap/do-core": [
+        "../../@dongkap/do-core/src"
+      ],
+      "@dongkap/do-core/*": [
+        "../../@dongkap/do-core/src/*"
+      ],
+      "@dongkap/do-theme": [
+        "../../@dongkap/do-theme/src"
+      ],
+      "@dongkap/do-theme/*": [
+        "../../@dongkap/do-theme/src/*"
+      ],
+      "@dongkap/do-shared": [
+        "../../@dongkap/do-shared/src"
+      ],
+      "@dongkap/do-shared/*": [
+        "../../@dongkap/do-shared/src/*"
+      ],
+      "@dongkap/do-auth": [
+        "../../@dongkap/do-auth/src"
+      ],
+      "@dongkap/do-auth/*": [
+        "../../@dongkap/do-auth/src/*"
+      ],
+      "@dongkap/do-extra": [
+        "../../@dongkap/do-extra/src"
+      ],
+      "@dongkap/do-extra/*": [
+        "../../@dongkap/do-extra/src/*"
+      ],
+      "@dongkap/do-sys": [
+        "../../@dongkap/do-sys/src"
+      ],
+      "@dongkap/do-sys/*": [
+        "../../@dongkap/do-sys/src/*"
+      ],
+      "@dongkap/do-panic": [
+        "../../@dongkap/do-panic/src"
+      ],
+      "@dongkap/do-panic/*": [
+        "../../@dongkap/do-panic/src/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts",
+    "../../node_modules/@nebular/**/*.spec.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts",
+    "../../node_modules/@nebular/**/*.ts"
+  ]
+}

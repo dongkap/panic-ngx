@@ -1,0 +1,111 @@
+<do-wizard-page-outlet>
+  <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup" wizardcontent>
+    <div [formGroupName]="formGroupName">
+      <do-input-text
+        [name]="'name'"
+        [label]="'Name'"
+        [placeholder]="'Name'"
+        [pattern]="patternFullname"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="name">
+      </do-input-text>
+      <do-input-text
+        [name]="'nik'"
+        [label]="'Employee Identification Number'"
+        [placeholder]="'Employee Identification Number'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="nik">
+      </do-input-text>
+      <do-input-text
+        [name]="'idNumber'"
+        [label]="'ID Card Number'"
+        [placeholder]="'ID Card Number'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="idNumber">
+      </do-input-text>
+      <do-radio
+        [name]="'gender'"
+        [label]="'Gender'"
+        [placeholder]="'Gender'"
+        [data]="genderData"
+        [skeleton]="loadingForm"
+        formControlName="gender">
+      </do-radio>
+      <do-input-text
+        [name]="'placeOfBirth'"
+        [label]="'Place of Birth'"
+        [placeholder]="'Place of Birth'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="placeOfBirth">
+      </do-input-text>
+      <do-datepicker
+        [name]="'dateOfBirth'"
+        [label]="'Date of Birth'"
+        [placeholder]="'Date of Birth'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="dateOfBirth">
+      </do-datepicker>
+      <do-input-text
+        [name]="'email'"
+        [label]="'Email'"
+        [placeholder]="'Email'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        [pattern]="patternEmail"
+        [paramError]="{value:5}"
+        minlength="5"
+        maxlength="50"
+        formControlName="email">
+      </do-input-text>
+      <do-input-text
+        [name]="'phoneNumber'"
+        [label]="'Phone Number'"
+        [placeholder]="'Phone Number'"
+        [pattern]="patternPhoneNumber"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="phoneNumber">
+      </do-input-text>
+      <do-textarea
+        [name]="'address'"
+        [label]="'Address'"
+        [placeholder]="'Address'"
+        [required]="true"
+        [skeleton]="loadingForm"
+        formControlName="address">
+      </do-textarea>
+      <do-input-text
+        [name]="'height'"
+        [label]="'height.body'"
+        [placeholder]="'Centimeter'"
+        [type]="'number'"
+        [step]="'any'"
+        [skeleton]="loadingForm"
+        formControlName="height">
+      </do-input-text>
+      <do-input-text
+        [name]="'weight'"
+        [label]="'weight.body'"
+        [placeholder]="'Kilogram'"
+        [type]="'number'"
+        [step]="'any'"
+        [skeleton]="loadingForm"
+        formControlName="weight">
+      </do-input-text>
+      <do-select
+        [name]="'bloodType'"
+        [label]="'Blood Type'"
+        [placeholder]="'Blood Type'"
+        [items]="bloodTypeData"
+        [searchable]="false"
+        [skeleton]="loadingForm"
+        formControlName="bloodType">
+      </do-select>
+    </div>
+  </form>
+</do-wizard-page-outlet>

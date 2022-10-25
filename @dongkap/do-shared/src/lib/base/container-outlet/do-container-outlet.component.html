@@ -1,0 +1,29 @@
+<div class="form-group row" *ngIf="show">
+  <div
+    *ngIf="(!skeleton || nolabel);else labelskeleton"
+    class="col-sm-{{colLabel}}">
+    <label
+      for="{{name}}"
+      class="label col-form-label">
+      {{label | translate}}{{ (!nolabel) ? ((required) ? ' *' : '') : '' }}
+    </label>
+    <label *ngIf="dividerlabel" class="divider-label col-form-label">:</label>
+  </div>
+  <ng-template #labelskeleton>
+    <div class="col-sm-{{colLabel}}">
+      <label
+        class="label col-form-label"
+        [ngClass]="{
+          'label-skeleton': true,
+          'skeleton': skeleton
+        }">
+      </label>
+    </div>
+  </ng-template>
+  <ng-content></ng-content>
+  <div class="offset-sm-{{colLabel}} col-sm-{{colContent}}">
+    <do-warn-message *ngIf="!skeleton" [warnMessage]="warnMessage"></do-warn-message>
+    <do-error-message [hasErrors]="hasErrors" [errorMessages]="errorMessages" [param]="paramError">
+    </do-error-message>
+  </div>
+</div>

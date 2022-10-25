@@ -1,0 +1,82 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install() {
+    nb-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: nb-theme(card-header-with-select-padding-top);
+        padding-bottom: nb-theme(card-header-with-select-padding-bottom);
+    }
+
+    .navigation {
+        display: inline-block;
+    }
+
+    .back-link {
+        font-size: 1.25rem;
+        margin: 0.625rem 0.5rem 0.625rem 0;
+        cursor: pointer;
+    }
+    .back-link:hover {
+        color: #3366ff;
+    }
+
+    .toggle-icon {
+        font-size: 1.25rem;
+        margin: 0.625rem 1rem 0.625rem 0.5rem;
+        cursor: pointer;
+        line-height: 1.5em;
+    }
+    .toggle-icon:hover {
+        color: #3366ff;
+    }
+
+    .skeleton {
+        animation: loading 1.7s infinite linear;
+        border-radius: 0.25rem;
+        background: nb-theme(skeleton-bg);
+        background-image: -webkit-linear-gradient(to right, nb-theme(skeleton-bg-image-r) 0%, nb-theme(skeleton-bg-image-g) 20%, nb-theme(skeleton-bg-image-b) 40%, nb-theme(skeleton-bg-image-a) 100%);
+        background-image: linear-gradient(to right, nb-theme(skeleton-bg-image-r) 0%, nb-theme(skeleton-bg-image-g) 20%, nb-theme(skeleton-bg-image-b) 40%, nb-theme(skeleton-bg-image-a) 100%);
+    }
+
+    @keyframes loading {
+        0% {
+            background-position: -100px;
+        }
+
+        100% {
+            background-position: 380px;
+        }
+    }
+}
+
+.label-skeleton {
+    width: 100%;
+    height: 2.5rem;
+    line-height: 1.5rem;
+    padding: 0.4375rem 1.125rem;
+}
+
+.input-skeleton {
+    width: 100%;
+    height: 2.5rem;
+    line-height: 1.5rem;
+    padding: 0.4375rem 1.125rem;
+}
+
+.texteditor-skeleton {
+    width: 100%;
+    height: 10.5rem;
+    line-height: 1.5rem;
+    padding: 0.4375rem 1.125rem;
+}
+
+.button-skeleton {
+    width: 6rem;
+    height: 2.5rem;
+    line-height: 1rem;
+    margin: 0 .125rem;
+}

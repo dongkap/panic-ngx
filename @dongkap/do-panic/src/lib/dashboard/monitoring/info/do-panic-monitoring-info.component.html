@@ -1,0 +1,77 @@
+<div class="civilians-emergency">
+    <h5 class="h5">{{data.name}}</h5>
+    <div class="civilians-body">
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'ID Number' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.idNumber}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'Gender' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.gender}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'Age' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.age + ' '}}{{'Years' | translate}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'Phone Number' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.phoneNumber}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'Device Name' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.latestDeviceName}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-5 col-md-5 col-sm-5">
+                <span class="label-body">{{'Location' | translate}}</span>
+            </div>
+            <div class="col-sm-7 col-md-7 col-sm-7">
+                <span>{{data.latestFormattedAddress}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-8 col-md-8 col-sm-8">
+                <button
+                type="submit"
+                status="warning"
+                class="preview-right"
+                (click)="onPreview()"
+                nbButton>
+                {{ 'Preview' | translate}}
+                </button>
+            </div>
+            <div class="col-sm-4 col-md-4 col-sm-4">
+                <button
+                type="submit"
+                status="primary"
+                class="details-right"
+                (click)="onViewDetails()"
+                nbButton>
+                {{ 'Details' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="civilians-footer">
+    </div>
+</div>

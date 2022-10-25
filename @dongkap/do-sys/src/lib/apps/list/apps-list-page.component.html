@@ -1,0 +1,47 @@
+<do-page-outlet [header]="'header.apps-management'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [sort]="sort"
+        [reloadFn]="reload"
+        (onAdd)="onAdd()"
+        (onEdit)="onViewDetail($event)"
+        (onDelete)="onDeleteDialog($event, dialogdelete)"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'appCode'"
+            [label]="'App Code'"
+            formControlName="appCode">
+          </do-input-text>
+          <do-input-text
+            [name]="'appName'"
+            [label]="'App Name'"
+            formControlName="appName">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>
+
+<ng-template #dialogdelete let-data let-ref="dialogRef">
+  <nb-card accent="danger">
+    <nb-card-header>{{ 'Warning' | translate}}</nb-card-header>
+    <nb-card-body>{{ data | translate}}</nb-card-body>
+    <nb-card-footer>
+      <do-button-submit
+        [colLabel]="0"
+        [colButton]="12"
+        [submitTitle]="'Delete'"
+        [resetTitle]="'Cancel'"
+        [disabledButton]="disabled"
+        (onReset)="ref.close()"
+        (onSubmit)="onDelete(ref)">
+      </do-button-submit>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

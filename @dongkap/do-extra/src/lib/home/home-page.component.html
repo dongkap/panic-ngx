@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <div class="icon-container">
+        <div class="icon status-primary">
+          <i [ngClass]="'nb-home'"></i>
+        </div>
+      </div>
+      <div class="details">
+        <div class="title h5">{{'Welcome' | translate}}</div>
+        <div class="paragraph-2">{{'Hi' | translate}}, <strong>{{name | async}}</strong>!</div>
+      </div>
+    </nb-card>
+  </div>
+</div>

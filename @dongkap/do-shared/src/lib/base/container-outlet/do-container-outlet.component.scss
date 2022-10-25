@@ -1,0 +1,26 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+label.divider-label {
+    float: right;
+}
+
+@include media-breakpoint-down(sm) {
+    label.divider-label {
+        display: none;
+    }
+}
+
+label.float-right {
+    display: none;
+    float: right !important;
+}
+
+@include media-breakpoint-down(sm) {
+    label.float-right {
+        display: inline;
+        float: unset !important;
+        padding-left: 0.75rem;
+    }
+}

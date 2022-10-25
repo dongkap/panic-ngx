@@ -1,0 +1,70 @@
+<do-wizard-page-outlet>
+  <form class="form-horizontal" autocomplete="on" [formGroup]="formGroup" wizardcontent>
+    <div class="accordion-container" [formGroupName]="formGroupName">
+      <nb-accordion multi>
+        <nb-accordion-item [expanded]="true">
+          <nb-accordion-item-header>
+            {{'Formal Education' | translate}}
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <do-select
+              [name]="'educationalLevel'"
+              [label]="'Educational Level'"
+              [placeholder]="'Educational Level'"
+              [required]="true"
+              [api]="apiSelectEducationalLevel"
+              [queryParam]="paramSelectEducationalLevel"
+              [searchable]="false"
+              (onSelect)="onSelectEducationalLevel($event)"
+              [skeleton]="loadingForm"
+              formControlName="educationalLevel">
+            </do-select>
+            <do-input-text
+              [name]="'school'"
+              [label]="'School'"
+              [placeholder]="'School'"
+              [show]="!noSchool"
+              formControlName="school">
+            </do-input-text>
+            <do-input-text
+              [name]="'startYear'"
+              [label]="'Start Year'"
+              [placeholder]="'Start Year'"
+              [type]="'number'"
+              [show]="!noSchool"
+              formControlName="startYear">
+            </do-input-text>
+            <do-input-text
+              [name]="'endYear'"
+              [label]="'End Year'"
+              [placeholder]="'End Year'"
+              [type]="'number'"
+              [show]="!noSchool"
+              formControlName="endYear">
+            </do-input-text>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+        <nb-accordion-item [expanded]="true">
+          <nb-accordion-item-header>
+            {{'Non Formal Education' | translate}}
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <do-input-text
+              [name]="'trainingName'"
+              [label]="'Training Name'"
+              [placeholder]="'Training Name'"
+              formControlName="trainingName">
+            </do-input-text>
+            <do-datepicker-range
+              [name]="'trainingDate'"
+              [label]="'Training Date'"
+              [placeholder]="'Training Date'"
+              [skeleton]="loadingForm"
+              formControlName="trainingDate">
+            </do-datepicker-range>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </div>
+  </form>
+</do-wizard-page-outlet>

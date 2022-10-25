@@ -1,0 +1,165 @@
+<h1 id="title" class="title">{{ 'Register' | translate }}</h1>
+
+<nb-alert *ngIf="responseError" outline="danger" role="alert">
+  <p class="alert-title"><b>{{ 'alert.title.register' | translate }}</b></p>
+  <ul class="alert-message-list">
+    <li class="alert-message">{{ responseError }}</li>
+  </ul>
+</nb-alert>
+
+<form [formGroup]="form" (ngSubmit)="register()" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-name">{{ 'Full name' | translate }}* :</label>
+    <input [formControlName]="'fullname'"
+          [required]="true"
+          minlength="4"
+          maxlength="50"
+          [pattern]="patternFullname"
+          [ngClass]="{
+            'status-danger': hasErrorFullname,
+            'status-success': hasSuccessFullname
+          }"
+          name="fullname"
+          id="inputFullname"
+          placeholder="{{ 'Full name' | translate }}"
+          fieldSize="large"
+          tabindex="1"
+          autofocus
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorFullname">
+      <span class="caption status-danger">{{errorMsgFullname | translate}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-username">{{ 'Username' | translate }}* :</label>
+    <input [formControlName]="'username'"
+          [required]="true"
+          minlength="5"
+          maxlength="20"
+          [pattern]="patternUsername"
+          [ngClass]="{
+            'status-danger': hasErrorUsername,
+            'status-success': hasSuccessUsername
+          }"
+          name="username"
+          id="inputUsername"
+          (keydown)="onKeyDownUsername($event)"
+          placeholder="{{ 'Username' | translate }}"
+          fieldSize="large"
+          tabindex="2"
+          autofocus
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorUsername">
+      <span class="caption status-danger">{{errorMsgUsername | translate:paramMsgUsername}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">{{ 'Email' | translate }}* :</label>
+    <input [formControlName]="'email'"
+          [required]="true"
+          minlength="5"
+          maxlength="50"
+          [pattern]="patternEmail"
+          [ngClass]="{
+            'status-danger': hasErrorEmail,
+            'status-success': hasSuccessEmail
+          }"
+          name="email"
+          id="inputEmail"
+          (keydown)="onKeyDownEmail($event)"
+          placeholder="{{ 'Email' | translate }}"
+          fieldSize="large"
+          tabindex="3"
+          autofocus
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorEmail">
+      <span class="caption status-danger">{{errorMsgEmail | translate:paramMsgEmail}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-password">{{ 'Password' | translate }}* :</label>
+    <input [formControlName]="'password'"
+          [required]="true"
+          minlength="8"
+          maxlength="50"
+          [pattern]="patternPassword"
+          [ngClass]="{
+            'status-danger': hasErrorPassword,
+            'status-success': hasSuccessPassword
+          }"
+          name="password"
+          type="password"
+          id="inputPassword"
+          placeholder="{{ 'Password' | translate }}"
+          fieldSize="large"
+          tabindex="4"
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorPassword">
+      <span class="caption status-danger">{{ errorMsgPassword | translate}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-confirmpassword">{{ 'Confirm Password' | translate }}* :</label>
+    <input [formControlName]="'confirmPassword'"
+          [required]="true"
+          minlength="8"
+          maxlength="50"
+          [ngClass]="{
+            'status-danger': hasErrorConfirmPassword,
+            'status-success': hasSuccessConfirmPassword
+          }"
+          name="confirmPassword"
+          type="password"
+          id="inputConfirmPassword"
+          placeholder="{{ 'Confirm Password' | translate }}"
+          fieldSize="large"
+          tabindex="5"
+          nbInput
+          fullWidth>
+    <ng-container *ngIf="hasErrorConfirmPassword">
+      <span class="caption status-danger">{{ errorMsgConfirmPassword | translate}}</span>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group accept-group">
+    <div class="terms-row row">
+      <nb-checkbox
+        name="terms"
+        [formControlName]="'terms'"
+        [required]="true"
+        (change)="onCheckedChange()">
+        {{ 'message.terms-conditions-label' | translate}}
+      </nb-checkbox>
+      <span class="terms-conditions" (click)="onClickTermsConditions()" tabindex="-1"><strong>{{ 'message.terms-conditions' | translate}}</strong></span>
+    </div>
+  </div>
+
+  <div class="form-control-group" style="transform:scale(0.7);transform-origin:0;">
+    <re-captcha
+      [formControlName]="'recaptcha'"
+      required>
+    </re-captcha>
+  </div>
+
+  <button [disabled]="!form.valid || buttonRegister"
+          fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="!form.valid || buttonRegister">
+    {{ 'Register' | translate }}
+  </button>
+</form>
+
+<section class="another-action" aria-label="Sign in">
+  {{ 'message.register-footer' | translate}} <a class="text-link" routerLink="/auth/login" tabindex="-1">{{ 'Login' | translate}}</a>
+</section>
