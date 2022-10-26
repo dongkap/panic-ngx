@@ -1,8 +1,8 @@
 import { SecurityResourceModel } from '@dongkap/do-core';
 
 export const oauthResource: SecurityResourceModel = {
-    client_id: 'xa-core',
-    client_secret: 'secretxa01',
+    client_id: 'do-core',
+    client_secret: 'secretdo01',
     grant_type: 'password',
     private_key: 'UHU3NG42QjNuNHI=',
     aes_key: 'UHVsYW5nQjNuNHI=',

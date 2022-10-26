@@ -1,4 +1,4 @@
-# satpol-ngx [![Actions Status](https://github.com/dongkap/satpol-ngx/workflows/Dongkap%20Webpack%20CI/badge.svg)](https://github.com/dongkap/satpol-ngx/actions/workflows/webpack.yml)
+# panic-ngx [![Actions Status](https://github.com/dongkap/panic-ngx/workflows/Dongkap%20Webpack%20CI/badge.svg)](https://github.com/dongkap/panic-ngx/actions/workflows/webpack.yml)
 Dongkap | Web Application with Angular
 
 ```

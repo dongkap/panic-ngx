@@ -14,14 +14,14 @@ const routes: Routes = [{
       path: '',
       component: DoPanicMonitoringPageComponent,
       data: {
-        code: '#DASHBOARD-PAGE',
+        code: '#MONITORING-PAGE',
       },
     },
     {
       path: 'details/:code',
       component: DoPanicMonitoringDetailComponent,
       data: {
-        code: '#DASHBOARD-PAGE',
+        code: '#MONITORING-PAGE',
       },
     },
   ],

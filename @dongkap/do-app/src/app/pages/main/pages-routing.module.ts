@@ -13,7 +13,7 @@ const routes: Routes = [{
       component: HomePageComponent,
     },
     {
-      path: 'dashboard',
+      path: 'monitoring',
       loadChildren: () => import('../panic/panic-dashboard-wrapper.module')
         .then(m => m.PanicDashboardWrapperModule),
     },
