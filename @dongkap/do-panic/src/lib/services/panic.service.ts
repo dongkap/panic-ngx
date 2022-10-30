@@ -11,14 +11,14 @@ export class PanicService {
     }
 
     public notifyPanic(data: any): void {
-        this.panicIndexedDB.put(data['panicCode'], data).then(() => {
-            this.loaderPanicSubject$.next(data['panicCode']);
+        this.panicIndexedDB.put(data['id'], data).then(() => {
+            this.loaderPanicSubject$.next(data['id']);
         });
     }
 
     public putAllPanic(datas: any[]): void {
         datas.forEach(data => {
-            this.panicIndexedDB.put(data['panicCode'], data).then();
+            this.panicIndexedDB.put(data['id'], data).then();
         });
     }
 
@@ -26,8 +26,8 @@ export class PanicService {
         return this.panicIndexedDB.clearAll();
     }
 
-    public getPanic(panicCode: string): Promise<any> {
-        return this.panicIndexedDB.get(panicCode);
+    public getPanic(id: string): Promise<any> {
+        return this.panicIndexedDB.get(id);
     }
 
     public getAllPanic(): Observable<any[]> {

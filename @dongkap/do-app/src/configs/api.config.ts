@@ -503,20 +503,25 @@ export const apiPath: APIModel = {
             method: HttpMethod.GET,
             path: '/api/panic/vw/auth/panic/v.1',
         },
+        'get-panic': {
+            server: environment.host.panic,
+            method: HttpMethod.GET,
+            path: '/api/panic/vw/auth/panic/v.1',
+        },
         'datatable-panic-detail': {
             server: environment.host.panic,
             method: HttpMethod.POST,
-            path: '/api/panic/vw/post/datatable/panic-detail/v.1',
+            path: '/api/panic/vw/auth/datatable/panic-detail/v.1',
         },
         'datatable-panic-reports': {
             server: environment.host.panic,
             method: HttpMethod.POST,
-            path: '/api/panic/vw/post/datatable/panic-reports/v.1',
+            path: '/api/panic/vw/auth/datatable/panic-reports/v.1',
         },
         'datatable-fake-reports': {
             server: environment.host.panic,
             method: HttpMethod.POST,
-            path: 'api/panic/vw/post/datatable/fake-reports/v.1',
+            path: 'api/panic/vw/auth/datatable/fake-reports/v.1',
         },
         'process-report': {
             server: environment.host.panic,

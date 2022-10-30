@@ -29,7 +29,7 @@ export class DoPanicMonitoringInfoComponent implements OnInit {
   }
 
   public onViewDetails(): void {
-    this.router.navigate(['/app/dashboard/details', this.data['panicCode']]);
+    this.router.navigate(['/app/monitoring/details', this.data['id']]);
   }
 
   onPreview(): void {

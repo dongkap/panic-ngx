@@ -43,7 +43,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   public paramSelectStatus: SelectParamModel[];
   public paramSelectEmergency: SelectParamModel[];
   public disabledFake: boolean;
-  private panicCode: string;
+  private id: string;
   private username: string;
   private oauthResource: SecurityResourceModel;
   private enc: EncryptionService;
@@ -60,9 +60,9 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
     this.oauthResource = injector.get(OAUTH_INFO);
     this.apiSelectParameter = this.api['master']['select-parameter'];
     if (this.route.snapshot.params['code']) {
-      this.panicCode = this.route.snapshot.params['code'];
+      this.id = this.route.snapshot.params['code'];
       this.keyword = {
-        panicCode: this.panicCode,
+        id: this.id,
       };
     } else {
       this.router.navigate(['/app/dashboard']);
@@ -85,7 +85,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   }
 
   onInit(serviceName: string, apiName: string): void {
-    this.panicService.getPanic(this.panicCode).then((value: any) => {
+    this.panicService.getPanic(this.id).then((value: any) => {
       this.loadingForm = true;
       this.username = value.username;
       const data: any = {
@@ -142,7 +142,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
           this.disabledFake = true;
           const data: any = {
             password: this.enc.encryptAES(this.oauthResource['aes_key'], password),
-            panicCode: this.panicCode,
+            id: this.id,
           };
           (super.onSubmit(data, 'panic', 'fake-report') as Observable<ApiBaseResponse>)
             .pipe(takeUntil(this.destroy$))
@@ -161,7 +161,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
 
   onProcess(): void {
     const data: any = {
-      panicCode: this.panicCode,
+      id: this.id,
       status: this.valueSelect('status'),
       emergencyCategory: this.valueSelect('emergencyCategory'),
     };

@@ -32,7 +32,7 @@ export class DoPanicMonitoringPageComponent implements OnInit, OnDestroy {
     this.swPush.messages.subscribe((message: {notification: NotificationOptions}) => {
       console.log(message);
       const data: any = JSON.parse(message.notification.data);
-      if (data['panicCode'] || message.notification.tag === 'panic') {
+      if (data['id'] || message.notification.tag === 'panic') {
         this.panicService.notifyPanic(data);
       }
     });
@@ -56,7 +56,7 @@ export class DoPanicMonitoringPageComponent implements OnInit, OnDestroy {
             data['latestLatitude'], data['latestLongitude'],
           ],
           title: data['name'],
-          alt: data['panicCode'],
+          alt: data['id'],
           className: 'pulse',
         });
       });
@@ -80,7 +80,7 @@ export class DoPanicMonitoringPageComponent implements OnInit, OnDestroy {
             data['latestLatitude'], data['latestLongitude'],
           ],
           title: data['name'],
-          alt: data['panicCode'],
+          alt: data['id'],
           className: 'pulse',
         });
       });
