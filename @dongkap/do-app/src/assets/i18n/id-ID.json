@@ -313,8 +313,9 @@
 	"label": {
 		"language": "Bahasa",
 		"dark-mode": "Mode Gelap",
-		"contact-person": "Narahubung",
+		"contact-person": "Kontak Pribadi",
 		"personal-info": "Informasi Pribadi",
+		"emergency-contact": "Kontak Darurat",
 		"account": "Akun",
 		"pobdob": "Tempat, Tanggal Lahir"
 	},

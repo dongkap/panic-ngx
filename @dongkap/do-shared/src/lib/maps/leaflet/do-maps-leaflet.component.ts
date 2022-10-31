@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import * as L from 'leaflet';
-import { delay } from 'rxjs/operators';
 import { LeafletModel } from '../models/leaflet.model';
 
 @Component({
@@ -24,6 +23,7 @@ export class DoMapsLeafletComponent implements OnInit {
     zoomDelta: 1,
     center: this.defaultLatLng,
   };
+  @Input() public animatedMarker: boolean = true;
   @Input() public layers: any[] = [];
   @Input() public set markersFn(markers: LeafletModel[]) {
     if (markers) {
@@ -58,7 +58,10 @@ export class DoMapsLeafletComponent implements OnInit {
       title: title,
       alt: alt,
     });
-    this.map.flyTo(latlng, 16);
+    this.map.flyTo(latlng, 16, {
+      animate: this.animatedMarker,
+      duration: 1,
+    });
   }
 
   public onMapReady(map: L.Map): void {

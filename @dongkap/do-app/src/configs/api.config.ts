@@ -598,4 +598,11 @@ export const apiPath: APIModel = {
             path: '/api/notification/push/auth/web/subscribe/v.1',
         },
     },
+    file: {
+        'evidence': {
+            server: environment.host.file,
+            method: HttpMethod.GET,
+            path: '/api/file/vw/get/evidence/v.1',
+        },
+    },
 };

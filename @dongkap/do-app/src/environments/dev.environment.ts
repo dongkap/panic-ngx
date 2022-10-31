@@ -43,5 +43,10 @@ export const environment = {
       host: 'localhost',
       port: 8085,
     },
+    file: {
+      protocol: 'http',
+      host: 'localhost',
+      port: 8085,
+    },
   },
 };

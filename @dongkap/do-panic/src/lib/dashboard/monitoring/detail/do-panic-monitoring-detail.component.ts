@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, OnDestroy, Injector } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbDialogService } from '@nebular/theme';
@@ -17,7 +17,7 @@ import { DoPanicMonitoringPreviewComponent } from '../preview/do-panic-monitorin
 })
 export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> implements OnInit, OnDestroy {
 
-  public profile: any = {};
+  public panicReport: any = {};
   public image: string;
   public imageDefault: string = `${document.getElementsByTagName('base')[0].href}/assets/images/avatars/default.png`;
 
@@ -44,7 +44,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   public paramSelectEmergency: SelectParamModel[];
   public disabledFake: boolean;
   private id: string;
-  private username: string;
+  private userId: string;
   private oauthResource: SecurityResourceModel;
   private enc: EncryptionService;
 
@@ -65,7 +65,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
         id: this.id,
       };
     } else {
-      this.router.navigate(['/app/dashboard']);
+      this.router.navigate(['/app/monitoring']);
     }
     this.apiPath = this.api['panic']['datatable-panic-detail'];
   }
@@ -73,7 +73,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    this.onInit('security', 'get-profile-personal');
+    this.onInit('panic', 'get-panic');
     this.paramSelectStatus = [{
       key: 'parameterGroupCode',
       value: 'STATUS_EMERGENCY',
@@ -87,17 +87,16 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   onInit(serviceName: string, apiName: string): void {
     this.panicService.getPanic(this.id).then((value: any) => {
       this.loadingForm = true;
-      this.username = value.username;
-      const data: any = {
-        username: value.username,
-      };
-      this.exec(serviceName, apiName, data)
+      this.userId = value.userId;
+      const pathVariables: string[] = [this.id];
+
+      this.exec(serviceName, apiName, null, null, null, pathVariables)
         .subscribe(
           (success: any) => {
             this.loadingForm = false;
-            this.profile = success;
+            this.panicReport = success;
             if (success['image']) {
-              this.image = success['image'];
+              this.image = success.personalInfo?.image;
             }
           },
           (error: HttpErrorResponse) => {
@@ -129,7 +128,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
     this.dialogService.open(DoPanicMonitoringPreviewComponent, {
       context: {
         checksum: data['checksum'],
-        user: this.username,
+        userId: this.userId,
         fileType: data['fileType'],
       },
     });
@@ -149,7 +148,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
             .subscribe((response: ApiBaseResponse) => {
               if (response) {
                 if (response.respStatusCode === ResponseCode.OK_SCR011.toString()) {
-                  this.router.navigate(['/app/dashboard']);
+                  this.router.navigate(['/app/monitoring']);
                 }
               }
             });
@@ -170,7 +169,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
       .subscribe((response: ApiBaseResponse) => {
         if (response) {
           if (response.respStatusCode === ResponseCode.OK_UPDATED.toString()) {
-            this.router.navigate(['/app/dashboard']);
+            this.router.navigate(['/app/monitoring']);
           }
         }
       });

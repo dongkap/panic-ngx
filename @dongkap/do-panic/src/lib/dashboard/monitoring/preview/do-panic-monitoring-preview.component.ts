@@ -12,7 +12,7 @@ export class DoPanicMonitoringPreviewComponent implements OnInit {
 
   @Input() public url: any;
   @Input() public checksum: any;
-  @Input() public user: any;
+  @Input() public userId: any;
   @Input() public fileType: any;
 
   constructor(
@@ -21,13 +21,13 @@ export class DoPanicMonitoringPreviewComponent implements OnInit {
     public sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.getEvidence(this.checksum, this.user, this.fileType);
+    this.getEvidence(this.checksum, this.userId, this.fileType);
   }
 
-  private getEvidence(checksum: any, user: string, fileType: string) {
+  private getEvidence(checksum: any, userId: string, fileType: string) {
     this.httpBaseService.HTTP_AUTH(
     this.apiPath['file']['evidence'], null, null, null,
-    [checksum, user], 'arraybuffer')
+    [checksum, userId], 'arraybuffer')
     .pipe(tap((response: any) => {
         const fileBlob: Blob = new Blob([response], {
           type: fileType,

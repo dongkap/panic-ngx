@@ -7,6 +7,7 @@ import {
   NbDialogModule,
   NbWindowModule,
   NbButtonModule,
+  NbAccordionModule,
 } from '@nebular/theme';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TranslateModule } from '@ngx-translate/core';
@@ -49,6 +50,7 @@ const modules = [
   NbAlertModule,
   NbIconModule,
   NbButtonModule,
+  NbAccordionModule,
   NbDialogModule.forChild(),
   NbWindowModule.forChild(),
   TranslateModule,

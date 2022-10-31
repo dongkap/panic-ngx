@@ -35,5 +35,9 @@ export const environment = {
       protocol: 'https',
       host: 'satpol-api-notification.herokuapp.com',
     },
+    file: {
+      protocol: 'https',
+      host: 'satpol-api-notification.herokuapp.com',
+    },
   },
 };

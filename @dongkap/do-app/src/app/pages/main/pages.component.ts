@@ -67,7 +67,6 @@ export class PagesComponent implements OnInit, OnDestroy {
         }
       });
       this.swPush.messages.subscribe((message: {notification: NotificationOptions}) => {
-        console.log(message);
         const data: any = JSON.parse(message.notification.data);
         if (data['id'] || message.notification.tag === 'panic') {
           titleService.setTitle('(1) '+ titleService.getTitle());
