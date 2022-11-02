@@ -1,10 +1,15 @@
-<do-page-outlet
-    [header]="'header.statistics-emergency-gender-male'"
-    [width]="6"
-    [hidefooter]="true"
-    [showToggle]="false"
-    [dataSelect]="dataSelect"
-    [selected]="selected"
-    (selectChange)="onSelectChange($event)">
-    <do-chart [options]="options" pagecontent></do-chart>
-</do-page-outlet>
+<nb-card>
+    <nb-card-header>
+        <nav>
+            {{'header.statistics-emergency-gender-male' | translate}}
+        </nav>
+        <div class="row">
+            <nb-select *ngIf="dataSelect" [selected]="selected" (selectedChange)="onSelectChange($event)">
+            <nb-option *ngFor="let data of dataSelect" [value]="data">{{ data }}</nb-option>
+            </nb-select>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <do-chart [options]="options" pagecontent></do-chart>     
+    </nb-card-body>
+</nb-card>

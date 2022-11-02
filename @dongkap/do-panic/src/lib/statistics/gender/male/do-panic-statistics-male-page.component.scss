@@ -1,0 +1,18 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install() {
+    ::ng-deep .echart {
+      height: 100%;
+      width: 100%;
+    }
+
+    nb-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: nb-theme(card-header-with-select-padding-top);
+        padding-bottom: nb-theme(card-header-with-select-padding-bottom);
+    }
+}

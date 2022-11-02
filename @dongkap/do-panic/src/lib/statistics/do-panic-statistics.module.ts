@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule } from '@nebular/theme';
+import { TranslateModule } from '@ngx-translate/core';
 import { DoChartsModule, DoBaseModule } from '@dongkap/do-shared';
 import { DoThemeModule } from '@dongkap/do-theme';
 import { DoPanicStatisticsRoutingModule } from './do-panic-statistics-routing.module';
@@ -23,7 +24,9 @@ const PANIC_COMPONENTS = [
 const modules = [
   FormsModule,
   ReactiveFormsModule,
+  TranslateModule,
   NbCardModule,
+  NbSelectModule,
   DoThemeModule,
   DoBaseModule,
   DoChartsModule,

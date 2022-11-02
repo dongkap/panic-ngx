@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injector, ViewEncapsulation } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { NbThemeService } from '@nebular/theme';
 import { HttpFactoryService, HTTP_SERVICE, API, APIModel } from '@dongkap/do-core';
@@ -7,6 +7,7 @@ import { HttpFactoryService, HTTP_SERVICE, API, APIModel } from '@dongkap/do-cor
   selector: 'do-panic-statistics-male',
   styleUrls: ['./do-panic-statistics-male-page.component.scss'],
   templateUrl: './do-panic-statistics-male-page.component.html',
+  encapsulation: ViewEncapsulation.None,
 })
 export class DoPanicStatisticsMalePageComponent implements OnInit, OnDestroy {
 
@@ -112,7 +113,6 @@ export class DoPanicStatisticsMalePageComponent implements OnInit, OnDestroy {
           }
         }
       };
-      console.log(this.options);
     });
   }
 
