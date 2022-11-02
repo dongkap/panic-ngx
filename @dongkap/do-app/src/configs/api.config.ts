@@ -521,7 +521,7 @@ export const apiPath: APIModel = {
         'datatable-fake-reports': {
             server: environment.host.panic,
             method: HttpMethod.POST,
-            path: 'api/panic/vw/auth/datatable/fake-reports/v.1',
+            path: '/api/panic/vw/auth/datatable/fake-reports/v.1',
         },
         'process-report': {
             server: environment.host.panic,
@@ -538,30 +538,20 @@ export const apiPath: APIModel = {
             method: HttpMethod.GET,
             path: '/api/panic/vw/auth/statistics-area/v.1',
         },
-        'statistics-gender': {
+        'statistics-gender-male': {
             server: environment.host.panic,
             method: HttpMethod.GET,
-            path: '/api/panic/vw/auth/statistics-gender/v.1',
+            path: '/api/panic/vw/auth/statistics-gender/male/v.1',
         },
-        'statistics-periode': {
+        'statistics-gender-female': {
             server: environment.host.panic,
             method: HttpMethod.GET,
-            path: '/api/panic/vw/auth/statistics-periode/v.1',
+            path: '/api/panic/vw/auth/statistics-gender/female/v.1',
         },
         'statistics-emergency': {
             server: environment.host.panic,
             method: HttpMethod.GET,
             path: '/api/panic/vw/auth/statistics-emergency/v.1',
-        },
-        'statistics-device': {
-            server: environment.host.panic,
-            method: HttpMethod.GET,
-            path: '/api/panic/vw/auth/statistics-device/v.1',
-        },
-        'statistics-age': {
-            server: environment.host.panic,
-            method: HttpMethod.GET,
-            path: '/api/panic/vw/auth/statistics-age/v.1',
         },
     },
     activity: {

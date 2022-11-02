@@ -50,6 +50,7 @@ export class DoPanicMonitoringPageComponent implements OnInit, OnDestroy {
   private getAllPanicServer(): void {
     this.http.HTTP_AUTH(this.api['panic']['get-allpanic']).subscribe((values: any[]) => {
       const temps: any[] = [];
+      console.log(values);
       values.forEach((data: any) => {
         temps.push({
           mark: [
@@ -74,6 +75,7 @@ export class DoPanicMonitoringPageComponent implements OnInit, OnDestroy {
   private getAllPanicStorage(): void {
     this.panicService.getAllPanic().subscribe((values: any[]) => {
       const temps: any[] = [];
+      console.log(values);
       values.forEach((data: any) => {
         temps.push({
           mark: [

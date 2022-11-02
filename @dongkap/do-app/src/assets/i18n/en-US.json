@@ -308,7 +308,11 @@
 		"Edit-education-nonformal": "Edit Education Non Formal",
 		"Add-education-nonformal": "Add Education Non Formal",
 		"job-placement-management": "Job Placement Management",
-		"employee-selection": "Select Employee"
+		"employee-selection": "Select Employee",
+		"statistics-emergency-category": "Statistics of Emergency Category",
+		"statistics-emergency-area": "Statistics of Emergency Report by Area",
+		"statistics-emergency-gender-male": "Statistics of Emergency Report by Gender Male",
+		"statistics-emergency-gender-female": "Statistics of Emergency Report by Gender Female"
 	},
 	"label": {
 		"language": "Language",

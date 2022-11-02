@@ -120,7 +120,6 @@
     "@fortawesome/fontawesome-free": "~5.2.0",
     "@types/d3-color": "1.0.5",
     "@types/estree": "0.0.50",
-    "@types/googlemaps": "~3.30.4",
     "@types/jasminewd2": "2.0.10",
     "@types/leaflet": "1.2.3",
     "@types/node": "~12.11.1",
@@ -148,7 +147,6 @@
     "@dongkap/do-auth": "file:dist/@dongkap/do-auth/dongkap-do-auth-0.0.1.tgz",
     "@dongkap/do-core": "file:dist/@dongkap/do-core/dongkap-do-core-0.0.1.tgz",
     "@dongkap/do-extra": "file:dist/@dongkap/do-extra/dongkap-do-extra-0.0.1.tgz",
-    "@dongkap/do-panic": "file:dist/@dongkap/do-panic/dongkap-do-panic-0.0.1.tgz",
     "@dongkap/do-shared": "file:dist/@dongkap/do-shared/dongkap-do-shared-0.0.1.tgz",
     "@dongkap/do-sys": "file:dist/@dongkap/do-sys/dongkap-do-sys-0.0.1.tgz",
     "@dongkap/do-theme": "file:dist/@dongkap/do-theme/dongkap-do-theme-0.0.1.tgz"

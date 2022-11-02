@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() public name: string;
   @Input() public image: string;
-  @Input() public logo: string = '/assets/images/logo.png';
+  @Input() public logo: string = '/assets/icons/icon-72x72.png';
   @Input() public extraMenu: NbMenuItem[] = [];
   public userPictureOnly: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();

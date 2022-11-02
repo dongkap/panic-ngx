@@ -55,7 +55,19 @@
     display: none;
   }
   .image-logo {
-    display: none;
+    // display: none;
+    display: block;
+    background-size: 1em;
+    width: 1em;
+    height: 1em;
+  }
+  .title-logo {
+    padding: 0 1.25rem;
+    font-size: 1rem;
+    @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+    @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+    white-space: nowrap;
+    text-decoration: none;
   }
 
   @include media-breakpoint-down(sm) {

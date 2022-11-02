@@ -1,0 +1,9 @@
+<do-page-outlet
+    [header]="'header.statistics-emergency-area'"
+    [hidefooter]="true"
+    [showToggle]="false"
+    [dataSelect]="dataSelect"
+    [selected]="selected"
+    (selectChange)="onSelectChange($event)">
+    <do-chart [options]="options" pagecontent></do-chart>
+</do-page-outlet>

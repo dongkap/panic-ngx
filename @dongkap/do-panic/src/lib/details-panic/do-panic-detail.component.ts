@@ -1,25 +1,29 @@
-import { Component, Inject, OnInit, OnDestroy, Injector } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injector, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbDialogService } from '@nebular/theme';
 import { BaseFilterComponent, DatatableColumn, SelectParamModel, Sort } from '@dongkap/do-shared';
 import { ApiBaseResponse, EncryptionService, HttpBaseModel, OAUTH_INFO, ResponseCode, SecurityResourceModel } from '@dongkap/do-core';
-import { PanicService } from '../../../services/panic.service';
+import { PanicService } from '../services/panic.service';
 import { DoFakeReportPromptComponent } from './prompt/do-fake-report-prompt.component';
-import { DoPanicMonitoringPreviewComponent } from '../preview/do-panic-monitoring-preview.component';
+import { DoPanicPreviewComponent } from './preview/do-panic-preview.component';
 
 @Component({
-  selector: 'do-panic-monitoring-detail',
-  templateUrl: './do-panic-monitoring-detail.component.html',
-  styleUrls: ['do-panic-monitoring-detail.component.scss'],
+  selector: 'do-panic-detail',
+  templateUrl: './do-panic-detail.component.html',
+  styleUrls: ['do-panic-detail.component.scss'],
 })
-export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> implements OnInit, OnDestroy {
+export class DoPanicDetailComponent extends BaseFilterComponent<any> implements OnInit, OnDestroy {
 
   public panicReport: any = {};
   public image: string;
   public imageDefault: string = `${document.getElementsByTagName('base')[0].href}/assets/images/avatars/default.png`;
+  public disabledFake: boolean;
+  private id: string;
+  private userId: string;
+  public caseClosed: boolean = false;
 
   public apiPath: HttpBaseModel;
   public columns: DatatableColumn[] = [
@@ -42,9 +46,6 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   public apiSelectParameter: HttpBaseModel;
   public paramSelectStatus: SelectParamModel[];
   public paramSelectEmergency: SelectParamModel[];
-  public disabledFake: boolean;
-  private id: string;
-  private userId: string;
   private oauthResource: SecurityResourceModel;
   private enc: EncryptionService;
 
@@ -59,8 +60,8 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
     this.enc = injector.get(EncryptionService);
     this.oauthResource = injector.get(OAUTH_INFO);
     this.apiSelectParameter = this.api['master']['select-parameter'];
-    if (this.route.snapshot.params['code']) {
-      this.id = this.route.snapshot.params['code'];
+    if (this.route.snapshot.params['id']) {
+      this.id = this.route.snapshot.params['id'];
       this.keyword = {
         id: this.id,
       };
@@ -85,9 +86,15 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   }
 
   onInit(serviceName: string, apiName: string): void {
-    this.panicService.getPanic(this.id).then((value: any) => {
-      this.loadingForm = true;
-      this.userId = value.userId;
+    this.loadingForm = true;
+    this.panicService.getPanic(this.id).then((panicData: any) => {
+      this.formGroup.get('status').setValue(panicData?.status);
+      this.formGroup.get('emergencyCategory').setValue(panicData?.emergencyCategory);
+      if (panicData?.statusCode === 'STATUS_EMERGENCY.CASE_CLOSED') {
+        this.caseClosed = true;
+        this.formGroup.get('status').disable();
+        this.formGroup.get('emergencyCategory').disable();
+      }
       const pathVariables: string[] = [this.id];
 
       this.exec(serviceName, apiName, null, null, null, pathVariables)
@@ -95,6 +102,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
           (success: any) => {
             this.loadingForm = false;
             this.panicReport = success;
+            this.userId = success?.userId;
             if (success['image']) {
               this.image = success.personalInfo?.image;
             }
@@ -125,7 +133,7 @@ export class DoPanicMonitoringDetailComponent extends BaseFilterComponent<any> i
   }
 
   onPreview(data: any): void {
-    this.dialogService.open(DoPanicMonitoringPreviewComponent, {
+    this.dialogService.open(DoPanicPreviewComponent, {
       context: {
         checksum: data['checksum'],
         userId: this.userId,

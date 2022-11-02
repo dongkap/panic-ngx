@@ -1,0 +1,8 @@
+<nb-card>
+  <nb-card-header>
+    {{ 'Choose Flag' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    <span class="flag-icon flag-icon-{{flag}} choose-flag" (click)="choose(flag)" *ngFor="let flag of flags"></span>
+  </nb-card-body>
+</nb-card>

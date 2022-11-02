@@ -16,6 +16,7 @@ export { DoDatePickerModule } from './lib/datepicker/do-datepicker.module';
 export { DoImageModule } from './lib/image/do-image.module';
 export { DoWizardModule } from './lib/wizard/do-wizard.module';
 export { DoMapsModule } from './lib/maps/do-maps.module';
+export { DoChartsModule } from './lib/charts/do-charts.module';
 
 export * from './lib/base/animations';
 export { BaseFilterComponent } from './lib/base/base-component/base-filter.component';
@@ -80,3 +81,5 @@ export { DoWizardStep } from './lib/wizard/wizard-step/do-wizard-step';
 
 export { DoMapsLeafletComponent } from './lib/maps/leaflet/do-maps-leaflet.component';
 export * from './lib/maps/models/leaflet.model';
+
+export { DoChartComponent } from './lib/charts/base/do-chart.component';

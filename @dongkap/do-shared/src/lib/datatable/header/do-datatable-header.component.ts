@@ -67,8 +67,10 @@ export class DoDatatableHeaderComponent implements OnDestroy {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    if (event.key.toUpperCase() === 'ENTER') {
-      this.doSearch(this._search);
+    if(event.key) {
+      if (event.key.toUpperCase() === 'ENTER') {
+        this.doSearch(this._search);
+      }
     }
   }
 

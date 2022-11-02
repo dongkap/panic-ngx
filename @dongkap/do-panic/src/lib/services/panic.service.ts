@@ -6,6 +6,7 @@ import { PANIC_INDEXED_DB, IndexedDBFactoryService } from '@dongkap/do-core';
 export class PanicService {
 
     private loaderPanicSubject$ = new Subject<string>();
+    private reports: any;
 
     constructor(@Inject(PANIC_INDEXED_DB) private panicIndexedDB: IndexedDBFactoryService) {
     }
@@ -36,6 +37,14 @@ export class PanicService {
 
     public onCheckPanic(): Observable<string> {
         return this.loaderPanicSubject$.asObservable();
+    }
+
+    public getReports(): any {
+        return this.reports;
+    }
+
+    public setReports(reports: any) {
+        this.reports = reports;
     }
 
 }

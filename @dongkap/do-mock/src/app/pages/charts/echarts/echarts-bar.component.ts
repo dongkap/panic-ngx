@@ -22,7 +22,7 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
 
       this.options = {
         backgroundColor: echarts.bg,
-        color: [colors.primaryLight],
+        color: [colors.success, colors.info, colors.primaryLight],
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -36,25 +36,6 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
           containLabel: true,
         },
         xAxis: [
-          {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        yAxis: [
           {
             type: 'value',
             axisLine: {
@@ -74,15 +55,165 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
             },
           },
         ],
+        yAxis: [
+          {
+            type: 'category',
+            data: ['Bali'],
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLine: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+            axisLabel: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+        ],
         series: [
           {
-            name: 'Score',
+            name: 'Score 1',
             type: 'bar',
-            barWidth: '60%',
+            barWidth: '10%',
             data: [10, 52, 200, 334, 390, 330, 220],
+          },
+          {
+            name: 'Score 2',
+            type: 'bar',
+            barWidth: '10%',
+            data: [45, 10, 45, 90, 20, 80, 20],
+          },
+          {
+            name: 'Score 3',
+            type: 'bar',
+            barWidth: '10%',
+            data: [54, 44, 68, 56, 43, 77, 54],
           },
         ],
       };
+
+      /*
+      this.options = {
+        backgroundColor: echarts.bg,
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        legend: {
+          data: ['Fire'],
+          textStyle: {
+            color: echarts.textColor,
+          },
+        },
+        grid: {
+          left: '2%',
+          right: '3%',
+          bottom: '5%',
+          top: '15%',
+          containLabel: true,
+        },
+        xAxis: [
+          {
+            type: 'value',
+            axisLine: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: echarts.splitLineColor,
+              },
+            },
+            axisLabel: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+        ],
+        yAxis: [
+          {
+            type: 'category',
+            data: ['Bali'],
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLine: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+            axisLabel: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: 'Fire',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Abduction',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Theft',
+            type: 'bar',
+            barWidth: '10%',
+            data: [1],
+          },
+          {
+            name: 'Hospital Emergency Room',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Unrest',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Sexual Harrassment',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Threat',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Bullying',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+          {
+            name: 'Others',
+            type: 'bar',
+            barWidth: '10%',
+            data: [0],
+          },
+        ],
+      }; */
     });
   }
 

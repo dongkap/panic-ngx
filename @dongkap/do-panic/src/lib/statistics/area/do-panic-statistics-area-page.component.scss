@@ -1,0 +1,12 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+  
+  ::ng-deep nb-card-body {
+    overflow: unset;
+    div.echart {
+      height: 400px;
+    }
+  }
+
+}

@@ -1,4 +1,4 @@
-<do-page-outlet [url]="'/app/monitoring'" [header]="'Civilians Profile'" [hidefooter]="true">
+<do-page-outlet [header]="'Civilians Profile'" [hidefooter]="true">
     <div class="row" pagecontent>
         <div class="col-md-4 col-lg-4 col-xxxl-6">
             <div class="photo-profile"
@@ -129,7 +129,7 @@
 <do-page-outlet [header]="'Emergency Report Detail'">
     <div pagecontent> 
         <div class="form-group row">
-            <div class="col-md-12 col-lg-12 col-xxxl-6">
+            <div class="col-md-12 col-lg-12 col-xxxl-12">
                 <do-datatable
                     [api]="apiPath"
                     [filters]="filters"
@@ -147,18 +147,6 @@
         <div class="form-group">
             <form [formGroup]="formGroup">
                 <do-select
-                    [name]="'status'"
-                    [label]="'Status'"
-                    [colLabel]="4"
-                    [colInput]="8"
-                    [required]="true"
-                    [api]="apiSelectParameter"
-                    [queryParam]="paramSelectStatus"
-                    [searchable]="false"
-                    [skeleton]="loadingForm"
-                    formControlName="status">
-                </do-select>
-                <do-select
                     [name]="'emergency'"
                     [label]="'Emergency'"
                     [colLabel]="4"
@@ -169,6 +157,18 @@
                     [searchable]="false"
                     [skeleton]="loadingForm"
                     formControlName="emergencyCategory">
+                </do-select>
+                <do-select
+                    [name]="'status'"
+                    [label]="'Status'"
+                    [colLabel]="4"
+                    [colInput]="8"
+                    [required]="true"
+                    [api]="apiSelectParameter"
+                    [queryParam]="paramSelectStatus"
+                    [searchable]="false"
+                    [skeleton]="loadingForm"
+                    formControlName="status">
                 </do-select>
             </form>
         </div>

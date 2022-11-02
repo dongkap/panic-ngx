@@ -1,0 +1,10 @@
+<do-page-outlet
+    [header]="'header.statistics-emergency-gender-male'"
+    [width]="6"
+    [hidefooter]="true"
+    [showToggle]="false"
+    [dataSelect]="dataSelect"
+    [selected]="selected"
+    (selectChange)="onSelectChange($event)">
+    <do-chart [options]="options" pagecontent></do-chart>
+</do-page-outlet>

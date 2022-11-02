@@ -22,25 +22,18 @@ import {
   DoMapsModule,
   DoSelectModule,
 } from '@dongkap/do-shared';
+import { DoPanicModule } from '../do-panic.module';
 import { DoPanicDashboardRoutingModule } from './do-panic-dashboard-routing.module';
 import { DoDashboardComponent } from './do-panic-dashboard.component';
 import { DoPanicMonitoringPageComponent } from './monitoring/do-panic-monitoring-page.component';
-import { DoPanicMonitoringDetailComponent } from './monitoring/detail/do-panic-monitoring-detail.component';
 import { DoPanicSlideOutComponent } from './monitoring/slide-out/do-panic-slide-out.component';
 import { DoPanicMonitoringInfoComponent } from './monitoring/info/do-panic-monitoring-info.component';
-import { DoPanicDatatableComponent } from './monitoring/detail/datatable/do-panic-datatable.component';
-import { DoPanicMonitoringPreviewComponent } from './monitoring/preview/do-panic-monitoring-preview.component';
-import { DoFakeReportPromptComponent } from './monitoring/detail/prompt/do-fake-report-prompt.component';
 
 const PANIC_COMPONENTS = [
   DoDashboardComponent,
   DoPanicMonitoringPageComponent,
   DoPanicMonitoringInfoComponent,
   DoPanicSlideOutComponent,
-  DoPanicDatatableComponent,
-  DoPanicMonitoringDetailComponent,
-  DoPanicMonitoringPreviewComponent,
-  DoFakeReportPromptComponent,
 ];
 
 const modules = [
@@ -64,10 +57,11 @@ const modules = [
   DoMapsModule,
   DoDatatableModule,
   DoLabelModule,
+  DoPanicModule.forRoot(),
   DoPanicDashboardRoutingModule,
 ];
 
-const providers = [
+const PANIC_PROVIDERS = [
 ];
 
 @NgModule({
@@ -78,7 +72,7 @@ const providers = [
     ...PANIC_COMPONENTS,
   ],
   providers: [
-    ...providers,
+    ...PANIC_PROVIDERS,
   ],
 })
 export class DoPanicDashboardModule { }

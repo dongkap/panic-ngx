@@ -18,6 +18,16 @@ const routes: Routes = [{
         .then(m => m.PanicDashboardWrapperModule),
     },
     {
+      path: 'statistics',
+      loadChildren: () => import('../panic/panic-statistics-wrapper.module')
+        .then(m => m.PanicStatisticsWrapperModule),
+    },
+    {
+      path: 'reports',
+      loadChildren: () => import('../panic/panic-reports-wrapper.module')
+        .then(m => m.PanicReportsWrapperModule),
+    },
+    {
       path: 'mgmt/corporate',
       loadChildren: () => import('../sys/sys-mgmt-corporate-wrapper.module')
         .then(m => m.SysMgmtCorporateWrapperModule),

@@ -1,0 +1,36 @@
+<do-page-outlet [header]="'Emergency Reports'" [hidefooter]="true">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12 col-xxxl-6">
+      <do-datatable
+        [api]="apiPath"
+        [formGroupFilter]="formGroupFilter"
+        [filters]="filters"
+        [add]="false"
+        [delete]="false"
+        (onExport)="doExport($event)"
+        [selectionType]="selectionType"
+        (onFilter)="doFilterAdvanced($event)"
+        (onEdit)="onViewDetail($event)"
+        [filterFn]="keyword"
+        [columns]="columns">
+        <form [formGroup]="formGroupFilter">
+          <do-input-text
+            [name]="'fullname'"
+            [label]="'Name'"
+            formControlName="fullname">
+          </do-input-text>
+          <do-input-text
+            [name]="'phoneNumber'"
+            [label]="'Phone Number'"
+            formControlName="phoneNumber">
+          </do-input-text>
+          <do-input-text
+            [name]="'latestFormattedAddress'"
+            [label]="'Address'"
+            formControlName="latestFormattedAddress">
+          </do-input-text>
+        </form>
+      </do-datatable>
+    </div>
+  </div>
+</do-page-outlet>

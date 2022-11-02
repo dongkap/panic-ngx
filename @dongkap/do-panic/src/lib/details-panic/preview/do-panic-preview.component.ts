@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
-import { API, APIModel, HttpFactoryService, HTTP_SERVICE } from '@dongkap/do-core';
+import { APIModel, API, HTTP_SERVICE, HttpFactoryService } from '@dongkap/do-core';
 
 @Component({
-  selector: 'do-panic-monitoring-preview',
-  templateUrl: './do-panic-monitoring-preview.component.html',
-  styleUrls: ['do-panic-monitoring-preview.component.scss'],
+  selector: 'do-panic-preview',
+  templateUrl: './do-panic-preview.component.html',
+  styleUrls: ['do-panic-preview.component.scss'],
 })
-export class DoPanicMonitoringPreviewComponent implements OnInit {
+export class DoPanicPreviewComponent implements OnInit {
 
   @Input() public url: any;
   @Input() public checksum: any;

@@ -308,7 +308,11 @@
 		"Edit-education-nonformal": "Ubah Pendidikan Non Formal",
 		"Add-education-nonformal": "Tambah Pendidikan Non Formal",
 		"job-placement-management": "Kelola Penempatan Kerja",
-		"employee-selection": "Pilih Karyawan"
+		"employee-selection": "Pilih Karyawan",
+		"statistics-emergency-category": "Statistik Kategori Darurat",
+		"statistics-emergency-area": "Statistik Laporan Darurat Berdasarkan Area",
+		"statistics-emergency-gender-male": "Statistik Laporan Darurat Berdasarkan Pria",
+		"statistics-emergency-gender-female": "Statistik Laporan Darurat Berdasarkan Wanita"
 	},
 	"label": {
 		"language": "Bahasa",

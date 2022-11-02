@@ -33,7 +33,6 @@ import { environment } from '../environments/environment';
 import { apiPath } from '../configs/api.config';
 import { oauthResource } from '../configs/security.config';
 import { IndexedDBDistributionService } from './services/indexeddb-dist.service';
-import { DoPanicModule } from '@dongkap/do-panic';
 
 @NgModule({
   declarations: [AppComponent],
@@ -57,7 +56,6 @@ import { DoPanicModule } from '@dongkap/do-panic';
     NgIdleKeepaliveModule.forRoot(),
     DoCoreModule.forRoot(),
     DoAuthModule.forRoot(),
-    DoPanicModule.forRoot(),
     ServiceWorkerModule.register(environment.basePath + 'ngdo-sw.js'),
     // ServiceWorkerModule.register(environment.basePath + 'ngdo-sw.js', {enabled: environment.production && location.protocol !== 'http:'}),
   ],
