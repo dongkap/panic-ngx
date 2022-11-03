@@ -1,13 +1,14 @@
 import { Component, Injector, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';;
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { ApiBaseResponse, SystemAuthority, HttpBaseModel, ResponseCode, RoleModel } from '@dongkap/do-core';
 import { BaseFormComponent, CheckboxModel } from '@dongkap/do-shared';
 import { RoleService } from '../services/role.service';
 import { RoleMainPageComponent } from './main/role-main-page.component';
 import { RoleExtraPageComponent } from './extra/role-extra-page.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'do-language-add-edit-page',
@@ -17,6 +18,7 @@ import { RoleExtraPageComponent } from './extra/role-extra-page.component';
 export class RoleAddEditPageComponent extends BaseFormComponent<any> implements OnInit {
 
   public apiSelectGroup: HttpBaseModel;
+  public authority: string;
   public action: 'Add' | 'Edit' = 'Add';
   public dataDefault: CheckboxModel[] = [
     {
@@ -39,29 +41,20 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
     super(injector,
       {
         authority: [],
-        level: [],
         description: [],
         group: [],
         mainMenus: [],
         extraMenus: [],
       });
     this.apiSelectGroup = this.api['security']['select-group'];
-    if ((this.route.snapshot.params['action'] === 'edit')) {
+    this.authority = this.route.snapshot.params['authority'];
+    if (this.authority != null) {
       this.action = 'Edit';
       if (!this.roleService.getRole()) {
-        this.router.navigate(['/app/mgmt/role']);
+        this.getRequestRole(this.authority);
+      } else {
+        this.putRoleToForm();
       }
-    }
-    if (this.roleService.getRole() && (this.route.snapshot.params['action'] === 'edit')) {
-      this.title = this.roleService.getRole().description;
-      this.formGroup.get('authority').setValue(this.roleService.getRole().authority);
-      this.formGroup.get('authority').disable();
-      this.formGroup.get('level').setValue(this.roleService.getRole().level);
-      this.formGroup.get('description').setValue(this.roleService.getRole().description);
-      this.formGroup.get('group').setValue({
-        value: this.roleService.getRole().group?.code,
-        label: this.roleService.getRole().group?.name
-      });
     }
   }
 
@@ -69,6 +62,35 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
 
   onReset(): void {
     this.router.navigate(['/app/mgmt/role']);
+  }
+
+  getRequestRole(authority: string): void {
+    this.http.HTTP_AUTH(
+      this.api['security']['get-role'], null, null, null,
+      [authority]).subscribe(
+            (success: any) => {
+              this.roleService.setRole(success);
+              this.putRoleToForm();
+            },
+            (error: any | ApiBaseResponse) => {
+              this.disabled = false;
+              if (error instanceof HttpErrorResponse) {
+                  error = error['error'] as ApiBaseResponse;
+              }
+              this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
+            },
+        );
+  }
+
+  putRoleToForm(): void {
+    this.title = this.roleService.getRole().description;
+    this.formGroup.get('authority').setValue(this.roleService.getRole().authority);
+    this.formGroup.get('authority').disable();
+    this.formGroup.get('description').setValue(this.roleService.getRole().description);
+    this.formGroup.get('group').setValue({
+      value: this.roleService.getRole().group?.code,
+      label: this.roleService.getRole().group?.name
+    });
   }
 
   onSubmit(): void {
@@ -79,7 +101,6 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
     }
     const role: RoleModel = {
       authority: this.formGroup.get('authority').value,
-      level: this.formGroup.get('level').value,
       description: this.formGroup.get('description').value,
       group,
     };
@@ -119,7 +140,7 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
     this.tab = event.tabId;
     this.loading = true;
     if (this.tab === 'main') {
-      if (this.roleService.getRole() && this.action === 'Edit') {
+      if (this.action === 'Edit') {
         this.mainMenu.loadDataMenu(this.mainData)
           .pipe(takeUntil(this.destroy$))
           .subscribe((value: any[]) => {
@@ -137,7 +158,7 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
         });
       }
     } else {
-      if (this.roleService.getRole() && this.action === 'Edit') {
+      if (this.action === 'Edit') {
         this.extraMenu.loadDataMenu(this.extraData)
           .pipe(takeUntil(this.destroy$))
           .subscribe((value: any[]) => {

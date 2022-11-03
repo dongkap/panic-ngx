@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiBaseResponse, ResponseCode } from '@dongkap/do-core';
-import { BaseFormComponent } from '@dongkap/do-shared';
+import { BaseFormComponent, CheckboxModel } from '@dongkap/do-shared';
 
 @Component({
   selector: 'do-parameter-add-group-page',
@@ -13,11 +13,19 @@ import { BaseFormComponent } from '@dongkap/do-shared';
 })
 export class ParameterAddGroupPageComponent extends BaseFormComponent<any> implements OnInit {
 
+  public dataType: CheckboxModel[] = [
+    {
+      id: 'parameterGroupType',
+      selected: true,
+    },
+  ];
+
   constructor(public injector: Injector, private router: Router) {
     super(injector,
       {
         parameterGroupCode: [],
         parameterGroupName: [],
+        parameterGroupType: [],
       });
   }
 
@@ -28,7 +36,18 @@ export class ParameterAddGroupPageComponent extends BaseFormComponent<any> imple
   }
 
   onSubmit(): void {
-    (super.onSubmit(this.formGroup.value, 'master', 'post-parameter-group')  as Observable<ApiBaseResponse>)
+    const parameterGroupCode = this.formGroup.get('parameterGroupCode')?.value;
+    const parameterGroupName = this.formGroup.get('parameterGroupName')?.value;
+    let parameterGroupType : 'multi' | 'single' = 'single';
+    if (this.formGroup.get('parameterGroupType')?.value) {
+      parameterGroupType = this.formGroup.get('parameterGroupType')?.value[0].selected ? 'multi' : 'single';
+    }
+    const data : any = {
+      parameterGroupCode,
+      parameterGroupName,
+      parameterGroupType
+    };
+    (super.onSubmit(data, 'master', 'post-parameter-group')  as Observable<ApiBaseResponse>)
       .pipe(takeUntil(this.destroy$))
       .subscribe(response => {
         if (response.respStatusCode === ResponseCode.OK_SCR009.toString()) {

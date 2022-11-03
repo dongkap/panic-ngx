@@ -1,7 +1,6 @@
 <do-page-outlet
   [header]="'Edit Parameter Group'"
-  [url]="'/app/sysconf/parameter'"
-  [isCollapsed]="true">
+  [url]="'/app/sysconf/parameter'">
   <div class="row" pagecontent>
     <div class="col-md-12 col-lg-12">
       <form [formGroup]="formGroup">
@@ -11,6 +10,12 @@
           [required]="true"
           formControlName="parameterGroupName">
         </do-input-text>
+        <do-checkbox
+          [name]="'parameterGroupType'"
+          [label]="'label.parameter-type-language'"
+          [data]="dataType"
+          formControlName="parameterGroupType">
+        </do-checkbox>
       </form>
     </div>
   </div>

@@ -18,7 +18,14 @@ const routes: Routes = [{
       },
     },
     {
-      path: ':action',
+      path: 'add',
+      component: RoleAddEditPageComponent,
+      data: {
+        code: '#MANAGEMENT-ROLE-PAGE',
+      },
+    },
+    {
+      path: 'edit/:authority',
       component: RoleAddEditPageComponent,
       data: {
         code: '#MANAGEMENT-ROLE-PAGE',

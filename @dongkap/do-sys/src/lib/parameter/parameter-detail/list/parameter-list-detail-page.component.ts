@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { TableColumn, SelectionType } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { HttpBaseModel } from '@dongkap/do-core';
-import { BaseFilterComponent } from '@dongkap/do-shared';
+import { BaseFilterComponent, CheckboxModel } from '@dongkap/do-shared';
 import { ParameterService } from '../../services/parameter.service';
 import { ParameterGroupModel } from '../../models/parameter.model';
 
@@ -25,6 +25,11 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
   ];
   public parameterGroup: ParameterGroupModel = new ParameterGroupModel();
   public expanded: boolean = false;
+  public dataType: any[] = [
+    {
+      id: 'parameterGroupType',
+    },
+  ];
 
   constructor(public injector: Injector, private router: Router, private parameterService: ParameterService) {
     super(injector, {
@@ -32,6 +37,7 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
     }, {
       parameterGroupCode: [],
       parameterGroupName: [],
+      parameterGroupType: [],
     });
     this.sort = {
       asc: ['parameterCode']
@@ -43,8 +49,17 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
       this.keyword = {
         parameterGroupCode: this.parameterGroup.parameterGroupCode,
       };
+      console.log((this.parameterGroup.parameterGroupType === 'multi' ? true : false));
+      const parameterGroupType: CheckboxModel[] = [
+        {
+          id: 'parameterGroupType',
+          selected: (this.parameterGroup.parameterGroupType === 'multi' ? true : false),
+        },
+      ]
       this.formGroup.get('parameterGroupCode').setValue(this.parameterGroup.parameterGroupCode);
       this.formGroup.get('parameterGroupName').setValue(this.parameterGroup.parameterGroupName);
+      this.formGroup.get('parameterGroupType').setValue(parameterGroupType);
+      this.formGroup.get('parameterGroupType').disable();
     } else {
       this.router.navigate(['/app/sysconf/parameter']);
     }
@@ -62,6 +77,7 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
     this.parameterService.setParameter({
       parameterGroupCode: data['parameterGroupCode'],
       parameterGroupName: data['parameterGroupName'],
+      parameterGroupType: data['parameterGroupType'],
       parameterCode: data['parameterCode'],
     });
     this.router.navigate(['/app/sysconf/parameter/detail', 'edit']);

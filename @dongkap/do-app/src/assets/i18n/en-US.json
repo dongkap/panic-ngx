@@ -301,8 +301,8 @@
 		"Add-apps": "Add Apps",
 		"menu-management": "Menu Management",
 		"menu-role": "Choose Menu",
-		"Edit-i18n": "Edit i18n",
-		"Add-i18n": "Add i18n",
+		"Edit-language": "Edit Language",
+		"Add-language": "Add Language",
 		"Edit-education-formal": "Edit Education Formal",
 		"Add-education-formal": "Add Education Formal",
 		"Edit-education-nonformal": "Edit Education Non Formal",
@@ -317,6 +317,7 @@
 	"label": {
 		"language": "Language",
 		"dark-mode": "Dark Mode",
+		"parameter-type-language": "Language Parameter",
 		"contact-person": "Contact Person",
 		"personal-info": "Personal Info",
 		"emergency-contact": "Emergency Contact",

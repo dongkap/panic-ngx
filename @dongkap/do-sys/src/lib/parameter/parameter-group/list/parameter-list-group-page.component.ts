@@ -34,6 +34,7 @@ export class ParameterListGroupPageComponent extends BaseFilterComponent<any> im
     super(injector, {
       parameterGroupCode: [],
       parameterGroupName: [],
+      parameterGroupType: [],
     });
     this.sort = {
       asc: ['parameterGroupName']
@@ -60,6 +61,7 @@ export class ParameterListGroupPageComponent extends BaseFilterComponent<any> im
     this.parameterService.setParameterGroup({
       parameterGroupCode: data['parameterGroupCode'],
       parameterGroupName: data['parameterGroupName'],
+      parameterGroupType: data['parameterGroupType'],
     });
     this.router.navigate(['/app/sysconf/parameter/detail']);
   }

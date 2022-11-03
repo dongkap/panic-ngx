@@ -9,13 +9,6 @@
           formControlName="authority">
         </do-input-text>
         <do-input-text
-          [name]="'level'"
-          [label]="'Level'"
-          [required]="true"
-          [type]="'number'"
-          formControlName="level">
-        </do-input-text>
-        <do-input-text
           [name]="'description'"
           [label]="'Description'"
           [required]="true"
@@ -34,10 +27,10 @@
     <div class="col-md-12 col-lg-12">
       <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation($event)">
         <nb-tab tabId="main" tabTitle="{{'tab.main-menu' | translate}}" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
-          <do-role-main-page (onSelect)="onSelectMain($event)" #mainRole></do-role-main-page>
+          <do-role-main-page [authority]="authority" (onSelect)="onSelectMain($event)" #mainRole></do-role-main-page>
         </nb-tab>
         <nb-tab tabId="extra" tabTitle="{{'tab.extra-menu' | translate}}" [lazyLoad]="true" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
-          <do-role-extra-page (onSelect)="onSelectExtra($event)" #extraRole></do-role-extra-page>
+          <do-role-extra-page [authority]="authority" (onSelect)="onSelectExtra($event)" #extraRole></do-role-extra-page>
         </nb-tab>
       </nb-tabset>
     </div>

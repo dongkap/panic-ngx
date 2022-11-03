@@ -16,8 +16,8 @@ export class RoleListPageComponent extends BaseFilterComponent<any> implements O
   public apiPath: HttpBaseModel;
   public selectionType: SelectionType = SelectionType.single;
   public columns: DatatableColumn[] = [
-    { name: 'Authority', prop: 'authority', width: 150, frozenLeft: true },
-    { name: 'Description', prop: 'description', width: 275, frozenLeft: true },
+    { name: 'Authority', prop: 'authority', width: 250, frozenLeft: true },
+    { name: 'Description', prop: 'description', width: 250, frozenLeft: true },
     { name: 'Created', prop: 'createdBy' },
     { name: 'Created Date', prop: 'createdDate' },
     { name: 'Modified', prop: 'modifiedBy' },
@@ -31,9 +31,6 @@ export class RoleListPageComponent extends BaseFilterComponent<any> implements O
       description: [],
     });
     this.apiPath = this.api['security']['datatable-role'];
-    this.sort = {
-      asc: ['level']
-    };
     this.filters = [
       { controlName: 'authority', type: 'input' },
       { controlName: 'description', type: 'input' }];
@@ -43,12 +40,12 @@ export class RoleListPageComponent extends BaseFilterComponent<any> implements O
   }
 
   onAddGroup(): void {
-    this.router.navigate(['/app/mgmt/role', 'add']);
+    this.router.navigate(['/app/mgmt/role/add']);
   }
 
   onViewDetail(data): void {
     this.roleService.setRole(data);
-    this.router.navigate(['/app/mgmt/role', 'edit']);
+    this.router.navigate(['/app/mgmt/role/edit', data.authority]);
   }
 
   onReset(): void {

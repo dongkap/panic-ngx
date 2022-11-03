@@ -301,8 +301,8 @@
 		"Add-inventory": "Tambah Inventaris",
 		"menu-management": "Kelola Menu",
 		"menu-role": "Pilih Menu",
-		"Edit-i18n": "Ubah i18n",
-		"Add-i18n": "Tambah i18n",
+		"Edit-language": "Ubah Bahasa",
+		"Add-language": "Tambah Bahasa",
 		"Edit-education-formal": "Ubah Pendidikan Formal",
 		"Add-education-formal": "Tambah Pendidikan Formal",
 		"Edit-education-nonformal": "Ubah Pendidikan Non Formal",
@@ -317,6 +317,7 @@
 	"label": {
 		"language": "Bahasa",
 		"dark-mode": "Mode Gelap",
+		"parameter-type-language": "Parameter Bahasa",
 		"contact-person": "Kontak Pribadi",
 		"personal-info": "Informasi Pribadi",
 		"emergency-contact": "Kontak Darurat",

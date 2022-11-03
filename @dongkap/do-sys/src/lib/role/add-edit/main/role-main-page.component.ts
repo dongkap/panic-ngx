@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Injector, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, Output, ViewEncapsulation } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TreeMode } from 'tree-ngx';
 import { BaseFormComponent } from '@dongkap/do-shared';
-import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'do-role-main-page',
@@ -15,6 +14,7 @@ import { RoleService } from '../../services/role.service';
 export class RoleMainPageComponent extends BaseFormComponent<any> implements OnInit {
 
   @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Input() public authority: string;
   public nodeItems: any[] = [];
   public options: any = {
     mode: TreeMode.MultiSelect,
@@ -25,8 +25,7 @@ export class RoleMainPageComponent extends BaseFormComponent<any> implements OnI
   private data: any[] = [];
 
   constructor(
-    public injector: Injector,
-    private roleService: RoleService) {
+    public injector: Injector) {
     super(injector);
   }
 
@@ -41,7 +40,7 @@ export class RoleMainPageComponent extends BaseFormComponent<any> implements OnI
     } else {
       return this.http.HTTP_AUTH(
         this.api['security']['get-function-menus'], null, null, null,
-        ['main', this.roleService.getRole().authority]).pipe(map((response: any) => {
+        ['main', this.authority]).pipe(map((response: any) => {
           this.nodeItems = [];
           this.nodeItems = [...this.nodeItems, ...response];
           this.data = [];
