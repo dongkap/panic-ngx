@@ -6,18 +6,21 @@
           [name]="'authority'"
           [label]="'Authority'"
           [required]="true"
+          [skeleton]="loadingForm"
           formControlName="authority">
         </do-input-text>
         <do-input-text
           [name]="'description'"
           [label]="'Description'"
           [required]="true"
+          [skeleton]="loadingForm"
           formControlName="description">
         </do-input-text>
         <do-select
           [name]="'group'"
           [label]="'Group'"
           [required]="true"
+          [skeleton]="loadingForm"
           [searchable]="false"
           [api]="apiSelectGroup"
           formControlName="group">

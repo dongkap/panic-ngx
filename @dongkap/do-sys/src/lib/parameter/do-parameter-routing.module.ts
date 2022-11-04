@@ -5,7 +5,8 @@ import { ParameterComponent } from './do-parameter.component';
 import { ParameterListGroupPageComponent } from './parameter-group/list/parameter-list-group-page.component';
 import { ParameterAddGroupPageComponent } from './parameter-group/add/parameter-add-group-page.component';
 import { ParameterListDetailPageComponent } from './parameter-detail/list/parameter-list-detail-page.component';
-import { ParameterAddEditDetailPageComponent } from './parameter-detail/add-edit/parameter-add-edit-detail-page.component';
+import { ParameterAddEditMultiDetailPageComponent } from './parameter-detail/add-edit-multi/parameter-add-edit-multi-detail-page.component';
+import { ParameterAddEditSingleDetailPageComponent } from './parameter-detail/add-edit-single/parameter-add-edit-single-detail-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,22 +28,43 @@ const routes: Routes = [{
       },
     },
     {
-      path: 'group/:action',
+      path: 'group/add',
       component: ParameterAddGroupPageComponent,
       data: {
         code: '#SYSCONF-PARAMETER-PAGE',
       },
     },
     {
-      path: 'detail',
+      path: 'detail/:parameterGroupCode',
       component: ParameterListDetailPageComponent,
       data: {
         code: '#SYSCONF-PARAMETER-PAGE',
       },
     },
     {
-      path: 'detail/:action',
-      component: ParameterAddEditDetailPageComponent,
+      path: 'detail/i18n/:parameterGroupCode',
+      component: ParameterAddEditMultiDetailPageComponent,
+      data: {
+        code: '#SYSCONF-PARAMETER-PAGE',
+      },
+    },
+    {
+      path: 'detail/i18n/:parameterGroupCode/:parameterCode',
+      component: ParameterAddEditMultiDetailPageComponent,
+      data: {
+        code: '#SYSCONF-PARAMETER-PAGE',
+      },
+    },
+    {
+      path: 'detail/value/:parameterGroupCode',
+      component: ParameterAddEditSingleDetailPageComponent,
+      data: {
+        code: '#SYSCONF-PARAMETER-PAGE',
+      },
+    },
+    {
+      path: 'detail/value/:parameterGroupCode/:parameterCode',
+      component: ParameterAddEditSingleDetailPageComponent,
       data: {
         code: '#SYSCONF-PARAMETER-PAGE',
       },

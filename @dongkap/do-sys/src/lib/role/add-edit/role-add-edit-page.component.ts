@@ -65,15 +65,18 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
   }
 
   getRequestRole(authority: string): void {
+    this.loadingForm = true;
     this.http.HTTP_AUTH(
       this.api['security']['get-role'], null, null, null,
       [authority]).subscribe(
             (success: any) => {
+              this.loadingForm = false;
               this.roleService.setRole(success);
               this.putRoleToForm();
             },
             (error: any | ApiBaseResponse) => {
               this.disabled = false;
+              this.loadingForm = false;
               if (error instanceof HttpErrorResponse) {
                   error = error['error'] as ApiBaseResponse;
               }

@@ -23,7 +23,7 @@ export class PrivacyPolicyPageComponent extends BaseComponent<any> implements On
     const data: any = {
       parameterCode: 'PRIVACY_POLICY.DONGKAP'
     };
-    this.http.HTTP_AUTH(this.api['master']['parameter'], data)
+    this.http.HTTP_AUTH(this.api['master']['parameter-i18n'], data)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response: any) => {
       this.content = response['parameterValue'];

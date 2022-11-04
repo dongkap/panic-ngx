@@ -17,14 +17,16 @@ import { ParameterService } from './services/parameter.service';
 import { ParameterListGroupPageComponent } from './parameter-group/list/parameter-list-group-page.component';
 import { ParameterAddGroupPageComponent } from './parameter-group/add/parameter-add-group-page.component';
 import { ParameterListDetailPageComponent } from './parameter-detail/list/parameter-list-detail-page.component';
-import { ParameterAddEditDetailPageComponent } from './parameter-detail/add-edit/parameter-add-edit-detail-page.component';
+import { ParameterAddEditMultiDetailPageComponent } from './parameter-detail/add-edit-multi/parameter-add-edit-multi-detail-page.component';
+import { ParameterAddEditSingleDetailPageComponent } from './parameter-detail/add-edit-single/parameter-add-edit-single-detail-page.component';
 
 const components = [
   ParameterComponent,
   ParameterListGroupPageComponent,
   ParameterAddGroupPageComponent,
   ParameterListDetailPageComponent,
-  ParameterAddEditDetailPageComponent,
+  ParameterAddEditMultiDetailPageComponent,
+  ParameterAddEditSingleDetailPageComponent,
 ];
 
 const modules = [

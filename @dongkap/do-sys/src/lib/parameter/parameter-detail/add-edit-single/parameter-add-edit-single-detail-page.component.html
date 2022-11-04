@@ -1,0 +1,31 @@
+<do-page-outlet [header]="action + ' Parameter'" [url]="urlBack">
+  <div class="row" pagecontent>
+    <div class="col-md-12 col-lg-12">
+      <form [formGroup]="formGroup">
+        <do-input-text
+          [name]="'parameterCode'"
+          [label]="'Parameter Code'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="parameterCode">
+        </do-input-text>
+        <do-input-text
+          [name]="'parameterValue'"
+          [label]="'Parameter Value'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="parameterValue">
+        </do-input-text>
+      </form>
+    </div>
+  </div>
+  <do-button-submit
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
+</do-page-outlet>

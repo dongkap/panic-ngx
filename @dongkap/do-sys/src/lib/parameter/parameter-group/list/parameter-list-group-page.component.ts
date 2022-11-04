@@ -63,7 +63,7 @@ export class ParameterListGroupPageComponent extends BaseFilterComponent<any> im
       parameterGroupName: data['parameterGroupName'],
       parameterGroupType: data['parameterGroupType'],
     });
-    this.router.navigate(['/app/sysconf/parameter/detail']);
+    this.router.navigate(['/app/sysconf/parameter/detail', data['parameterGroupCode']]);
   }
 
   onDeleteGroup(data, dialog: TemplateRef<any>): void {

@@ -1,8 +1,9 @@
-import { Component, Injector, ViewChild } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { TableColumn, SelectionType } from '@swimlane/ngx-datatable';
-import { Router } from '@angular/router';
-import { HttpBaseModel } from '@dongkap/do-core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiBaseResponse, HttpBaseModel } from '@dongkap/do-core';
 import { BaseFilterComponent, CheckboxModel } from '@dongkap/do-shared';
 import { ParameterService } from '../../services/parameter.service';
 import { ParameterGroupModel } from '../../models/parameter.model';
@@ -24,6 +25,7 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
     { name: 'Modified Date', prop: 'modifiedDate' },
   ];
   public parameterGroup: ParameterGroupModel = new ParameterGroupModel();
+  public parameterGroupCode: string;
   public expanded: boolean = false;
   public dataType: any[] = [
     {
@@ -31,7 +33,7 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
     },
   ];
 
-  constructor(public injector: Injector, private router: Router, private parameterService: ParameterService) {
+  constructor(public injector: Injector, private router: Router, private parameterService: ParameterService, private route: ActivatedRoute) {
     super(injector, {
       parameterCode: [],
     }, {
@@ -42,24 +44,18 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
     this.sort = {
       asc: ['parameterCode']
     };
-    if (this.parameterService.getParameterGroup()) {
+    this.parameterGroupCode = this.route.snapshot.params['parameterGroupCode'];
+    if (this.parameterGroupCode) {
       this.apiPath = this.api['master']['datatable-parameter'];
       this.filters = [{ controlName: 'parameterCode', type: 'input' }];
-      this.parameterGroup = this.parameterService.getParameterGroup();
       this.keyword = {
-        parameterGroupCode: this.parameterGroup.parameterGroupCode,
+        parameterGroupCode: this.parameterGroupCode,
       };
-      console.log((this.parameterGroup.parameterGroupType === 'multi' ? true : false));
-      const parameterGroupType: CheckboxModel[] = [
-        {
-          id: 'parameterGroupType',
-          selected: (this.parameterGroup.parameterGroupType === 'multi' ? true : false),
-        },
-      ]
-      this.formGroup.get('parameterGroupCode').setValue(this.parameterGroup.parameterGroupCode);
-      this.formGroup.get('parameterGroupName').setValue(this.parameterGroup.parameterGroupName);
-      this.formGroup.get('parameterGroupType').setValue(parameterGroupType);
-      this.formGroup.get('parameterGroupType').disable();
+      if(this.parameterService.getParameterGroup()) {
+        this.putParamToForm();
+      } else {
+        this.getRequestParamGroup(this.parameterGroupCode);
+      }
     } else {
       this.router.navigate(['/app/sysconf/parameter']);
     }
@@ -68,9 +64,48 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
   ngOnInit(): void {
   }
 
+  getRequestParamGroup(parameterGroupCode: string): void {
+    this.loadingForm = true;
+    this.http.HTTP_AUTH(
+      this.api['master']['get-parameter-group'], null, null, null,
+      [parameterGroupCode]).subscribe(
+        (success: any) => {
+          this.loadingForm = false;
+          this.parameterService.setParameterGroup(success);
+          this.putParamToForm();
+        },
+        (error: any | ApiBaseResponse) => {
+          this.disabled = false;
+          this.loadingForm = false;
+          if (error instanceof HttpErrorResponse) {
+              error = error['error'] as ApiBaseResponse;
+          }
+          this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
+        },
+      );
+  }
+
+  putParamToForm(): void {
+    this.parameterGroup = this.parameterService.getParameterGroup();
+    const parameterGroupType: CheckboxModel[] = [
+      {
+        id: 'parameterGroupType',
+        selected: (this.parameterGroup.parameterGroupType === 'multi' ? true : false),
+      },
+    ]
+    this.formGroup.get('parameterGroupCode').setValue(this.parameterGroup.parameterGroupCode);
+    this.formGroup.get('parameterGroupName').setValue(this.parameterGroup.parameterGroupName);
+    this.formGroup.get('parameterGroupType').setValue(parameterGroupType);
+    this.formGroup.get('parameterGroupType').disable();
+  }
+
   onAddGroup(event): void {
     this.parameterService.setParameter(null);
-    this.router.navigate(['/app/sysconf/parameter/detail', 'add']);
+    if(this.parameterGroup?.parameterGroupType === 'multi') {
+      this.router.navigate(['/app/sysconf/parameter/detail/i18n', this.parameterGroupCode]);
+    } else {
+      this.router.navigate(['/app/sysconf/parameter/detail/value', this.parameterGroupCode]);
+    }
   }
 
   onViewDetail(data): void {
@@ -79,8 +114,13 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
       parameterGroupName: data['parameterGroupName'],
       parameterGroupType: data['parameterGroupType'],
       parameterCode: data['parameterCode'],
+      parameterValue: data['parameterValue'],
     });
-    this.router.navigate(['/app/sysconf/parameter/detail', 'edit']);
+    if(this.parameterGroup?.parameterGroupType === 'multi') {
+      this.router.navigate(['/app/sysconf/parameter/detail/i18n', this.parameterGroupCode, data['parameterCode']]);
+    } else {
+      this.router.navigate(['/app/sysconf/parameter/detail/value', this.parameterGroupCode, data['parameterCode']]);
+    }
   }
 
   onReset(): void {

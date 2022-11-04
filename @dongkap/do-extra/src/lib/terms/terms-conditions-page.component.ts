@@ -23,7 +23,7 @@ export class TermsConditionsPageComponent extends BaseComponent<any> implements 
     const data: any = {
       parameterCode: 'TERMS_CONDITIONS.DONGKAP'
     };
-    this.http.HTTP_AUTH(this.api['master']['parameter'], data)
+    this.http.HTTP_AUTH(this.api['master']['parameter-i18n'], data)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response: any) => {
       this.content = response['parameterValue'];

@@ -436,15 +436,35 @@ export const apiPath: APIModel = {
             method: HttpMethod.POST,
             path: '/api/master/vw/auth/datatable/parameter/v.1',
         },
-        parameter: {
+        'parameter-i18n': {
             server: environment.host.master,
             method: HttpMethod.POST,
             path: '/api/master/vw/post/parameter-i18n/v.1',
         },
-        'all-parameter-i18n': {
+        'get-multi-parameter-i18n': {
             server: environment.host.master,
             method: HttpMethod.POST,
-            path: '/api/master/vw/auth/all/parameter-i18n/v.1',
+            path: '/api/master/vw/auth/parameter-i18n/v.1',
+        },
+        'get-parameter': {
+            server: environment.host.master,
+            method: HttpMethod.GET,
+            path: '/api/master/vw/get/parameter/v.1',
+        },
+        'get-parameter-i18n': {
+            server: environment.host.master,
+            method: HttpMethod.GET,
+            path: '/api/master/vw/auth/parameter-i18n/v.1',
+        },
+        'get-parameter-group': {
+            server: environment.host.master,
+            method: HttpMethod.GET,
+            path: '/api/master/vw/auth/parameter-group/v.1',
+        },
+        'post-parameter': {
+            server: environment.host.master,
+            method: HttpMethod.POST,
+            path: '/api/master/trx/auth/parameter/v.1',
         },
         'post-parameter-i18n': {
             server: environment.host.master,
