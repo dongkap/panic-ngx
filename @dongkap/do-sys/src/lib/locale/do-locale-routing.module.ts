@@ -18,7 +18,14 @@ const routes: Routes = [{
       },
     },
     {
-      path: ':action',
+      path: 'add',
+      component: LocaleAddEditPageComponent,
+      data: {
+        code: '#SYSCONF-I18N-PAGE',
+      },
+    },
+    {
+      path: 'edit/:locale',
       component: LocaleAddEditPageComponent,
       data: {
         code: '#SYSCONF-I18N-PAGE',

@@ -8,6 +8,7 @@ import { ApiBaseResponse, ResponseCode, HttpBaseModel, LocaleModel } from '@dong
 import { BaseFormComponent, CheckboxModel } from '@dongkap/do-shared';
 import { LocaleService } from '../services/locale.service';
 import { DialogFlagComponent } from './dialog-flag/dialog-flag.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'do-locale-add-edit-page',
@@ -18,6 +19,8 @@ export class LocaleAddEditPageComponent extends BaseFormComponent<any> implement
 
   public action: 'Add' | 'Edit' = 'Add';
   public apiSelectLanguage: HttpBaseModel;
+  public localeDefault: boolean = false;
+  public localeCode: string;
   public dataDefault: CheckboxModel[] = [
     {
       id: 'default',
@@ -36,34 +39,53 @@ export class LocaleAddEditPageComponent extends BaseFormComponent<any> implement
         icon: [],
         default: [],
       });
-    if (this.localeService.getLocale() || (this.route.snapshot.params['action'] === 'add')) {
-      if ((this.route.snapshot.params['action'] === 'edit')) {
-        this.action = 'Edit';
+    this.localeCode = this.route.snapshot.params['locale'];
+    if (this.localeCode != null) {
+      this.action = 'Edit';
+      if (!this.localeService.getLocale()) {
+        this.getRequestRole(this.localeCode);
+      } else {
+        this.putLocaleToForm();
       }
-      this.apiSelectLanguage = this.api['master']['select-language'];
-      if (this.localeService.getLocale() && (this.route.snapshot.params['action'] === 'edit')) {
-        if (this.localeService.getLocale().localeDefault) {
-          this.formGroup.get('default').setValue([{
-            id: 'default',
-            selected: true,
-          }]);
-          this.formGroup.get('default').disable();
-        } else {
-          this.formGroup.get('default').setValue([{
-            id: 'default',
-            selected: false,
-          }]);
-        }
-        this.formGroup.get('icon').setValue(this.localeService.getLocale().icon);
-        this.formGroup.get('language').setValue(this.localeService.getLocale().identifier);
-        this.formGroup.get('language').disable();
-      }
-    } else {
-      this.router.navigate(['/app/sysconf/i18n']);
     }
   }
 
   ngOnInit(): void {}
+
+  getRequestRole(authority: string): void {
+    this.loadingForm = true;
+    this.http.HTTP_AUTH(
+      this.api['master']['get-locale'], null, null, null,
+      [authority]).subscribe(
+            (success: any) => {
+              this.loadingForm = false;
+              this.localeService.setLocale(success);
+              this.putLocaleToForm();
+            },
+            (error: any | ApiBaseResponse) => {
+              this.disabled = false;
+              this.loadingForm = false;
+              if (error instanceof HttpErrorResponse) {
+                  error = error['error'] as ApiBaseResponse;
+              }
+              this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
+            },
+        );
+  }
+
+  putLocaleToForm(): void {
+    this.localeDefault = this.localeService.getLocale().localeDefault;
+    this.formGroup.get('default').setValue([{
+      id: 'default',
+      selected: this.localeDefault,
+    }]);
+    if(this.localeDefault) {
+      this.formGroup.get('default').disable();
+    }
+    this.formGroup.get('icon').setValue(this.localeService.getLocale().icon);
+    this.formGroup.get('language').setValue(this.localeService.getLocale().identifier);
+    this.formGroup.get('language').disable();
+  }
 
   onSearchFlag(): void {
     this.dialogService.open(DialogFlagComponent)

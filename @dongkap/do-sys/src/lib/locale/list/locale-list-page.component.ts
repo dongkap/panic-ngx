@@ -42,12 +42,12 @@ export class LocaleListPageComponent extends BaseFilterComponent<any> implements
   }
 
   onAddGroup(): void {
-    this.router.navigate(['/app/sysconf/i18n', 'add']);
+    this.router.navigate(['/app/sysconf/i18n/add']);
   }
 
   onViewDetail(data): void {
     this.localeService.setLocale(data);
-    this.router.navigate(['/app/sysconf/i18n', 'edit']);
+    this.router.navigate(['/app/sysconf/i18n/edit', data.localeCode]);
   }
 
   onReset(): void {

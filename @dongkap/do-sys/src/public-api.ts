@@ -14,3 +14,4 @@ export { DoMgmtInventoryModule } from './lib/inventory/do-mgmt-inventory.module'
 export { DoMgmtEmployeeModule } from './lib/employee/do-mgmt-employee.module';
 export { DoMgmtJobPlacementModule } from './lib/job-placement/do-mgmt-job-placement.module';
 export { DoEmployeeProfileModule } from './lib/profile/do-employee-profile.module';
+export { DoClientDetailsModule } from './lib/client-details/do-client-details.module';

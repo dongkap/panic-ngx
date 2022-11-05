@@ -63,6 +63,11 @@ const routes: Routes = [{
         .then(m => m.SysMgmtAppsWrapperModule),
     },
     {
+      path: 'mgmt/client-ids',
+      loadChildren: () => import('../sys/sys-client-details-wrapper.module')
+        .then(m => m.SysClientDetailsWrapperModule)
+    },
+    {
       path: 'mgmt/role',
       loadChildren: () => import('../sys/sys-mgmt-role-wrapper.module')
         .then(m => m.SysMgmtRoleWrapperModule),

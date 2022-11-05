@@ -297,6 +297,16 @@ export const apiPath: APIModel = {
             method: HttpMethod.POST,
             path: '/api/security/trx/auth/delete/training/employee/v.1',
         },
+        'datatable-client-details': {
+            server: environment.host.security,
+            method: HttpMethod.POST,
+            path: '/api/security/vw/auth/datatable/client-details/v.1',
+        },
+        'post-client-details': {
+            server: environment.host.security,
+            method: HttpMethod.POST,
+            path: '/api/security/trx/auth/client-details/v.1',
+        },
     },
     profile: {
         'change-profile': {
@@ -405,6 +415,11 @@ export const apiPath: APIModel = {
             server: environment.host.master,
             method: HttpMethod.POST,
             path: '/api/master/trx/auth/locale/v.1',
+        },
+        'get-locale': {
+            server: environment.host.master,
+            method: HttpMethod.GET,
+            path: '/api/master/vw/auth/locale/v.1',
         },
         'datatable-locale': {
             server: environment.host.master,

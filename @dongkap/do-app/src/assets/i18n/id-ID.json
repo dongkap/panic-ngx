@@ -322,7 +322,8 @@
 		"statistics-emergency-category": "Statistik Kategori Darurat",
 		"statistics-emergency-area": "Statistik Laporan Darurat Berdasarkan Area",
 		"statistics-emergency-gender-male": "Statistik Laporan Darurat Berdasarkan Pria",
-		"statistics-emergency-gender-female": "Statistik Laporan Darurat Berdasarkan Wanita"
+		"statistics-emergency-gender-female": "Statistik Laporan Darurat Berdasarkan Wanita",
+		"edit-client-ids": "Edit Client IDs"
 	},
 	"label": {
 		"language": "Bahasa",
