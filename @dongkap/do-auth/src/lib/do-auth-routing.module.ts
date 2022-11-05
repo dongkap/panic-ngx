@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UnauthorizeGuardService } from './services/unauth-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { UnauthorizeGuardService } from './services/unauth-guard.service';
+import { UnauthorizeGuardLockService } from './services/unauth-guard-lock.service';
 import { AuthComponent } from './pages/layout/auth.component';
 import { LoginPageComponent } from './pages/login/login-page.component';
 import { LogoutComponent } from './pages/logout/logout.component';
@@ -12,6 +13,8 @@ import { ForgotPageComponent } from './pages/forgot/forgot-page.component';
 import { RegisterPageComponent } from './pages/register/register-page.component';
 import { ActivateAccountPageComponent } from './pages/activate-account/activate-account-page.component';
 import { OAuth2CallbackComponent } from './pages/oauth2/oauth2-callback.component';
+import { LockingComponent } from './pages/locking/locking.component';
+import { LockedPageComponent } from './pages/locked/locked-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -60,6 +63,16 @@ const routes: Routes = [{
     {
       path: 'logout',
       component: LogoutComponent,
+      canActivate: [AuthGuardService],
+    },
+    {
+      path: 'lock',
+      component: LockedPageComponent,
+      canActivate: [UnauthorizeGuardLockService],
+    },
+    {
+      path: 'locking',
+      component: LockingComponent,
       canActivate: [AuthGuardService],
     },
   ],

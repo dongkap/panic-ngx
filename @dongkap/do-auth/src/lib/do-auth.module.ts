@@ -28,6 +28,7 @@ import { DoAuthRoutingModule } from './do-auth-routing.module';
 import { AuthForceService } from './services/auth-force.service';
 import { AuthGuardChildService } from './services/auth-guard-child.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { UnauthorizeGuardLockService } from './services/unauth-guard-lock.service';
 import { AuthLanguageService } from './services/auth-lang.service';
 import { AuthSignatureService } from './services/auth-signature.service';
 import { AuthTokenService } from './services/auth-token.service';
@@ -49,6 +50,8 @@ import { RequestForgotPageComponent } from './pages/forgot/request-forgot-page.c
 import { RegisterPageComponent } from './pages/register/register-page.component';
 import { ActivateAccountPageComponent } from './pages/activate-account/activate-account-page.component';
 import { OAuth2CallbackComponent } from './pages/oauth2/oauth2-callback.component';
+import { LockingComponent } from './pages/locking/locking.component';
+import { LockedPageComponent } from './pages/locked/locked-page.component';
 
 export const AUTH_PROVIDERS = [
   { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorTokenService, multi: true},
@@ -60,9 +63,10 @@ export const AUTH_PROVIDERS = [
   { provide: PROFILE_INDEXED_DB, useClass: ProfileIndexedDBService },
   { provide: SETTINGS_INDEXED_DB, useClass: SettingsIndexedDBService },
   AuthGuardService,
-  UnauthorizeGuardService,
-  AuthTokenService,
   AuthGuardChildService,
+  UnauthorizeGuardService,
+  UnauthorizeGuardLockService,
+  AuthTokenService,
   AuthSignatureService,
   AuthLanguageService,
   AuthForceService
@@ -71,6 +75,8 @@ export const AUTH_PROVIDERS = [
 export const AUTH_COMPONENTS = [
   LoginPageComponent,
   LogoutComponent,
+  LockingComponent,
+  LockedPageComponent,
   ForceLoginPageComponent,
   ForgotPageComponent,
   RequestForgotPageComponent,

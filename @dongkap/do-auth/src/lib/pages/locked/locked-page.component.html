@@ -1,0 +1,47 @@
+<h1 id="title" class="title">{{ 'title.lock-screen' | translate }}</h1>
+<p class="sub-title">{{ 'subtitle.lock' | translate: {name: name} }}</p>
+
+<form [formGroup]="formGroup" (ngSubmit)="unlock()" aria-labelledby="title">
+  <div class="form-control-group">
+    <div class="input-group">
+      <input [formControlName]="'password'"
+            [required]="true"
+            [ngClass]="{
+              'status-danger': hasErrorPassword,
+              'status-success': hasSuccessPassword
+            }"
+            name="password"
+            [type]="!showPassword ? 'password' : 'text'"
+            id="inputPassword"
+            placeholder="{{ 'Password' | translate }}"
+            fieldSize="large"
+            tabindex="2"
+            nbInput
+            fullWidth>
+      <div class="input-icon">
+        <nb-icon [options]="{ animation: { type: 'zoom' } }" class="input-icon-hover" icon="{{icon}}" (click)="onShowPassword()"></nb-icon>
+      </div>
+    </div>
+    <ng-container *ngIf="hasErrorPassword">
+      <span class="caption status-danger">{{ 'error.password' | translate}}</span>
+    </ng-container>
+  </div>
+
+  <button [disabled]="formGroup.invalid || buttonLock"
+          fullWidth
+          nbButton
+          status="primary"
+          size="large"
+          [class.btn-pulse]="formGroup.invalid || buttonLock">
+    {{ 'Unlock' | translate }}
+  </button>
+</form>
+
+<section class="sign-in-or-up" aria-label="Sign in or sign up">
+  <p>
+    {{ 'subtitle.lock-footer' | translate }} <a class="text-link" routerLink="/auth/login">{{ 'Click here' | translate }}</a>
+  </p>
+  <!--
+  <p><a routerLink="/auth/register" class="text-link">{{ 'Register' | translate}}</a></p>
+  -->
+</section>

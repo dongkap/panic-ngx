@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { StoreKey } from 'idb';
 import {
   additionalInfoModels,
+  AuthParam,
   IndexedDBEncFactoryService,
   IndexedDBService,
   oauthInfo,
@@ -87,6 +88,9 @@ export class AuthIndexedDBService extends IndexedDBService<AuthIDB> implements I
     });
   }
 
+  /**
+   * @Deprecated
+   **/ 
   public async isLogin(): Promise<boolean> {
       if (await this.getEnc(oauthInfo.access_token)) {
         return true;
@@ -97,4 +101,25 @@ export class AuthIndexedDBService extends IndexedDBService<AuthIDB> implements I
       return false;
   }
 
+  public authenticate(): Observable<AuthParam> {
+    const result$: Subject<AuthParam> = new Subject<AuthParam>();
+    Promise.all([
+      this.getEnc(oauthInfo.access_token),
+      this.getEnc(oauthInfo.refresh_token),
+      this.getEnc(oauthInfo.locked_account)
+    ]).then((authParam: string[]) => {
+      if (authParam[0] && authParam[1]) {
+        result$.next(AuthParam.GRANTED);
+      } else if (!authParam[0] && authParam[2]) {
+        result$.next(AuthParam.LOCKED);
+      } else {
+        oauthInfoModels.forEach(data => {
+          this.removeEnc(data.key).then();
+        });
+        this.removeEnc(oauthInfo.locked_account).then();
+        result$.next(AuthParam.DENIED);
+      }
+    });
+    return result$.asObservable();
+  }
 }

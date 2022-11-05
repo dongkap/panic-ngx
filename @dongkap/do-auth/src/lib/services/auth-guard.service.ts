@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { Injectable, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { UserService, USER_SERVICE } from '@dongkap/do-core';
+import { AuthParam, UserService, USER_SERVICE } from '@dongkap/do-core';
 import { AuthTokenService } from './auth-token.service';
 
 @Injectable()
@@ -16,12 +16,14 @@ export class AuthGuardService implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         const result$: Subject<boolean> = new Subject<boolean>();
-        this.authTokenService.isLogin().then((value: boolean) => {
-            result$.next(value);
-            if (!value) {
+        this.authTokenService.authenticate().subscribe((auth: AuthParam) => {
+            result$.next(auth === AuthParam.GRANTED);
+            if (auth === AuthParam.DENIED) {
                 this.router.navigate(['/auth']);
+            } else if (auth === AuthParam.LOCKED) {
+                this.router.navigate(['/auth/lock']);
             } else {
-                if (state.url !== '/auth/logout') {
+                if (!state.url.match('/auth/logout') && !state.url.match('/auth/locking')) {
                     this.authService.loadUser();
                 }
             }

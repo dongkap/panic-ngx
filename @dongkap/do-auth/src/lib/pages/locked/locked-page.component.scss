@@ -1,0 +1,19 @@
+@import '~@dongkap/do-theme/styles/themes';
+
+@include nb-install-component() {
+
+    nb-icon {
+        color: #8f9bb3;
+    }
+
+    .input-icon {
+        position: absolute;
+        right: 0;
+        padding: 0.9rem;
+    }
+    .input-icon-hover:hover {
+        color: #598bff;
+        cursor: pointer;
+    }
+
+}

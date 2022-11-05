@@ -4,6 +4,7 @@ export interface SecurityResourceModel {
     grant_type: string;
     private_key?: string;
     aes_key?: string;
+    system_idle?: boolean;
     session_idle?: number;
     session_timeout?: number;
     signature?: boolean;
@@ -28,6 +29,7 @@ export const oauthInfo = {
     locale: 'locale',
     theme: 'theme',
     name: 'name',
+    locked_account: 'locked_account',
 };
 
 export const additionalInfo = {

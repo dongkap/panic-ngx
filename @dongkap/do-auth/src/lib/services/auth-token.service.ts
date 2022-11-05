@@ -7,6 +7,7 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import {
     API,
     APIModel,
+    AuthParam,
     HttpFactoryService,
     HTTP_SERVICE,
     oauthInfo,
@@ -40,8 +41,9 @@ export class AuthTokenService implements OnDestroy {
             /* console.log('[Dongkap] Session Timeout'); */
             this.logout();
         });
-        idle.onIdleEnd.subscribe(() => {
+        idle.onIdleStart.subscribe(() => {
             /* console.log('[Dongkap] Session Idle End'); */
+            // this.lockout();
         });
     }
 
@@ -62,7 +64,9 @@ export class AuthTokenService implements OnDestroy {
                 .toPromise()
                 .then((response: HttpResponse<any>) => {
                     this.idle.setIdle(+response['expires_in']);
-                    this.idle.watch();
+                    if(this.oauthResource.system_idle) {
+                        this.idle.watch();
+                    }
                     /* console.log('[DONGKAP] Session Idle Start'); */
                     /* console.log('[DONGKAP] Session Timeout in ' + response['expires_in'] + ' seconds'); */
                     this.authIndexedDB.loginStorage(response);
@@ -81,7 +85,30 @@ export class AuthTokenService implements OnDestroy {
                 .toPromise()
                 .then((response: HttpResponse<any>) => {
                     this.idle.setIdle(+response['expires_in']);
-                    this.idle.watch();
+                    if(this.oauthResource.system_idle) {
+                        this.idle.watch();
+                    }
+                    /* console.log('[DONGKAP] Session Idle Start'); */
+                    /* console.log('[DONGKAP] Session Timeout in ' + response['expires_in'] + ' seconds'); */
+                    this.authIndexedDB.loginStorage(response);
+                    this.profileIndexedDB.loginStorage(response);
+                    this.settingsIndexedDB.loginStorage(response);
+                });
+    }
+
+    public unlock(username: string, password: string): Promise<any> {
+        return this.httpBaseService.
+        HTTP_BASE(this.apiPath['auth']['force'],
+            this.getAuthBody(username, password).toString(),
+            this.getAuthHeader())
+                .pipe(takeUntil(this.destroy$))
+                .toPromise()
+                .then((response: HttpResponse<any>) => {
+                    this.authIndexedDB.removeEnc(oauthInfo.locked_account).then();
+                    this.idle.setIdle(+response['expires_in']);
+                    if(this.oauthResource.system_idle) {
+                        this.idle.watch();
+                    }
                     /* console.log('[DONGKAP] Session Idle Start'); */
                     /* console.log('[DONGKAP] Session Timeout in ' + response['expires_in'] + ' seconds'); */
                     this.authIndexedDB.loginStorage(response);
@@ -107,16 +134,17 @@ export class AuthTokenService implements OnDestroy {
 
     public logout() {
         this.timer = setInterval(() => {
-            this.doLogout();
+            this.clearSession();
         }, 5000);
         this.httpBaseService.HTTP_AUTH(this.apiPath['security']['revoke'])
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
-                this.doLogout();
+                this.clearSession();
             });
     }
 
-    private doLogout() {
+    private clearSession() {
+        this.authIndexedDB.removeEnc(oauthInfo.locked_account).then();
         this.authIndexedDB.logout();
         this.profileIndexedDB.logout();
         clearInterval(this.timer);
@@ -124,8 +152,17 @@ export class AuthTokenService implements OnDestroy {
         this.router.navigate(['/auth']);
     }
 
-    public async isLogin(): Promise<boolean> {
-        return await this.authIndexedDB.isLogin();
+    public lockout() {
+        Promise.all([
+            this.authIndexedDB.putEnc(oauthInfo.locked_account, 'true'),
+            this.authIndexedDB.removeEnc(oauthInfo.access_token),
+        ]).then(async () => {
+            this.router.navigate(['/auth/lock']);
+        });
+    }
+
+    public authenticate(): Observable<AuthParam> {
+        return this.authIndexedDB.authenticate();
     }
 
     public oauthHeaders(request: HttpRequest<any>): Observable<HttpRequest<any>> {

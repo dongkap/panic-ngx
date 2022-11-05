@@ -6,11 +6,12 @@ export * from './lib/do-auth.module';
 export * from './lib/miscellaneous.module';
 export { AuthGuardChildService } from './lib/services/auth-guard-child.service';
 export { AuthGuardService } from './lib/services/auth-guard.service';
+export { UnauthorizeGuardService } from './lib/services/unauth-guard.service';
+export { UnauthorizeGuardLockService } from './lib/services/unauth-guard-lock.service';
 export { AuthIndexedDBService } from './lib/services/storage/auth-indexeddb.service';
 export { ProfileIndexedDBService } from './lib/services/storage/profile-indexeddb.service';
 export { SettingsIndexedDBService } from './lib/services/storage/settings-indexeddb.service';
 export { AuthTokenService } from './lib/services/auth-token.service';
-export { UnauthorizeGuardService } from './lib/services/unauth-guard.service';
 export { AuthSignatureService } from './lib/services/auth-signature.service';
 export { AuthUserService } from './lib/services/auth-user.service';
 

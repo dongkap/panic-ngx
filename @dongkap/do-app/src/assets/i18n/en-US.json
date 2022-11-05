@@ -92,6 +92,9 @@
 	"Click here": "Click here",
 	"Show More": "show more",
 	"Show Less": "show less",
+	"Account Locked": "Account Locked",
+	"Lock": "Lock",
+	"Unlock": "Unlock",
 	"Next": "Next",
 	"Back": "Back",
 	"Submit": "Submit",
@@ -165,6 +168,7 @@
 		"button-deactivate": "I understand the consequences, deactivate account",
 		"fake-form": "Please make sure again, the report you are investigating is really invalid.",
 		"logout": "Logging out...",
+		"locking": "Locking...",
 		"callback": "Authenticating...",
 		"provider": "You are currently logged in with {{value}}"
 	},
@@ -218,6 +222,7 @@
 		"password": "Password is required!",
 		"required": "This field is required!",
 		"translate": "Please reload Browser!",
+		"unlock": "Incorrect Password",
 		"0": "Connection Refused",
 		"400": "Bad Request",
 		"401": "Unauthorized",
@@ -246,17 +251,23 @@
 	"datatable": {
 		"typesearch": "Type to search"
 	},
+	"title": {
+		"lock-screen": "Lock Screen"
+	},
 	"subtitle": {
 		"login" : "Sign In to your account",
 		"force" : "Your account is being used",
 		"force-footer" : "Logged in as someone else?",
 		"forgot-password" : "Enter your email address and we will send a link to reset your password",
 		"reset-password" : "Enter your new password",
-		"set-password" : "Set your account password"
+		"set-password" : "Set your account password",
+		"lock" : "Hi {{name}}, enter your password to continue login",
+		"lock-footer" : "Logged in as someone else?"
 	},
 	"alert": {
 		"title": {
 			"login" : "Login Failed!",
+			"unlock" : "Unlock Failed!",
 			"register" : "Register Failed!",
 			"forgot" : "Forgot Password Failed!",
 			"reset-password" : "Reset Password Failed!",

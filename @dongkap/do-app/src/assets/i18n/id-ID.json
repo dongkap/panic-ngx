@@ -92,6 +92,9 @@
 	"Click here": "Klik disini",
 	"Show More": "tampilkan lebih banyak",
 	"Show Less": "tampilkan lebih sedikit",
+	"Account Locked": "Akun Terkunci",
+	"Lock": "Kunci",
+	"Unlock": "Buka Kunci",
 	"Next": "Lanjut",
 	"Back": "Kembali",
 	"Submit": "Kirim",
@@ -165,6 +168,7 @@
 		"button-deactivate": "Saya mengerti konsekuensinya, nonaktifkan akun",
 		"fake-form": "Mohon dipastikan kembali, laporan yang anda selidiki sungguh tidak valid.",
 		"logout": "Proses keluar...",
+		"locking": "Proses mengunci...",
 		"callback": "Proses otentikasi...",
 		"provider": "Anda saat ini masuk dengan {{value}}"
 	},
@@ -246,17 +250,23 @@
 	"datatable": {
 		"typesearch": "Ketik untuk menelusuri"
 	},
+	"title": {
+		"lock-screen": "Layar Terkunci"
+	},
 	"subtitle": {
 		"login" : "Masuk ke akun Anda",
 		"force" : "Akun Anda sedang digunakan",
 		"force-footer" : "Masuk sebagai orang lain?",
 		"forgot-password" : "Masukkan email Anda, kami akan mengirimkan tautan untuk menyetel ulang kata sandi Anda",
 		"reset-password" : "Masukan kata sandi baru Anda",
-		"set-password" : "Atur Kata Sandi Anda"
+		"set-password" : "Atur Kata Sandi Anda",
+		"lock" : "Halo {{name}}, masukkan kata sandi Anda untuk masuk kembali",
+		"lock-footer" : "Masuk sebagai orang lain?"
 	},
 	"alert": {
 		"title": {
 			"login" : "Gagal Masuk!",
+			"unlock" : "Gagal Masuk!",
 			"register" : "Gagal Register!",
 			"forgot" : "Gagal Lupa Kata Sandi!",
 			"reset-password" : "Gagal Setel Ulang Kata Sandi!",

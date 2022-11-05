@@ -7,6 +7,7 @@ import { HostModel } from './utils/http-base.model';
 import { HttpMethod } from './utils/http-base.model';
 import { ApiBaseResponse } from './utils/http-base.model';
 import { LocaleModel } from './utils/locale.model';
+import { AuthParam } from './utils/auth-param.model';
 
 import { RoleModel, SystemAuthority } from './security/role.model';
 import { UserModel } from './security/user.model';
@@ -36,6 +37,7 @@ export {
     LocaleModel,
     RoleModel,
     SystemAuthority,
+    AuthParam,
 
     UserModel,
     SecurityResourceModel,
