@@ -8,7 +8,6 @@ import { ApiBaseResponse, ResponseCode, HttpBaseModel, LocaleModel } from '@dong
 import { BaseFormComponent, CheckboxModel } from '@dongkap/do-shared';
 import { LocaleService } from '../services/locale.service';
 import { DialogFlagComponent } from './dialog-flag/dialog-flag.component';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'do-locale-add-edit-page',
@@ -17,7 +16,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LocaleAddEditPageComponent extends BaseFormComponent<any> implements OnInit {
 
-  public action: 'Add' | 'Edit' = 'Add';
   public apiSelectLanguage: HttpBaseModel;
   public localeDefault: boolean = false;
   public localeCode: string;
@@ -40,37 +38,25 @@ export class LocaleAddEditPageComponent extends BaseFormComponent<any> implement
         default: [],
       });
     this.localeCode = this.route.snapshot.params['locale'];
+  }
+
+  ngOnInit(): void {
     if (this.localeCode != null) {
       this.action = 'Edit';
       if (!this.localeService.getLocale()) {
-        this.getRequestRole(this.localeCode);
+        this.getRequestLocale(this.localeCode);
       } else {
         this.putLocaleToForm();
       }
     }
   }
 
-  ngOnInit(): void {}
-
-  getRequestRole(authority: string): void {
-    this.loadingForm = true;
-    this.http.HTTP_AUTH(
-      this.api['master']['get-locale'], null, null, null,
-      [authority]).subscribe(
-            (success: any) => {
-              this.loadingForm = false;
-              this.localeService.setLocale(success);
-              this.putLocaleToForm();
-            },
-            (error: any | ApiBaseResponse) => {
-              this.disabled = false;
-              this.loadingForm = false;
-              if (error instanceof HttpErrorResponse) {
-                  error = error['error'] as ApiBaseResponse;
-              }
-              this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
-            },
-        );
+  getRequestLocale(locale: string): void {
+    this.onInitData('master','get-locale', [locale])
+      .subscribe((response: any) => {
+        this.localeService.setLocale(response);
+        this.putLocaleToForm();
+      });
   }
 
   putLocaleToForm(): void {

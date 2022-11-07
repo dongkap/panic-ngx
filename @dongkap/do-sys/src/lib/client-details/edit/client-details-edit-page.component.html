@@ -1,16 +1,53 @@
-<do-page-outlet [header]="'header.edit-client-ids'">
+<do-page-outlet [header]="'header.'+action+'-client-ids'">
   <div class="row" pagecontent>
     <div class="col-md-12 col-lg-12 col-xxxl-6">
       <form [formGroup]="formGroup">
-        <do-label-text
+        <do-input-text
           [name]="'clientId'"
           [label]="'Client ID'"
-          [content]="clientDetails.client_id"
+          [required]="true"
           [skeleton]="loadingForm"
-          [dividerlabel]="false"
-          [colLabel]="3"
-          [colContent]="9">
-        </do-label-text>
+          formControlName="clientId">
+        </do-input-text>
+        <do-input-text
+          [name]="'clientSecret'"
+          [label]="'Client Secret'"
+          [type]="'password'"
+          [pattern]="passwordPattern"
+          [required]="isClientSecret"
+          [skeleton]="loadingForm"
+          formControlName="clientSecret">
+        </do-input-text>
+        <do-input-text
+          [name]="'resourceIds'"
+          [label]="'Resource IDs'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="resourceIds">
+        </do-input-text>
+        <do-input-text
+          [name]="'scope'"
+          [label]="'Scope'"
+          [placeholder]="'read,write,trust,check_token'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="scope">
+        </do-input-text>
+        <do-input-text
+          [name]="'authorizedGrantTypes'"
+          [label]="'Authorized Grant Types'"
+          [placeholder]="'password,refresh_token'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="authorizedGrantTypes">
+        </do-input-text>
+        <do-input-text
+          [name]="'authorities'"
+          [label]="'Authorities'"
+          [required]="true"
+          [skeleton]="loadingForm"
+          formControlName="authorities">
+        </do-input-text>
         <do-input-text
           [name]="'accessTokenValidity'"
           [label]="'Access Token Validity'"
@@ -27,45 +64,16 @@
           [skeleton]="loadingForm"
           formControlName="refreshTokenValidity">
         </do-input-text>
-        <do-input-text
-          [name]="'resourceIds'"
-          [label]="'Resource IDs'"
-          [required]="true"
-          [skeleton]="loadingForm"
-          formControlName="resourceIds">
-        </do-input-text>
       </form>
     </div>
   </div>
-  <div class="row" pagefooter>
-    <div class="offset-sm-3 col-sm-9" *ngIf="!loadingForm; else buttonskeleton">
-      <button
-        type="reset"
-        (click)="onReset()"
-        class="btn btn-danger mr-1">
-        {{ 'Cancel' | translate}}
-      </button>
-      <button
-        type="submit"
-        (click)="onSubmit()"
-        [ngClass]="{
-          'btn mr-1': true,
-          'btn-primary': !formGroup.invalid || !formGroup.pristine || !disabled,
-          'btn-secondary': formGroup.invalid || formGroup.pristine || disabled
-        }"
-        [disabled]="formGroup.invalid || formGroup.pristine || disabled">
-        {{ 'Edit' | translate}}
-      </button>
-    </div>
-    <ng-template #buttonskeleton>
-      <div class="offset-sm-3 col-sm-9">
-        <div
-          [ngClass]="{
-            'button-skeleton': true,
-            'skeleton': loadingForm
-          }">
-        </div>
-      </div>
-    </ng-template>
-  </div>
+  <do-button-submit pagefooter
+    [submitTitle]="action"
+    [resetTitle]="'Cancel'"
+    [formGroupButton]="formGroup"
+    [disabledButton]="disabled"
+    (onReset)="onReset()"
+    (onSubmit)="onSubmit()"
+    pagefooter>
+  </do-button-submit>
 </do-page-outlet>

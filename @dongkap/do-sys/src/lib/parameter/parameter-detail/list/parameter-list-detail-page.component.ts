@@ -65,24 +65,11 @@ export class ParameterListDetailPageComponent extends BaseFilterComponent<any> i
   }
 
   getRequestParamGroup(parameterGroupCode: string): void {
-    this.loadingForm = true;
-    this.http.HTTP_AUTH(
-      this.api['master']['get-parameter-group'], null, null, null,
-      [parameterGroupCode]).subscribe(
-        (success: any) => {
-          this.loadingForm = false;
-          this.parameterService.setParameterGroup(success);
-          this.putParamToForm();
-        },
-        (error: any | ApiBaseResponse) => {
-          this.disabled = false;
-          this.loadingForm = false;
-          if (error instanceof HttpErrorResponse) {
-              error = error['error'] as ApiBaseResponse;
-          }
-          this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
-        },
-      );
+    this.onInitData('master', 'get-parameter-group', [parameterGroupCode])
+      .subscribe((response: any) => {
+        this.parameterService.setParameterGroup(response);
+        this.putParamToForm();
+      });
   }
 
   putParamToForm(): void {

@@ -1,14 +1,13 @@
 import { Component, Injector, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';;
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ApiBaseResponse, SystemAuthority, HttpBaseModel, ResponseCode, RoleModel } from '@dongkap/do-core';
 import { BaseFormComponent, CheckboxModel } from '@dongkap/do-shared';
 import { RoleService } from '../services/role.service';
 import { RoleMainPageComponent } from './main/role-main-page.component';
 import { RoleExtraPageComponent } from './extra/role-extra-page.component';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'do-language-add-edit-page',
@@ -19,7 +18,6 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
 
   public apiSelectGroup: HttpBaseModel;
   public authority: string;
-  public action: 'Add' | 'Edit' = 'Add';
   public dataDefault: CheckboxModel[] = [
     {
       selected: false,
@@ -48,6 +46,9 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
       });
     this.apiSelectGroup = this.api['security']['select-group'];
     this.authority = this.route.snapshot.params['authority'];
+  }
+
+  ngOnInit(): void {
     if (this.authority != null) {
       this.action = 'Edit';
       if (!this.roleService.getRole()) {
@@ -58,31 +59,16 @@ export class RoleAddEditPageComponent extends BaseFormComponent<any> implements 
     }
   }
 
-  ngOnInit(): void {}
-
   onReset(): void {
     this.router.navigate(['/app/mgmt/role']);
   }
 
   getRequestRole(authority: string): void {
-    this.loadingForm = true;
-    this.http.HTTP_AUTH(
-      this.api['security']['get-role'], null, null, null,
-      [authority]).subscribe(
-            (success: any) => {
-              this.loadingForm = false;
-              this.roleService.setRole(success);
-              this.putRoleToForm();
-            },
-            (error: any | ApiBaseResponse) => {
-              this.disabled = false;
-              this.loadingForm = false;
-              if (error instanceof HttpErrorResponse) {
-                  error = error['error'] as ApiBaseResponse;
-              }
-              this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
-            },
-        );
+    this.onInitData('security', 'get-role', [authority])
+      .subscribe((response: any) => {
+        this.roleService.setRole(response);
+        this.putRoleToForm();
+      });
   }
 
   putRoleToForm(): void {

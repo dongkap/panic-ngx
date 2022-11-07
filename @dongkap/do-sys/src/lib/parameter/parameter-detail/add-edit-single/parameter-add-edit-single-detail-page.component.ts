@@ -1,6 +1,5 @@
 import { Component, Injector } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +15,6 @@ import { ParameterModel, ParameterGroupModel } from '../../models/parameter.mode
 })
 export class ParameterAddEditSingleDetailPageComponent extends BaseFormComponent<any> implements OnInit {
 
-  public action: 'Add' | 'Edit' = 'Add';
   public parameter: ParameterModel = new ParameterModel();
   public parameterGroup: ParameterGroupModel = new ParameterGroupModel();
   public parameterGroupCode: string;
@@ -35,6 +33,9 @@ export class ParameterAddEditSingleDetailPageComponent extends BaseFormComponent
     });
     this.parameterGroupCode = this.route.snapshot.params['parameterGroupCode'];
     this.parameterCode = this.route.snapshot.params['parameterCode'];
+  }
+
+  ngOnInit(): void {
     if(this.parameterGroupCode) {
       this.urlBack = this.urlBack + '/' + this.parameterGroupCode;
       if(this.parameterCode) {
@@ -50,31 +51,16 @@ export class ParameterAddEditSingleDetailPageComponent extends BaseFormComponent
     }
   }
 
-  ngOnInit(): void {}
-
   onReset(): void {
     this.router.navigate(['/app/sysconf/parameter/detail', this.parameterGroupCode]);
   }
 
   getRequestParam(parameterCode: string): void {
-    this.loadingForm = true;
-    this.http.HTTP_AUTH(
-      this.api['master']['get-parameter'], null, null, null,
-      [parameterCode]).subscribe(
-        (success: any) => {
-          this.loadingForm = false;
-          this.parameterService.setParameter(success);
-          this.putParamToForm();
-        },
-        (error: any | ApiBaseResponse) => {
-          this.disabled = false;
-          this.loadingForm = false;
-          if (error instanceof HttpErrorResponse) {
-              error = error['error'] as ApiBaseResponse;
-          }
-          this.toastr.showI18n(error.respStatusMessage[error.respStatusCode], true, null, 'danger');
-        },
-      );
+    this.onInitData('master', 'get-parameter', [parameterCode])
+      .subscribe((response: any) => {
+        this.parameterService.setParameter(response);
+        this.putParamToForm();
+      });
   }
 
   putParamToForm(): void {

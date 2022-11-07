@@ -24,11 +24,14 @@ export class DoButtonSubmitComponent {
   public formGroup: FormGroup;
   public get disabledForm(): boolean {
     if(this.formGroup) {
-      if(!this.formGroup.valid || this.formGroup.pristine) {
+      if(this.formGroup.invalid || this.formGroup.pristine) {
         return true;
+      } else {
+        return false;
       }
+    } else {
+      return true;
     }
-    return false;
   }
 
   public submit(event: any) {

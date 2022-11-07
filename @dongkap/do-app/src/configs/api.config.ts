@@ -302,6 +302,11 @@ export const apiPath: APIModel = {
             method: HttpMethod.POST,
             path: '/api/security/vw/auth/datatable/client-details/v.1',
         },
+        'get-client-details': {
+            server: environment.host.security,
+            method: HttpMethod.GET,
+            path: '/api/security/vw/auth/client-details/v.1',
+        },
         'post-client-details': {
             server: environment.host.security,
             method: HttpMethod.POST,

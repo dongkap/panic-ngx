@@ -189,7 +189,8 @@
 			"telpNumber": "Please enter valid Telephone Number!",
 			"faxNumber": "Please enter valid Fax. Number!",
 			"mobileNumber": "Please enter valid Mobile Phone Number!",
-			"dateOfBirth": "Please enter valid date!"
+			"dateOfBirth": "Please enter valid date!",
+			"clientSecret": "Make sure it's at least 8 characters including a number, a lowercase, and uppercase letter"
 		},
 		"equal": {
 			"newPassword": "Old Password and New Password cannot be the same",
@@ -324,7 +325,8 @@
 		"statistics-emergency-area": "Statistics of Emergency Report by Area",
 		"statistics-emergency-gender-male": "Statistics of Emergency Report by Gender Male",
 		"statistics-emergency-gender-female": "Statistics of Emergency Report by Gender Female",
-		"edit-client-ids": "Edit Client IDs"
+		"Edit-client-ids": "Edit Client IDs",
+		"Add-client-ids": "Add Client IDs"
 	},
 	"label": {
 		"language": "Language",

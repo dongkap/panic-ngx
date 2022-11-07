@@ -19,7 +19,16 @@ const routes: Routes = [{
       },
     },
     {
-      path: ':action',
+      path: 'add',
+      component: ClientDetailsEditPageComponent,
+      data: {
+        code: '#CLIENT-DETAILS-PAGE',
+        title: 'OAuth 2.0 Client IDs',
+        reuse: true
+      },
+    },
+    {
+      path: 'edit/:clientId',
       component: ClientDetailsEditPageComponent,
       data: {
         code: '#CLIENT-DETAILS-PAGE',
