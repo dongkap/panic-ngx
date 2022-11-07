@@ -6,7 +6,7 @@ export const apiPath: APIModel = {
         parameter: {
             server: environment.host.openapi,
             method: HttpMethod.POST,
-            path: '/api/master/oa/vw/parameter-i18n/v.1',
+            path: '/oa/vw/parameter-i18n/v.1',
         }
     },
     auth: {

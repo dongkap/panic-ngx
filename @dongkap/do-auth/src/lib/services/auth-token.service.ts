@@ -126,8 +126,13 @@ export class AuthTokenService implements OnDestroy {
                 .pipe(takeUntil(this.destroy$))
                 .pipe(map((response: any) => {
                     this.idle.setIdle(response['expires_in']);
-                    this.authIndexedDB.logout();
+                    if(this.oauthResource.system_idle) {
+                        this.idle.watch();
+                    }
+                    // this.authIndexedDB.logout();
                     this.authIndexedDB.loginStorage(response);
+                    this.profileIndexedDB.loginStorage(response);
+                    this.settingsIndexedDB.loginStorage(response);
                 }));
         }));
     }

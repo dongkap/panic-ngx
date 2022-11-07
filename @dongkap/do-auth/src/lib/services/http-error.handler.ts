@@ -127,7 +127,9 @@ export class HttpErrorHandler {
                 } else {
                     const msg: string = error.error['respStatusMessage']['invalid_token'];
                     if (msg.includes('expired')) {
-                        this.authToken.logout();
+                        if(msg === 'Invalid refresh token (expired)') {
+                            this.authToken.logout();
+                        }
                     } else {
                         return this.refreshTokenSubject.pipe(
                             filter(response => response != null),
