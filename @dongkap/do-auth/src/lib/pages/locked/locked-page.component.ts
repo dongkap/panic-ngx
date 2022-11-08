@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { ApiBaseResponse, AUTH_INDEXED_DB, IndexedDBEncFactoryService, PROFILE_INDEXED_DB } from '@dongkap/do-core';
 import { DoToastrService } from '@dongkap/do-shared';
 import { AuthTokenService } from '../../services/auth-token.service';
 import { AuthForceService } from '../../services/auth-force.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'do-locked-page',
@@ -70,7 +70,16 @@ export class LockedPageComponent implements OnInit, OnDestroy {
           this.setProgress(this.progress = 95);
           this.progress = 0;
           this.responseError = null;
-          this.router.navigate(['/app/home']);
+          const previousURL: string = sessionStorage.getItem('do.lasturl.path');
+          const previousQueryParams: any = JSON.parse(sessionStorage.getItem('do.lasturl.param'));
+          if (previousURL) {
+            this.router.navigate([previousURL],
+              {
+                queryParams: previousQueryParams
+              });
+          } else {
+            this.router.navigate(['/app/home']);
+          }
         })
         .catch((error: any) => {
           try {
