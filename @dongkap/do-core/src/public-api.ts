@@ -33,3 +33,5 @@ export {
     SETTINGS_INDEXED_DB,
     PANIC_INDEXED_DB,
 } from './lib/providers/shared/storage.provider';
+
+export { CustomRouteReuseStrategy } from './lib/route-strategy/custom-route-reuse-strategy';

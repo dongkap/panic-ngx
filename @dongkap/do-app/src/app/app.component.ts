@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
  import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
+ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+ import { filter, map } from 'rxjs/operators';
  import { TranslateService } from '@ngx-translate/core';
  import { NbThemeService } from '@nebular/theme';
  import { Pattern } from '@dongkap/do-core';
@@ -24,6 +26,8 @@
      private translate: TranslateService,
      private themeService: NbThemeService,
      private settingsIndexedDB: SettingsIndexedDBService,
+     private router: Router,
+     private route: ActivatedRoute,
      @Inject(LOCALE_ID) public locale: string) {
    }
  
@@ -47,6 +51,7 @@
          this.translate.use(localeCode);
          this.locale = this.translate.currentLang;
      });
+     this.eventRoute();
    }
  
    private eventRoute(): void {
@@ -81,5 +86,13 @@
        }
      });
    }
+ 
+   private rootRoute(route: ActivatedRoute): ActivatedRoute {
+     while (route.firstChild) {
+       route = route.firstChild;
+     }
+     return route;
+   }
+ 
  }
  
